@@ -250,7 +250,7 @@ def vote():
 def execution():
     print("It's execution time! The player being executed is...")
     audio.playAudio(audio.EXECUTION)
-    print(mostFrequent(voted))
+    print(mostFrequent(voted.name))
     wait(5)
 
 def endGame():
