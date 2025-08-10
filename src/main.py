@@ -1,7 +1,7 @@
+#import audio_setup
 import app
 import game_logic
 # Modules
-
 
 if __name__ == "__main__": 
     game_logic.intro()
