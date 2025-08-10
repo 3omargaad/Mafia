@@ -1,11 +1,24 @@
 from random import choice
+import random
 from time import sleep
+from collections import Counter
+import os
+from pathlib import Path
+import glob
 
 import audio
 import player
 
 def mostFrequent(List):
-    return max(set(List),key=List.count)
+    occurence_count = Counter(List)
+    most_common = occurence_count.most_common()
+    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
+        print("Its a tie, chadGPT will randomly choose someone to kill")
+        sleep(1)
+        return random.choice([most_common[0][0], most_common[1][0]])
+    else:
+        return most_common[0][0]
+
 
 def wait(t):
     sleep(t)
@@ -54,6 +67,9 @@ def hasGameEnded():
     # Check to see if game ended
 
 def intro():
+    files = glob.glob('assets\\plrNames\\*')
+    for f in files:
+        os.remove(f)
     clear()
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
@@ -124,7 +140,12 @@ def intro():
     print("You Have 15 seconds to talk before night!")
     audio.playAudio(audio.INTRO)
     wait(3)
-    #countdown(15)
+    countdown(0)
+
+    for i in livingPlayers:
+        audio.textToSpeech(i.name, f'{i.name}_tts')
+        audio.convertToWav(str(Path(f'assets\\plrNames\\{i.name}')))
+        os.remove(str(Path(f'assets\\plrNames\\{i.name}_tts.mp3')))
 
 def night():
     clear()
@@ -218,10 +239,15 @@ def announcement():
     audio.playAudio(audio.GOODMORNING)
     print("Good morning everyone!")
     wait(2)
-    print("Unfortunately, the following players are no longer alive:")
-    audio.playAudio(audio.ANNOUNCEMENT)
-    printPlayerList(deadPlayers)
-    wait(4)
+    if len(deadPlayers) != 0:
+        print("Luckly, no players died.")
+    else:
+        print("Unfortunately, the following players are no longer alive:")
+        audio.playAudio(audio.ANNOUNCEMENT)
+        printPlayerList(deadPlayers)
+        for i in deadPlayers:
+            audio.playAudio(f"assets\\plrNames\\{i.name}_tts.wav")
+        wait(4)
 
 
 def day():
@@ -234,23 +260,47 @@ def vote():
     print("Times up! Now you must vote on which player to execute!")
     audio.playAudio(audio.VOTE)
     wait(1)
-    try:
-        for i in range(len(livingPlayers)):
-            print(livingPlayers[i].name + " choose who to vote.")
-            print("List of players:")
-            printPlayerList(livingPlayers)
-            votedNum = int(input("Enter the NUMBER of the player you want to vote: "))
-            voted.append(votedNum)
-            wait(2)
-            clear()
-    except Exception as e:
-        print(e)
+    while True:
+        try:
+            for i in range(len(livingPlayers)):
+                print(livingPlayers[i].name + " choose who to vote.")
+                print("List of players:")
+                printPlayerList(livingPlayers)
+                vote = input("Enter the NUMBER of the player you want to vote: ")
+                votedNum = int(vote)
+                voted.append(votedNum)
+                wait(2)
+                clear()
+            break
+        except Exception as e:
+            print(e)
+            print("invalid input")
+            continue
     
 
 def execution():
     print("It's execution time! The player being executed is...")
     audio.playAudio(audio.EXECUTION)
-    print(mostFrequent(voted.name))
+    executedPlayer = livingPlayers[mostFrequent(voted)-1]
+    print(executedPlayer.name)
+    audio.playAudio(f"assets\\plrNames\\{executedPlayer.name}_tts.wav")
+    executedPlayer.die()
+    movePlayer = None
+    for i in range(len(livingPlayers)):
+        currentPlayer = livingPlayers[i]
+        if currentPlayer.isAlive == False:
+            movePlayer = currentPlayer
+
+    if movePlayer != None:
+        livingPlayers.remove(movePlayer)
+        deadPlayers.append(movePlayer)
+        
+        if movePlayer.team == "Bad":
+            global badTeamNumber
+            badTeamNumber -= 1
+        elif movePlayer.team == "Good":
+            global goodTeamNumber
+            goodTeamNumber -= 1
     wait(5)
 
 def endGame():
