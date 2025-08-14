@@ -1,3 +1,8 @@
+from gtts import gTTS
+from pydub import AudioSegment
+from pydub.playback import play 
+from pathlib import Path
+
 import tempfile
 import os
 import subprocess
@@ -5,11 +10,6 @@ import subprocess
 temp_dir = "C:/Mafia/temp"
 os.makedirs(temp_dir, exist_ok=True)
 tempfile.tempdir = temp_dir
-
-from gtts import gTTS
-from pydub import AudioSegment
-from pydub.playback import play 
-from pathlib import Path
 
 
 def convertToWav(inputFile):
@@ -28,29 +28,29 @@ def playAudio(audioFile):
 
 def textToSpeech(text, filename):
     tss = gTTS(text, lang='en', tld="co.uk")
-    return tss.save(str(Path(f'assets\\plrNames\\{filename}.mp3')))
+    return tss.save(str(Path(f'assets\\audio\\player_names\\{filename}.mp3')))
 
 # Module Functions
 
-WELCOME = str(Path("assets\\audio\\welcome.wav"))
-INTRO = str(Path("assets\\audio\\intro.wav"))
-POP = str(Path("assets\\audio\\pop.wav"))
-MORNING = str(Path("assets\\audio\\morning.wav"))
-GOODNIGHT = str(Path("assets\\audio\\goodnight.wav"))
-GOODMORNING = str(Path("assets\\audio\\goodmorning.wav"))
-ANNOUNCEMENT = str(Path("assets\\audio\\announcement.wav"))
-DISCUSS = str(Path("assets\\audio\\discuss.wav"))
-VOTE = str(Path("assets\\audio\\vote.wav"))
-EXECUTION = str(Path("assets\\audio\\execution.wav"))
-GAMECONTINUES = str(Path("assets\\audio\\gamecontinues.wav"))
-GAMEOVER = str(Path("assets\\audio\\gameover.wav"))
+WELCOME = str(Path("assets\\audio\\preset\\welcome.wav"))
+INTRO = str(Path("assets\\audio\\preset\\intro.wav"))
+POP = str(Path("assets\\audio\\preset\\pop.wav"))
+MORNING = str(Path("assets\\audio\\preset\\morning.wav"))
+GOODNIGHT = str(Path("assets\\audio\\preset\\goodnight.wav"))
+GOODMORNING = str(Path("assets\\audio\\preset\\goodmorning.wav"))
+ANNOUNCEMENT = str(Path("assets\\audio\\preset\\announcement.wav"))
+DISCUSS = str(Path("assets\\audio\\preset\\discuss.wav"))
+VOTE = str(Path("assets\\audio\\preset\\vote.wav"))
+EXECUTION = str(Path("assets\\audio\\preset\\execution.wav"))
+GAMECONTINUES = str(Path("assets\\audio\\preset\\gamecontinues.wav"))
+GAMEOVER = str(Path("assets\\audio\\preset\\gameover.wav"))
 
-MAFIA = str(Path("assets\\audio\\mafia.wav"))
-MAFIA_SLEEP = str(Path("assets\\audio\\mafia_sleep.wav"))
+MAFIA = str(Path("assets\\audio\\preset\\mafia.wav"))
+MAFIA_SLEEP = str(Path("assets\\audio\\preset\\mafia_sleep.wav"))
 
-DOCTOR = str(Path("assets\\audio\\doctor.wav"))
-DOCTOR_SLEEP = str(Path("assets\\audio\\doctor_sleep.wav"))
+DOCTOR = str(Path("assets\\audio\\preset\\doctor.wav"))
+DOCTOR_SLEEP = str(Path("assets\\audio\\preset\\doctor_sleep.wav"))
 
-DETECTIVE = str(Path("assets\\audio\\detective.wav"))
-DETECTIVE_SLEEP = str(Path("assets\\audio\\detective_sleep.wav"))
+DETECTIVE = str(Path("assets\\audio\\preset\\detective.wav"))
+DETECTIVE_SLEEP = str(Path("assets\\audio\\preset\\detective_sleep.wav"))
 # Audio Constants

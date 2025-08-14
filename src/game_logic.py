@@ -95,9 +95,19 @@ def intro():
 
     #Adds every player to the array of players and sets them as civilian by default
 
-    mafiaPlayer = choice(players)
-    mafiaPlayer.role = "Mafia"
-    mafiaPlayer.team = "Bad"
+    mafiaPlayer1 = choice(players)
+    mafiaPlayer1.role = "Mafia"
+    mafiaPlayer1.team = "Bad"
+
+    
+    mafiaPlayer2 = None
+    while True:
+        mafiaPlayer2 = choice(players)
+        if mafiaPlayer2.role != "Mafia":
+            break
+
+    mafiaPlayer2.role = "Mafia"
+    mafiaPlayer2.team = "Bad"
 
     # Chooses Player as mafia
 
