@@ -30,6 +30,7 @@ def textToSpeech(text, filename):
     tss = gTTS(text, lang='en', tld="co.uk")
     return tss.save(str(Path(f'assets\\audio\\player_names\\{filename}.mp3')))
 
+
 # Module Functions
 
 WELCOME = str(Path("assets\\audio\\preset\\welcome.wav"))
@@ -42,6 +43,7 @@ ANNOUNCEMENT = str(Path("assets\\audio\\preset\\announcement.wav"))
 DISCUSS = str(Path("assets\\audio\\preset\\discuss.wav"))
 VOTE = str(Path("assets\\audio\\preset\\vote.wav"))
 EXECUTION = str(Path("assets\\audio\\preset\\execution.wav"))
+REVEAL = str(Path("assets\\audio\\preset\\reveal.wav"))
 GAMECONTINUES = str(Path("assets\\audio\\preset\\gamecontinues.wav"))
 GAMEOVER = str(Path("assets\\audio\\preset\\gameover.wav"))
 

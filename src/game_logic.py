@@ -13,6 +13,12 @@ wait = lambda t : sleep(t)
 clear = lambda : print("\033c", end="")
 # Lambda Functions
 
+def clearAudioFiles():
+    files = glob.glob('assets\\audio\\player_names\\*')
+    for f in files:
+        os.remove(f)
+
+
 def countdown(t):
     for i in range(t+1):
         print(t-i)
@@ -61,25 +67,26 @@ def hasGameEnded():
     # Check to see if game ended
 
 def intro():
-    files = glob.glob('assets\\audio\\player_names\\*')
-    for f in files:
-        os.remove(f)
+    clearAudioFiles()
     clear()
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
     
-    
     playerNumber = int(input("How many players are there (minimum 4)? "))
+    mafiaNumber = int(input("How many mafia are there (minimum 1)? "))
+
+
     global goodTeamNumber 
-    goodTeamNumber = playerNumber - 1
+    goodTeamNumber = playerNumber - mafiaNumber
 
     global badTeamNumber 
-    badTeamNumber = 1
+    badTeamNumber = mafiaNumber
 
     for i in range(playerNumber):
         plrName = input("Enter name of player #" + str(i+1) + " ")
         #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
-        plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=None) #nameAudio)
+        plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=None, votes=0)
+        # DEFAULT SETTINGS FOR PLAYEROBJECT
         players.append(plrObject)
         livingPlayers.append(plrObject)
         try:
@@ -94,24 +101,25 @@ def intro():
     clear()
 
     #Adds every player to the array of players and sets them as civilian by default
-
+    global mafiaPlayer1
     mafiaPlayer1 = choice(players)
     mafiaPlayer1.role = "Mafia"
     mafiaPlayer1.team = "Bad"
-
     
-    #mafiaPlayer2 = None
-    #while True:
-    #    mafiaPlayer2 = choice(players)
-    #    if mafiaPlayer2.role != "Mafia":
-    #        break
+    global mafiaPlayer2
+    mafiaPlayer2 = None
 
-    #mafiaPlayer2.role = "Mafia"
-    #mafiaPlayer2.team = "Bad"
+    if mafiaNumber == 2:
+        while True:
+            mafiaPlayer2 = choice(players)
+            if mafiaPlayer2.role != "Mafia":
+                break   
+        mafiaPlayer2.role = "Mafia"
+        mafiaPlayer2.team = "Bad"
 
     # Chooses Player as mafia
 
-    doctorPlayer = None
+    global doctorPlayer
     while True:
         doctorPlayer = choice(players)
         if doctorPlayer.role != "Mafia":
@@ -123,7 +131,7 @@ def intro():
     # Chooses Player as doctor
 
 
-    detectivePlayer = None
+    global detectivePlayer
     while True:
         detectivePlayer = choice(players)
         if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
@@ -137,11 +145,9 @@ def intro():
         wait(1)
         #players[i].sayName()
         input(players[i].name + " Press Enter to check your role ")
-        wait(1)
         print("You are " + players[i].role)
         wait(1)
         input("Press Enter to clear")
-        wait(1)
         clear()
 
     # Shows each player their role seperately
@@ -150,7 +156,7 @@ def intro():
     print("You Have 15 seconds to talk before night!")
     audio.playAudio(audio.INTRO)
     wait(3)
-    countdown(0)
+    #countdown(15)
 
 def night():
     clear()
@@ -181,18 +187,21 @@ def night():
     
     clear()
 
-
     print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
     audio.playAudio(audio.DOCTOR)
     wait(1)
     print()
-    print("List of players:")
-    printPlayerList(livingPlayers, "Doctor")
-    print()
-    healedNum = int(input("Enter the NUMBER of the player you want to heal: "))
-    healed = livingPlayers[healedNum-1]
-    healed.heal()
-    print(healed.name + " has been healed!")
+    if doctorPlayer.isAlive:
+        print("List of players:")
+        printPlayerList(livingPlayers, "Doctor")
+        print()
+        healedNum = int(input("Enter the NUMBER of the player you want to heal: "))
+        healed = livingPlayers[healedNum-1]
+        healed.heal()
+        print(healed.name + " has been healed!")
+    else:
+        print("Doctor is dead :P")
+        wait(choice(random.randint(3, 10)))
     wait(2)
     print("Doctor go back to sleep.")
     audio.playAudio(audio.DOCTOR_SLEEP)
@@ -204,36 +213,57 @@ def night():
     print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
     audio.playAudio(audio.DETECTIVE)
     wait(1)
-    print()
-    print("List of players:")
-    printPlayerList(livingPlayers, "Detective")
-
-    print()
-    investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
-    investigated = livingPlayers[investigatedNum-1]
-    print(investigated.name + " has been investigated!")
-    investigated.reveal()
+    if detectivePlayer.isAlive:
+        print()
+        print("List of players:")
+        printPlayerList(livingPlayers, "Detective")
+        print()
+        investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
+        investigated = livingPlayers[investigatedNum-1]
+        print(investigated.name + " has been investigated!")
+        investigated.reveal()
+    else:
+        print("Detective is dead :P")
+        wait(choice(random.randint(3, 10)))
     wait(2)
     print("The detective goes back to sleep.")
     audio.playAudio(audio.DETECTIVE_SLEEP)
     wait(4)
     # DETECTIVE STAGE
-    movePlayer = None
+
+    # Checks if attacked player is dead
+    # If dead then move to deadPlayers array and remove from livingPlayers
+
+
+    global deadPlayer
+    deadPlayer = None
     for i in range(len(livingPlayers)):
         currentPlayer = livingPlayers[i]
         if currentPlayer.isAlive == False:
-            movePlayer = currentPlayer
+            deadPlayer = currentPlayer
 
-    if movePlayer != None:
-        livingPlayers.remove(movePlayer)
-        deadPlayers.append(movePlayer)
-        
-        if movePlayer.team == "Bad":
-            global badTeamNumber
-            badTeamNumber -= 1
-        elif movePlayer.team == "Good":
-            global goodTeamNumber
-            goodTeamNumber -= 1
+            deadPlayers.append(deadPlayer)
+            livingPlayers.remove(deadPlayer)
+
+            if deadPlayer.team == "Bad":
+                global badTeamNumber
+                badTeamNumber -= 1
+            elif deadPlayer.team == "Good":
+                global goodTeamNumber
+                goodTeamNumber -= 1
+
+
+
+#    if deadPlayer != None:
+#        livingPlayers.remove(deadPlayer)
+#        deadPlayers.append(deadPlayer)
+#        
+#        if deadPlayer.team == "Bad":
+#            global badTeamNumber
+#            badTeamNumber -= 1
+#        elif deadPlayer.team == "Good":
+#            global goodTeamNumber
+#            goodTeamNumber -= 1
     
     # Moves dead player to correct list
     clear()
@@ -244,14 +274,14 @@ def announcement():
     audio.playAudio(audio.GOODMORNING)
     print("Good morning everyone!")
     wait(2)
-    if len(deadPlayers) != 0:
-        print("Luckly, no players died.")
+    if len(deadPlayers) == 0:
+        print("Luckly, everyone is still alive.")
     else:
         print("Unfortunately, the following players are no longer alive:")
         audio.playAudio(audio.ANNOUNCEMENT)
         printPlayerList(deadPlayers)
-        for i in deadPlayers:
-            audio.playAudio(f"assets\\audio\\player_names\\{i.name}_tts.wav")
+        #for i in deadPlayers:
+        #    audio.playAudio(f"assets\\audio\\player_names\\{i.name}_tts.wav")
         wait(4)
 
 
@@ -265,15 +295,18 @@ def vote():
     print("Times up! Now you must vote on which player to execute!")
     audio.playAudio(audio.VOTE)
     wait(1)
+
+
+
     while True:
         try:
             for i in range(len(livingPlayers)):
                 print(livingPlayers[i].name + " choose who to vote.")
                 print("List of players:")
                 printPlayerList(livingPlayers)
-                vote = input("Enter the NUMBER of the player you want to vote: ")
-                votedNum = int(vote)
-                voted.append(votedNum)
+                vote = int(input("Enter the NUMBER of the player you want to vote: "))
+                playerVoted = livingPlayers[vote-1]
+                playerVoted.addVote()
                 wait(2)
                 clear()
             break
@@ -284,29 +317,44 @@ def vote():
     
 
 def execution():
-    print("It's execution time! The player being executed is...")
-    audio.playAudio(audio.EXECUTION)
-    executedPlayer = livingPlayers[mostFrequent(voted)-1]
-    print(executedPlayer.name)
-    audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
-    executedPlayer.die()
-    movePlayer = None
+    print("It's time to reveal the votes!")
+    audio.playAudio()
+    wait(3)
     for i in range(len(livingPlayers)):
         currentPlayer = livingPlayers[i]
-        if currentPlayer.isAlive == False:
-            movePlayer = currentPlayer
+        currentPlayer.votes
 
-    if movePlayer != None:
-        livingPlayers.remove(movePlayer)
-        deadPlayers.append(movePlayer)
-        
-        if movePlayer.team == "Bad":
-            global badTeamNumber
-            badTeamNumber -= 1
-        elif movePlayer.team == "Good":
-            global goodTeamNumber
-            goodTeamNumber -= 1
+        print(currentPlayer.name + " has " + str(currentPlayer.votes) + " votes")
+
     wait(5)
+    
+    print("It's execution time! The player being executed is...")
+    audio.playAudio(audio.REVEAL)
+
+
+#    executedPlayer = livingPlayers[mostFrequent(voted)-1]
+#    print(executedPlayer.name)
+    #audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
+#    executedPlayer.die()
+
+
+#    deadPlayer = None
+#    for i in range(len(livingPlayers)):
+#        currentPlayer = livingPlayers[i]
+#        if currentPlayer.isAlive == False:
+#            deadPlayer = currentPlayer
+#
+#    if deadPlayer != None:
+#        livingPlayers.remove(deadPlayer)
+#        deadPlayers.append(deadPlayer)
+#        
+#        if deadPlayer.team == "Bad":
+#            global badTeamNumber
+#            badTeamNumber -= 1
+#        elif deadPlayer.team == "Good":
+#            global goodTeamNumber
+#            goodTeamNumber -= 1
+#    wait(5)
 
 def endGame():
     print("THE " + str(winningTeam) + " TEAM HAS WON!!!")
@@ -316,6 +364,13 @@ def endGame():
 badTeamNumber = 0
 goodTeamNumber = 0
 winningTeam = ""
+
+mafiaPlayer1 = None
+mafiaPlayer2 = None
+doctorPlayer = None
+detectivePlayer = None
+
+
 # Variables
 
 
