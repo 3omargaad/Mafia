@@ -9,7 +9,7 @@ class guiApp(App):
 class guiWidget(Widget):
     pass
 
-# if __name__ == "__main__":
-#     app = guiApp() 
-#     app.run()
-#     app.build()
+if __name__ == "__main__":
+    app = guiApp() 
+    app.run()
+    app.build()

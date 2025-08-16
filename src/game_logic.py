@@ -67,7 +67,7 @@ def hasGameEnded():
     # Check to see if game ended
 
 def intro():
-    files = glob.glob('assets\\plrNames\\*')
+    files = glob.glob('assets\\audio\\player_names\\*')
     for f in files:
         os.remove(f)
     clear()
@@ -88,6 +88,12 @@ def intro():
         plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=None) #nameAudio)
         players.append(plrObject)
         livingPlayers.append(plrObject)
+        try:
+            audio.textToSpeech(plrName, f'{plrName}_tts')
+            audio.convertToWav(str(Path(f'assets\\audio\\player_names\\{plrName}')))
+            os.remove(str(Path(f'assets\\audio\\player_names\\{plrName}_tts.mp3')))
+        except Exception as error:
+            print(error)
         clear()
 
 
@@ -100,14 +106,14 @@ def intro():
     mafiaPlayer1.team = "Bad"
 
     
-    mafiaPlayer2 = None
-    while True:
-        mafiaPlayer2 = choice(players)
-        if mafiaPlayer2.role != "Mafia":
-            break
+    #mafiaPlayer2 = None
+    #while True:
+    #    mafiaPlayer2 = choice(players)
+    #    if mafiaPlayer2.role != "Mafia":
+    #        break
 
-    mafiaPlayer2.role = "Mafia"
-    mafiaPlayer2.team = "Bad"
+    #mafiaPlayer2.role = "Mafia"
+    #mafiaPlayer2.team = "Bad"
 
     # Chooses Player as mafia
 
@@ -152,11 +158,6 @@ def intro():
     wait(3)
     countdown(0)
 
-    for i in livingPlayers:
-        audio.textToSpeech(i.name, f'{i.name}_tts')
-        audio.convertToWav(str(Path(f'assets\\plrNames\\{i.name}')))
-        os.remove(str(Path(f'assets\\plrNames\\{i.name}_tts.mp3')))
-
 def night():
     clear()
     print("The night approached... Everyone falls asleep")
@@ -175,7 +176,7 @@ def night():
         victimNum = int(input("Enter the NUMBER of the player you want to eliminate: "))
         victim = livingPlayers[victimNum-1]
         victim.die()
-        print(victim.name + " had been attacked!")
+        print(victim.name + " has been attacked!")
         wait(2)
         print("Mafia go back to sleep")
         audio.playAudio(audio.MAFIA_SLEEP)
@@ -197,7 +198,7 @@ def night():
     healedNum = int(input("Enter the NUMBER of the player you want to heal: "))
     healed = livingPlayers[healedNum-1]
     healed.heal()
-    print(healed.name + " had been healed!")
+    print(healed.name + " has been healed!")
     wait(2)
     print("Doctor go back to sleep.")
     audio.playAudio(audio.DOCTOR_SLEEP)
@@ -216,7 +217,7 @@ def night():
     print()
     investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
     investigated = livingPlayers[investigatedNum-1]
-    print(investigated.name + " had been investigated!")
+    print(investigated.name + " has been investigated!")
     investigated.reveal()
     wait(2)
     print("The detective goes back to sleep.")
@@ -256,7 +257,7 @@ def announcement():
         audio.playAudio(audio.ANNOUNCEMENT)
         printPlayerList(deadPlayers)
         for i in deadPlayers:
-            audio.playAudio(f"assets\\plrNames\\{i.name}_tts.wav")
+            audio.playAudio(f"assets\\audio\\player_names\\{i.name}_tts.wav")
         wait(4)
 
 
@@ -293,7 +294,7 @@ def execution():
     audio.playAudio(audio.EXECUTION)
     executedPlayer = livingPlayers[mostFrequent(voted)-1]
     print(executedPlayer.name)
-    audio.playAudio(f"assets\\plrNames\\{executedPlayer.name}_tts.wav")
+    audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
     executedPlayer.die()
     movePlayer = None
     for i in range(len(livingPlayers)):
