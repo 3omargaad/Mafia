@@ -9,20 +9,9 @@ import glob
 import audio
 import player
 
-def mostFrequent(List):
-    occurence_count = Counter(List)
-    most_common = occurence_count.most_common()
-    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
-        print("Its a tie, chadGPT will randomly choose someone to kill")
-        sleep(1)
-        return random.choice([most_common[0][0], most_common[1][0]])
-    else:
-        return most_common[0][0]
-
-
-def wait(t):
-    sleep(t)
-
+wait = lambda t : sleep(t)
+clear = lambda : print("\033c", end="")
+# Lambda Functions
 
 def countdown(t):
     for i in range(t+1):
@@ -30,8 +19,15 @@ def countdown(t):
         audio.playAudio(audio.POP)
 
 
-def clear():
-    print("\033c", end="")
+def mostFrequent(List):
+    occurence_count = Counter(List)
+    most_common = occurence_count.most_common()
+    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
+        print("Its a tie, chadGPT will randomly choose someone to kill")
+        wait(1)
+        return random.choice([most_common[0][0], most_common[1][0]])
+    else:
+        return most_common[0][0]
 
 
 def printPlayerList(list, exception=None):
@@ -41,13 +37,11 @@ def printPlayerList(list, exception=None):
         else:
             print(str(i+1) + ") " + list[i].name)
 
-
 def checkIfDead():
     for i in range(livingPlayers):
         if livingPlayers[i].isAlive == False:
             return livingPlayers[i].name
             # Assuming 1 player MAX dies each night
-
 
 def eliminate(playerNumber): 
     livingPlayers[playerNumber-1].die()

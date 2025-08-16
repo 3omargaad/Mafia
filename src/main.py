@@ -3,7 +3,8 @@ import app
 import game_logic
 # Modules
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
+    #app.setup() 
     game_logic.intro()
     while True: # Main Game Loop
         game_logic.night()
