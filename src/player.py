@@ -14,13 +14,23 @@ class Player:
         if self.isAlive == False:
             self.isAlive = True
 
-    def reveal(self):
+    def revealTeam(self):
         print(self.name + " is " + self.team)
 
+    def revealRole(self):
+        print(self.name + " is " + self.role)
+    
+    def finalReveal(self):
+        status = "Dead"
+        if self.isAlive:
+            status = "Alive"
+
+        print(self.name + " is " + self.role + " (" + status + ")")
+        
     def addVote(self):
         self.votes += 1
 
-    def resetVotes(self):
+    def resetVote(self):
         self.votes = 0
 
     #def sayName(self):

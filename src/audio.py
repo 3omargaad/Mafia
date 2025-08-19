@@ -2,6 +2,7 @@ from gtts import gTTS
 from pydub import AudioSegment
 from pydub.playback import play 
 from pathlib import Path
+import glob
 
 import tempfile
 import os
@@ -11,6 +12,11 @@ temp_dir = "C:/Mafia/temp"
 os.makedirs(temp_dir, exist_ok=True)
 tempfile.tempdir = temp_dir
 
+
+def clearAudioFiles():
+    files = glob.glob('assets\\audio\\player_names\\*')
+    for f in files:
+        os.remove(f)
 
 def convertToWav(inputFile):
     #audio = AudioSegment.from_mp3(inputFile)

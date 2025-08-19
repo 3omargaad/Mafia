@@ -13,49 +13,60 @@ wait = lambda t : sleep(t)
 clear = lambda : print("\033c", end="")
 # Lambda Functions
 
-def clearAudioFiles():
-    files = glob.glob('assets\\audio\\player_names\\*')
-    for f in files:
-        os.remove(f)
-
-
 def countdown(t):
     for i in range(t+1):
         print(t-i)
         audio.playAudio(audio.POP)
 
+def resetVotes():
+    for plr in players:
+        plr.resetVote()
 
-def mostFrequent(List):
-    occurence_count = Counter(List)
-    most_common = occurence_count.most_common()
-    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
-        print("Its a tie, chadGPT will randomly choose someone to kill")
-        wait(1)
-        return random.choice([most_common[0][0], most_common[1][0]])
-    else:
-        return most_common[0][0]
+def revealRoles():
+    for plr in players:
+        plr.finalReveal()
 
+#def mostFrequent(List):
+#    occurence_count = Counter(List)
+#    most_common = occurence_count.most_common()
+#    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
+#        print("Its a tie, chadGPT will randomly choose someone to kill")
+#        wait(1)
+#        return random.choice([most_common[0][0], most_common[1][0]])
+#    else:
+#        return most_common[0][0]
 
 def printPlayerList(list, exception=None):
-    for i in range(len(list)):
-        if list[i].role == exception:
-            print(str(i+1) + ") " + list[i].name + " (YOU)")
+    i = 0
+    for plr in list:
+        i += 1
+        if plr.role == exception:
+            print(str(i) + ") " + plr.name + " (YOU)")
         else:
-            print(str(i+1) + ") " + list[i].name)
+            print(str(i) + ") " + plr.name)
 
-def checkIfDead():
-    for i in range(livingPlayers):
-        if livingPlayers[i].isAlive == False:
-            return livingPlayers[i].name
+def removeDeadPlayers():
+    for plr in livingPlayers:
+        if plr.isAlive == False:
+            deadPlayer = plr
+
+            deadPlayers.append(deadPlayer)
+            livingPlayers.remove(deadPlayer)
+
+            if deadPlayer.team == "Bad":
+                global badTeamNumber
+                badTeamNumber -= 1
+            elif deadPlayer.team == "Good":
+                global goodTeamNumber
+                goodTeamNumber -= 1
             # Assuming 1 player MAX dies each night
 
 def eliminate(playerNumber): 
     livingPlayers[playerNumber-1].die()
     livingPlayers.remove(livingPlayers[playerNumber-1])
 
-# Functions
-
 def hasGameEnded():
+    global winningTeam
     if badTeamNumber == 0:
         winningTeam = "Good"
         return True
@@ -66,8 +77,10 @@ def hasGameEnded():
         return False
     # Check to see if game ended
 
+# Functions
+
 def intro():
-    clearAudioFiles()
+    audio.clearAudioFiles()
     clear()
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
@@ -86,13 +99,13 @@ def intro():
         plrName = input("Enter name of player #" + str(i+1) + " ")
         #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
         plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=None, votes=0)
-        # DEFAULT SETTINGS FOR PLAYEROBJECT
+        # DEFAULT SETTINGS FOR PLAYER OBJECT
         players.append(plrObject)
         livingPlayers.append(plrObject)
         try:
-            audio.textToSpeech(plrName, f'{plrName}_tts')
-            audio.convertToWav(str(Path(f'assets\\audio\\player_names\\{plrName}')))
-            os.remove(str(Path(f'assets\\audio\\player_names\\{plrName}_tts.mp3')))
+            audio.textToSpeech(plrName, f'plr_{plrName}')
+            audio.convertToWav(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
+            os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
         except Exception as error:
             print(error)
         clear()
@@ -155,8 +168,8 @@ def intro():
     print("The game has begun!")
     print("You Have 15 seconds to talk before night!")
     audio.playAudio(audio.INTRO)
-    wait(3)
-    #countdown(15)
+    wait(1)
+    countdown(15)
 
 def night():
     clear()
@@ -191,7 +204,7 @@ def night():
     audio.playAudio(audio.DOCTOR)
     wait(1)
     print()
-    if doctorPlayer.isAlive:
+    if doctorPlayer.isAlive or doctorPlayer in livingPlayers:
         print("List of players:")
         printPlayerList(livingPlayers, "Doctor")
         print()
@@ -200,8 +213,10 @@ def night():
         healed.heal()
         print(healed.name + " has been healed!")
     else:
+        randWait = random.randint(3, 8)
         print("Doctor is dead :P")
-        wait(choice(random.randint(3, 10)))
+        print("Continuing game in " + str(randWait) + " seconds...")
+        wait(randWait)
     wait(2)
     print("Doctor go back to sleep.")
     audio.playAudio(audio.DOCTOR_SLEEP)
@@ -213,7 +228,7 @@ def night():
     print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
     audio.playAudio(audio.DETECTIVE)
     wait(1)
-    if detectivePlayer.isAlive:
+    if detectivePlayer.isAlive or detectivePlayer in livingPlayers:
         print()
         print("List of players:")
         printPlayerList(livingPlayers, "Detective")
@@ -221,10 +236,12 @@ def night():
         investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
         investigated = livingPlayers[investigatedNum-1]
         print(investigated.name + " has been investigated!")
-        investigated.reveal()
+        investigated.revealTeam()
     else:
+        randWait = random.randint(3, 8)
         print("Detective is dead :P")
-        wait(choice(random.randint(3, 10)))
+        print("Continuing game in " + str(randWait) + " seconds...")
+        wait(randWait)
     wait(2)
     print("The detective goes back to sleep.")
     audio.playAudio(audio.DETECTIVE_SLEEP)
@@ -234,42 +251,12 @@ def night():
     # Checks if attacked player is dead
     # If dead then move to deadPlayers array and remove from livingPlayers
 
-
-    global deadPlayer
-    deadPlayer = None
-    for i in range(len(livingPlayers)):
-        currentPlayer = livingPlayers[i]
-        if currentPlayer.isAlive == False:
-            deadPlayer = currentPlayer
-
-            deadPlayers.append(deadPlayer)
-            livingPlayers.remove(deadPlayer)
-
-            if deadPlayer.team == "Bad":
-                global badTeamNumber
-                badTeamNumber -= 1
-            elif deadPlayer.team == "Good":
-                global goodTeamNumber
-                goodTeamNumber -= 1
-
-
-
-#    if deadPlayer != None:
-#        livingPlayers.remove(deadPlayer)
-#        deadPlayers.append(deadPlayer)
-#        
-#        if deadPlayer.team == "Bad":
-#            global badTeamNumber
-#            badTeamNumber -= 1
-#        elif deadPlayer.team == "Good":
-#            global goodTeamNumber
-#            goodTeamNumber -= 1
-    
-    # Moves dead player to correct list
+    removeDeadPlayers()
     clear()
     
 
 def announcement():
+    clear()
     wait(1)
     audio.playAudio(audio.GOODMORNING)
     print("Good morning everyone!")
@@ -296,8 +283,6 @@ def vote():
     audio.playAudio(audio.VOTE)
     wait(1)
 
-
-
     while True:
         try:
             for i in range(len(livingPlayers)):
@@ -311,53 +296,67 @@ def vote():
                 clear()
             break
         except Exception as e:
+            resetVotes()
             print(e)
             print("invalid input")
             continue
     
+    global votes
+    
+    for plr in livingPlayers:
+        votes.append(plr.votes)
+
+    maxVoteVal = max(votes)
+
+    for plr in livingPlayers:
+        if plr.votes == maxVoteVal:
+            executedPlayers.append(plr)
+
+    
 
 def execution():
     print("It's time to reveal the votes!")
-    audio.playAudio()
+    audio.playAudio(audio.REVEAL)
     wait(3)
+    executedVotes = 0
     for i in range(len(livingPlayers)):
         currentPlayer = livingPlayers[i]
-        currentPlayer.votes
+        if currentPlayer.votes >= executedVotes:
+            executedPlayer = currentPlayer
 
         print(currentPlayer.name + " has " + str(currentPlayer.votes) + " votes")
 
     wait(5)
     
     print("It's execution time! The player being executed is...")
-    audio.playAudio(audio.REVEAL)
+
+    
+    executedPlayer = random.choice(executedPlayers)
 
 
-#    executedPlayer = livingPlayers[mostFrequent(voted)-1]
-#    print(executedPlayer.name)
+    audio.playAudio(audio.EXECUTION)
+
+    print(executedPlayer.name)
+    wait(2)
+    executedPlayer.die()
+    executedPlayers.clear()
+    resetVotes()
+    votes.clear()
+    removeDeadPlayers()
+    print(executedPlayer.name + " has been executed and is no longer alive!")
+
+    #print(executedPlayer.name)
     #audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
-#    executedPlayer.die()
-
-
-#    deadPlayer = None
-#    for i in range(len(livingPlayers)):
-#        currentPlayer = livingPlayers[i]
-#        if currentPlayer.isAlive == False:
-#            deadPlayer = currentPlayer
-#
-#    if deadPlayer != None:
-#        livingPlayers.remove(deadPlayer)
-#        deadPlayers.append(deadPlayer)
-#        
-#        if deadPlayer.team == "Bad":
-#            global badTeamNumber
-#            badTeamNumber -= 1
-#        elif deadPlayer.team == "Good":
-#            global goodTeamNumber
-#            goodTeamNumber -= 1
-#    wait(5)
+    wait(5)
 
 def endGame():
+    print("The Game had ended!")
+    wait(2)
     print("THE " + str(winningTeam) + " TEAM HAS WON!!!")
+    wait(2)
+    print("---------------------------------------------------------")
+    revealRoles()
+
 
 # Procedures
 
@@ -373,10 +372,10 @@ detectivePlayer = None
 
 # Variables
 
-
 players = []
 livingPlayers = []
 deadPlayers = []
-voted = []
+votes = []
+executedPlayers = []
 
 # Arrays
