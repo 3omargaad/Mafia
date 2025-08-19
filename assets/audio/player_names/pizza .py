@@ -1,2 +1,5 @@
-for i in range(100):
-    print("hii will eat you")
+question = input("1+1= ?")
+if question == "3":
+    print("small skinny yes")
+else:
+    print("big fat no")
