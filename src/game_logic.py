@@ -2,6 +2,7 @@ from random import choice
 import random
 from time import sleep
 from pathlib import Path
+import os
 
 import audio
 import player
