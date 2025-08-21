@@ -39,4 +39,4 @@ def setup():
     app.run()
     app.build()
 
-setup()
+#setup()
