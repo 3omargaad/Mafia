@@ -3,13 +3,52 @@ guiWidget:
 
 <guiWidget>:
     Label:
-        text: "MAFIA"
+        text: "Mafia"
         size: "100dp", "80dp"
+        font: "200dp"
         pos: "100dp", "300dp"
         color: "#d73612ff"
-        font: 
+        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+        font_size: "75dp"
+    Image:
+        src: "assets\\images\\mafia_logo.png"
+        size: "100dp", "100dp"
+        pos: "100dp", "75dp"
     Button:
         text: "PLAY"
         size: "100dp", "80dp"
         pos: "100dp", "200dp"
+        on_press: root.on_play()
+    ToggleButton:
+        text: "tOGGLE"
+        on_state: root.toggle()
+        disabled: False
+    Label:
+        text: root.outputText
+        size: "100dp", "80dp"
+        font: "200dp"
+        pos: "100dp", "100dp"
+        color: "#d73612ff"
+    Switch:
+        id: add_doc_switch
+        on_active: root.on_swtich_active(self)
     
+    Switch:
+        id: add_dec_switch
+        on_active: root.on_swtich_active(self)
+
+    Label:
+        text: str(int(plr_num_slider.value))
+        color: "#d73612ff"
+        pos: "400dp", "50dp"
+
+    TextInput:
+        text: "Player #1 Name"
+
+    Slider:
+        id: plr_num_slider
+        pos: "400dp", "100dp"
+        min: 4
+        max: 20
+        value: 4
+        #on_value: root.on_slider_value(self)
