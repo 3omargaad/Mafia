@@ -172,6 +172,9 @@ def intro():
     countdown(15)
 
 def night():
+    print("The game continues!")
+    audio.playAudio(audio.GAMECONTINUES)
+    wait(2)
     clear()
     print("The night approached... Everyone falls asleep")
     audio.playAudio(audio.GOODNIGHT)
@@ -258,11 +261,12 @@ def night():
 def announcement():
     clear()
     wait(1)
-    audio.playAudio(audio.GOODMORNING)
     print("Good morning everyone!")
+    audio.playAudio(audio.GOODMORNING)
     wait(2)
     if len(deadPlayers) == 0:
-        print("Luckly, everyone is still alive.")
+        print("Fortunately, everyone is still alive.")
+        audio.playAudio(audio.FORTUNATELY)
     else:
         print("Unfortunately, the following players are no longer alive:")
         audio.playAudio(audio.ANNOUNCEMENT)
@@ -347,10 +351,12 @@ def execution():
 
     #print(executedPlayer.name)
     #audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
-    wait(5)
+    wait(3)
+    clear()
 
 def endGame():
-    print("The Game had ended!")
+    print("The game is over!")
+    audio.playAudio(audio.GAMEOVER)
     wait(2)
     print("THE " + str(winningTeam) + " TEAM HAS WON!!!")
     wait(2)
