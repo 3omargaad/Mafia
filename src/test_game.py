@@ -17,3 +17,6 @@ if __name__ == "__main__":
             break
         
     game_logic.endGame()
+
+
+# CLONE OF MAIN.PY FOR TESTING
