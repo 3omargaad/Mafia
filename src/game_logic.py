@@ -26,16 +26,6 @@ def revealRoles():
     for plr in players:
         plr.finalReveal()
 
-#def mostFrequent(List):
-#    occurence_count = Counter(List)
-#    most_common = occurence_count.most_common()
-#    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
-#        print("Its a tie, chadGPT will randomly choose someone to kill")
-#        wait(1)
-#        return random.choice([most_common[0][0], most_common[1][0]])
-#    else:
-#        return most_common[0][0]
-
 def printPlayerList(list, exception=None):
     i = 0
     for plr in list:
@@ -305,9 +295,8 @@ def vote():
             print("invalid input")
             continue
     
-    global votes
-    
     for plr in livingPlayers:
+        global votes
         votes.append(plr.votes)
 
     maxVoteVal = max(votes)
