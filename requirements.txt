@@ -6,3 +6,5 @@ glob
 tempfile
 os
 subprocess
+pydub
+gtts

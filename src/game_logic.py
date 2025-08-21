@@ -1,10 +1,7 @@
 from random import choice
 import random
 from time import sleep
-from collections import Counter
-import os
 from pathlib import Path
-import glob
 
 import audio
 import player
