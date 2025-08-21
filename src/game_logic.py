@@ -296,7 +296,7 @@ def vote():
             continue
     
     for plr in livingPlayers:
-        global votes
+        #global votes
         votes.append(plr.votes)
 
     maxVoteVal = max(votes)
