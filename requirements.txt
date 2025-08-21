@@ -1,0 +1,8 @@
+kivy
+pathlib
+random
+time
+glob
+tempfile
+os
+subprocess
