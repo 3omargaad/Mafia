@@ -8,6 +8,7 @@ guiWidget:
         font: "200dp"
         pos: "100dp", "300dp"
         color: "#d73612ff"
+        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
     Image:
         src: "assets\\images\\mafia_logo.png"
         size: "100dp", "100dp"
@@ -18,7 +19,7 @@ guiWidget:
         pos: "100dp", "200dp"
         on_press: root.on_play()
     Label:
-        text: "Welcome to mafia, I am your host Chadgpt"
+        text: root.outputText
         size: "100dp", "80dp"
         font: "200dp"
         pos: "100dp", "100dp"
