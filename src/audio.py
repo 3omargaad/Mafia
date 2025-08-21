@@ -36,7 +36,6 @@ def textToSpeech(text, filename):
     tss = gTTS(text, lang='en', tld="co.uk")
     return tss.save(str(Path(f'assets\\audio\\player_names\\{filename}.mp3')))
 
-
 # Module Functions
 
 WELCOME = str(Path("assets\\audio\\preset\\welcome.wav"))
