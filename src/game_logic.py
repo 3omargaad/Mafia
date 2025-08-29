@@ -6,6 +6,7 @@ import os
 
 import audio
 import player
+import app
 
 wait = lambda t : sleep(t)
 clear = lambda : print("\033c", end="")
@@ -70,6 +71,7 @@ def hasGameEnded():
 def intro():
     audio.clearAudioFiles()
     clear()
+    app.setup()
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
     
