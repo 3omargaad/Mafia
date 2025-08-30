@@ -59,7 +59,7 @@ def hasGameEnded():
     if badTeamNumber == 0:
         winningTeam = "Good"
         return True
-    elif goodTeamNumber == badTeamNumber:
+    elif goodTeamNumber <= badTeamNumber:
         winningTeam = "Bad"
         return True
     else:
@@ -72,11 +72,12 @@ def intro():
     audio.clearAudioFiles()
     clear()
     app.setup()
+    playerNumber, mafiaNumber = (app.plr_num_val, app.maf_num_val)
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
     
-    playerNumber = int(input("How many players are there (minimum 4)? "))
-    mafiaNumber = int(input("How many mafia are there (minimum 1)? "))
+    #playerNumber = int(input("How many players are there (minimum 4)? "))
+    #mafiaNumber = int(input("How many mafia are there (minimum 1)? "))
 
 
     global goodTeamNumber 
@@ -104,21 +105,30 @@ def intro():
     clear()
 
     #Adds every player to the array of players and sets them as civilian by default
-    global mafiaPlayer1
-    mafiaPlayer1 = choice(players)
-    mafiaPlayer1.role = "Mafia"
-    mafiaPlayer1.team = "Bad"
-    
-    global mafiaPlayer2
-    mafiaPlayer2 = None
 
-    if mafiaNumber == 2:
+    #global mafiaPlayer1
+    #mafiaPlayer1 = choice(players)
+    #mafiaPlayer1.role = "Mafia"
+    #mafiaPlayer1.team = "Bad"
+    
+    for maf in range(mafiaNumber):
         while True:
-            mafiaPlayer2 = choice(players)
-            if mafiaPlayer2.role != "Mafia":
+            mafiaPlayer = choice(players)
+            if mafiaPlayer.role != "Mafia":
                 break   
-        mafiaPlayer2.role = "Mafia"
-        mafiaPlayer2.team = "Bad"
+        mafiaPlayer.role = "Mafia"
+        mafiaPlayer.team = "Bad"
+
+    #global mafiaPlayer2
+    #mafiaPlayer2 = None
+
+    #if mafiaNumber == 2:
+    #    while True:
+    #        mafiaPlayer2 = choice(players)
+    #        if mafiaPlayer2.role != "Mafia":
+    #            break   
+    #    mafiaPlayer2.role = "Mafia"
+    #    mafiaPlayer2.team = "Bad"
 
     # Chooses Player as mafia
 
