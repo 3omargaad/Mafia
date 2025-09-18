@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
+#from kivy.uix.stacklayout import StackLayout
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
 from pathlib import Path
@@ -24,6 +25,11 @@ class guiApp(App):
         self.stop()  # Stops the app cleanly
         return True  # Return True to indicate that the close event is handled
 
+#class stackLayout(StackLayout):
+#    def __init__(self, **kwargs):
+#        super().__init__(**kwargs)
+#        b = Button(text="Z")
+#        self.add_widget(b)
 
 class guiWidget(FloatLayout):
     outputText = StringProperty("Welcome to Mafia! I am your host ChadGPT.")
@@ -33,23 +39,32 @@ class guiWidget(FloatLayout):
     plr_num_val = StringProperty("4")
     maf_num_val = StringProperty("1")
 
+    include_doc_val = BooleanProperty(False)
+    include_det_val = BooleanProperty(False)
+
     def on_play(self):
         global plr_num_val
         global maf_num_val
+        global include_doc_val
+        global include_det_val
         plr_num_val = int(self.plr_num_val)
         maf_num_val = int(self.maf_num_val)
+        include_doc_val = bool(self.include_doc_val)
+        include_det_val = bool(self.include_det_val)
         app.stop()
         
     def toggle(self):
         pass
 
-    def on_swtich_active(self, widget):
-        print("Switch: " + str(widget.active))
+    def on_doc_swtich_active(self, widget):
+        print("Include Doctor? " + str(widget.active))
     
+    def on_det_swtich_active(self, widget):
+        print("Include Detective? " + str(widget.active))
     
     def on_plr_slider_value(self, widget):
         self.plr_num_val = str(int(widget.value))
-    
+          
     def on_maf_slider_value(self, widget):
         self.maf_num_val = str(int(widget.value))
 
@@ -58,7 +73,7 @@ class guiMenu(FloatLayout):
 
 
 def start():
-    return (plr_num_val, maf_num_val)
+    return (plr_num_val, maf_num_val, include_doc_val, include_det_val)
 
 def setup():
     global app

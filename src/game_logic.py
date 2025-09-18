@@ -72,13 +72,9 @@ def intro():
     audio.clearAudioFiles()
     clear()
     app.setup()
-    playerNumber, mafiaNumber = (app.plr_num_val, app.maf_num_val)
+    playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, app.include_doc_val, app.include_det_val)
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
-    
-    #playerNumber = int(input("How many players are there (minimum 4)? "))
-    #mafiaNumber = int(input("How many mafia are there (minimum 1)? "))
-
 
     global goodTeamNumber 
     goodTeamNumber = playerNumber - mafiaNumber
@@ -103,13 +99,6 @@ def intro():
 
 
     clear()
-
-    #Adds every player to the array of players and sets them as civilian by default
-
-    #global mafiaPlayer1
-    #mafiaPlayer1 = choice(players)
-    #mafiaPlayer1.role = "Mafia"
-    #mafiaPlayer1.team = "Bad"
     
     for maf in range(mafiaNumber):
         while True:
@@ -119,38 +108,30 @@ def intro():
         mafiaPlayer.role = "Mafia"
         mafiaPlayer.team = "Bad"
 
-    #global mafiaPlayer2
-    #mafiaPlayer2 = None
-
-    #if mafiaNumber == 2:
-    #    while True:
-    #        mafiaPlayer2 = choice(players)
-    #        if mafiaPlayer2.role != "Mafia":
-    #            break   
-    #    mafiaPlayer2.role = "Mafia"
-    #    mafiaPlayer2.team = "Bad"
-
-    # Chooses Player as mafia
+    # Chooses Player(s) as mafia
 
     global doctorPlayer
-    while True:
-        doctorPlayer = choice(players)
-        if doctorPlayer.role != "Mafia":
-            break
 
+    if includeDoc:
+        while True:
+            doctorPlayer = choice(players)
+            if doctorPlayer.role != "Mafia":
+                break
         
-    doctorPlayer.role = "Doctor"
+        doctorPlayer.role = "Doctor"
 
     # Chooses Player as doctor
 
 
     global detectivePlayer
-    while True:
-        detectivePlayer = choice(players)
-        if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
-            break
 
-    detectivePlayer.role = "Detective"
+    if includeDet:
+        while True:
+            detectivePlayer = choice(players)
+            if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
+                break
+
+        detectivePlayer.role = "Detective"
 
     # Chooses Player as detective
 
@@ -203,52 +184,54 @@ def night():
     
     clear()
 
-    print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
-    audio.playAudio(audio.DOCTOR)
-    wait(1)
-    print()
-    if doctorPlayer.isAlive or doctorPlayer in livingPlayers:
-        print("List of players:")
-        printPlayerList(livingPlayers, "Doctor")
+    if includeDoc:
+        print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
+        audio.playAudio(audio.DOCTOR)
+        wait(1)
         print()
-        healedNum = int(input("Enter the NUMBER of the player you want to heal: "))
-        healed = livingPlayers[healedNum-1]
-        healed.heal()
-        print(healed.name + " has been healed!")
-    else:
-        randWait = random.randint(3, 8)
-        print("Doctor is dead :P")
-        print("Continuing game in " + str(randWait) + " seconds...")
-        wait(randWait)
-    wait(2)
-    print("Doctor go back to sleep.")
-    audio.playAudio(audio.DOCTOR_SLEEP)
-    wait(4)
+        if doctorPlayer.isAlive or doctorPlayer in livingPlayers:
+            print("List of players:")
+            printPlayerList(livingPlayers, "Doctor")
+            print()
+            healedNum = int(input("Enter the NUMBER of the player you want to heal: "))
+            healed = livingPlayers[healedNum-1]
+            healed.heal()
+            print(healed.name + " has been healed!")
+        else:
+            randWait = random.randint(3, 8)
+            print("Doctor is dead :P")
+            print("Continuing game in " + str(randWait) + " seconds...")
+            wait(randWait)
+        wait(2)
+        print("Doctor go back to sleep.")
+        audio.playAudio(audio.DOCTOR_SLEEP)
+        wait(4)
     # DOCTOR STAGE
 
     clear()
 
-    print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
-    audio.playAudio(audio.DETECTIVE)
-    wait(1)
-    if detectivePlayer.isAlive or detectivePlayer in livingPlayers:
-        print()
-        print("List of players:")
-        printPlayerList(livingPlayers, "Detective")
-        print()
-        investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
-        investigated = livingPlayers[investigatedNum-1]
-        print(investigated.name + " has been investigated!")
-        investigated.revealTeam()
-    else:
-        randWait = random.randint(3, 8)
-        print("Detective is dead :P")
-        print("Continuing game in " + str(randWait) + " seconds...")
-        wait(randWait)
-    wait(2)
-    print("The detective goes back to sleep.")
-    audio.playAudio(audio.DETECTIVE_SLEEP)
-    wait(4)
+    if includeDet:
+        print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
+        audio.playAudio(audio.DETECTIVE)
+        wait(1)
+        if detectivePlayer.isAlive or detectivePlayer in livingPlayers:
+            print()
+            print("List of players:")
+            printPlayerList(livingPlayers, "Detective")
+            print()
+            investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
+            investigated = livingPlayers[investigatedNum-1]
+            print(investigated.name + " has been investigated!")
+            investigated.revealTeam()
+        else:
+            randWait = random.randint(3, 8)
+            print("Detective is dead :P")
+            print("Continuing game in " + str(randWait) + " seconds...")
+            wait(randWait)
+        wait(2)
+        print("The detective goes back to sleep.")
+        audio.playAudio(audio.DETECTIVE_SLEEP)
+        wait(4)
     # DETECTIVE STAGE
 
     # Checks if attacked player is dead

@@ -8,7 +8,7 @@ guiWidget:
         pos_hint: {"center_x": 0.5, "center_y": 0.85}
         color: "#d73612ff"
         font_name: "assets\\fonts\\Rye-Regular.ttf"
-        font_size: "75dp"
+        font_size: "100dp"
     Label:
         text: "Game Setup"
         size_hint: 0.5, None
@@ -27,13 +27,13 @@ guiWidget:
         font_size: "50dp"
 
     GridLayout:
-        rows: 2
+        rows: 4
         cols: 3
         row_default_height: '40dp'
         row_force_default: True
         size_hint: None, None
         size: self.minimum_size
-        pos_hint: {"center_x": 0.25, "center_y": 0.5}
+        pos_hint: {"center_x": 0.25, "center_y": 0.4}
         spacing: 135, 10   # (horizontal, vertical) space between widgets
         padding: 20       # space around the edges of the GridLayout
 
@@ -90,6 +90,65 @@ guiWidget:
             color: "#e0e0e0ff"
             font_name: "assets\\fonts\\PressStart2P-Regular.ttf"
             font_size: "25dp"
+        ###########################################################################
+        Label:
+            text: "Include Doctor?"
+            size_hint: 0.5, None
+            height: 50
+            #pos_hint: {"center_x": 0.15, "center_y": 0.45}
+            color: "#e0e0e0ff"
+            font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+            font_size: "22dp"
+        Switch:
+            on_active: root.on_doc_swtich_active(self)
+        Label:
+        ###########################################################################
+        Label:
+            text: "Include Detective?"
+            size_hint: 0.5, None
+            height: 50
+            #pos_hint: {"center_x": 0.15, "center_y": 0.45}
+            color: "#e0e0e0ff"
+            font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+            font_size: "22dp"
+        Switch:
+            on_active: root.on_det_swtich_active(self)
+        Label:
+
+    GridLayout:
+        rows: 2
+        cols: 2
+        row_default_height: '40dp'
+        row_force_default: True
+        size_hint: None, None
+        size: self.minimum_size
+        pos_hint: {"center_x": 0.75, "center_y": 0.4}
+        spacing: 135, 10   # (horizontal, vertical) space between widgets
+        padding: 20       # space around the edges of the GridLayout
+
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        ###########################################################################
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+
 
 
     Button:
