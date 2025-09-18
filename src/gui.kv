@@ -7,7 +7,7 @@ guiWidget:
         height: 50
         pos_hint: {"center_x": 0.5, "center_y": 0.85}
         color: "#d73612ff"
-        font_name: "assets\\fonts\\Rye-Regular.ttf"
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
         font_size: "100dp"
     Label:
         text: "Game Setup"
@@ -15,7 +15,7 @@ guiWidget:
         height: 50
         pos_hint: {"center_x": 0.25, "center_y": 0.65}
         color: "#7b9fecff"
-        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
         font_size: "50dp"
     Label:
         text: "Players"
@@ -23,7 +23,7 @@ guiWidget:
         height: 50
         pos_hint: {"center_x": 0.75, "center_y": 0.65}
         color: "#7b9fecff"
-        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
         font_size: "50dp"
 
     GridLayout:
@@ -43,7 +43,7 @@ guiWidget:
             height: 50
             #pos_hint: {"center_x": 0.15, "center_y": 0.55}
             color: "#e0e0e0ff"
-            font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "22dp"   
         Slider:
             id: plr_num_slider
@@ -61,7 +61,7 @@ guiWidget:
             font: "200dp"
             #pos_hint: {"center_x": 0.475, "center_y": 0.55}
             color: "#e0e0e0ff"
-            font_name: "assets\\fonts\\PressStart2P-Regular.ttf"
+            font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
             font_size: "25dp"
         ###########################################################################
         Label:
@@ -70,7 +70,7 @@ guiWidget:
             height: 50
             #pos_hint: {"center_x": 0.15, "center_y": 0.45}
             color: "#e0e0e0ff"
-            font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "22dp"   
         Slider:
             id: maf_num_slider
@@ -88,7 +88,7 @@ guiWidget:
             font: "200dp"
             #pos_hint: {"center_x": 0.475, "center_y": 0.45}
             color: "#e0e0e0ff"
-            font_name: "assets\\fonts\\PressStart2P-Regular.ttf"
+            font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
             font_size: "25dp"
         ###########################################################################
         Label:
@@ -97,7 +97,7 @@ guiWidget:
             height: 50
             #pos_hint: {"center_x": 0.15, "center_y": 0.45}
             color: "#e0e0e0ff"
-            font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "22dp"
         Switch:
             on_active: root.on_doc_swtich_active(self)
@@ -109,7 +109,7 @@ guiWidget:
             height: 50
             #pos_hint: {"center_x": 0.15, "center_y": 0.45}
             color: "#e0e0e0ff"
-            font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "22dp"
         Switch:
             on_active: root.on_det_swtich_active(self)
@@ -158,7 +158,7 @@ guiWidget:
         size_hint: (0.3, 0.1)
         pos_hint: {"center_x": 0.5, "center_y": 0.2}
         on_press: root.on_play()
-        font_name: "assets\\fonts\\PressStart2P-Regular.ttf"
+        font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
         font_size: "30dp"
 
 #<FloatLayout>:
@@ -168,7 +168,7 @@ guiWidget:
 #        font: "200dp"
 #        pos: "275dp", "500dp"
 #        color: "#d73612ff"
-#        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+#        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
 #        #font_size: "75dp"
 #    Label:
 #        text: "Press Esc to Quit"
@@ -176,10 +176,10 @@ guiWidget:
 #        font: "200dp"
 #        pos: "275dp", "200dp"
 #        color: "#a197f0ff"
-#        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+#        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
 #        #font_size: "25dp"
 #    Image:
-#        src: "assets\\images\\mafia_logo.png"
+#        src: root."assets\\images\\mafia_logo.png"
 #        #size: "100dp", "100dp"
 #        pos: "100dp", "75dp"
 #    Button:
@@ -187,19 +187,19 @@ guiWidget:
 #        #size: "100dp", "80dp"
 #        pos: "100dp", "200dp"
 #        on_press: root.on_play()
-#        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+#        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
 #    ToggleButton:
 #        text: "tOGGLE"
 #        on_state: root.toggle()
 #        disabled: False
-#        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+#        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
 #    Label:
 #        text: root.outputText
 #        #size: "100dp", "80dp"
 #        font: "200dp"
 #        pos: "100dp", "100dp"
 #        color: "#d73612ff"
-#        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+#        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
 #    Switch:
 #        id: add_doc_switch
 #        on_active: root.on_swtich_active(self)
@@ -212,10 +212,10 @@ guiWidget:
 #        text: str(int(plr_num_slider.value))
 #        color: "#d73612ff"
 #        pos: "400dp", "50dp"
-#        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+#        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
 #    TextInput:
 #        text: "Player #1 Name"
-#        font_name: "assets\\fonts\\RobotoSlab-Medium.ttf"
+#        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
 #    Slider:
 #        id: plr_num_slider
 #        pos: "400dp", "100dp"

@@ -9,11 +9,14 @@ from pathlib import Path
 from kivy.core.window import Window
 from kivy.config import Config
 
+from files import get_path
 #Window.fullscreen = 'auto'  # Let Kivy choose best full screen mode
 
 class guiApp(App):
     def build(self):
-        self.icon = str(Path("assets\\images\\mafia_logo.ico"))
+        icon = get_path("assets", "images", "mafia_logo.ico")
+
+        self.icon = icon
 
     def on_stop(self):
         print("App is closing. Cleaning up...")
@@ -32,6 +35,10 @@ class guiApp(App):
 #        self.add_widget(b)
 
 class guiWidget(FloatLayout):
+    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+    roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
+    press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
+
     outputText = StringProperty("Welcome to Mafia! I am your host ChadGPT.")
     count = 0
     state = BooleanProperty(False)

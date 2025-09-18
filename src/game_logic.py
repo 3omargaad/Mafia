@@ -1,7 +1,8 @@
 from random import choice
 import random
 from time import sleep
-from pathlib import Path
+
+from files import get_path
 import os
 
 import audio
@@ -72,7 +73,9 @@ def intro():
     audio.clearAudioFiles()
     clear()
     app.setup()
+    global includeDoc, includeDet
     playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, app.include_doc_val, app.include_det_val)
+    
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
 
@@ -91,8 +94,8 @@ def intro():
         livingPlayers.append(plrObject)
         try:
             audio.textToSpeech(plrName, f'plr_{plrName}')
-            audio.convertToWav(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
-            os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
+            audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
+            #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
         except Exception as error:
             print(error)
         clear()
