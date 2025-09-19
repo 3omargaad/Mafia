@@ -3,6 +3,7 @@ import random
 from time import sleep
 
 from files import get_path
+from files import clearAudioFiles
 import os
 
 import audio
@@ -70,12 +71,12 @@ def hasGameEnded():
 # Functions
 
 def intro():
-    audio.clearAudioFiles()
+    clearAudioFiles()
     clear()
     app.setup()
     global includeDoc, includeDet
-    playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, app.include_doc_val, app.include_det_val)
-    
+    playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, bool(app.include_doc_val), bool(app.include_det_val))
+    print(app.include_doc_val, app.include_det_val)
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
 
@@ -88,16 +89,17 @@ def intro():
     for i in range(playerNumber):
         plrName = input("Enter name of player #" + str(i+1) + " ")
         #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
-        plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=None, votes=0)
-        # DEFAULT SETTINGS FOR PLAYER OBJECT
-        players.append(plrObject)
-        livingPlayers.append(plrObject)
+        plrAudio = None
         try:
             audio.textToSpeech(plrName, f'plr_{plrName}')
-            audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
+            plrAudio = audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
             #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
         except Exception as error:
             print(error)
+        plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=plrAudio, votes=0)
+        # DEFAULT SETTINGS FOR PLAYER OBJECT
+        players.append(plrObject)
+        livingPlayers.append(plrObject)
         clear()
 
 
@@ -115,7 +117,8 @@ def intro():
 
     global doctorPlayer
 
-    if includeDoc:
+    print(includeDoc)
+    if bool(app.include_doc_val) == True:
         while True:
             doctorPlayer = choice(players)
             if doctorPlayer.role != "Mafia":
@@ -128,7 +131,7 @@ def intro():
 
     global detectivePlayer
 
-    if includeDet:
+    if bool(app.include_det_val) == True:
         while True:
             detectivePlayer = choice(players)
             if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
@@ -187,7 +190,7 @@ def night():
     
     clear()
 
-    if includeDoc:
+    if bool(app.include_doc_val) == True:
         print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
         audio.playAudio(audio.DOCTOR)
         wait(1)
@@ -213,7 +216,7 @@ def night():
 
     clear()
 
-    if includeDet:
+    if bool(app.include_det_val) == True:
         print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
         audio.playAudio(audio.DETECTIVE)
         wait(1)

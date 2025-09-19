@@ -52,8 +52,8 @@ class guiWidget(FloatLayout):
     def on_play(self):
         global plr_num_val
         global maf_num_val
-        global include_doc_val
-        global include_det_val
+        #global include_doc_val
+        #global include_det_val
         plr_num_val = int(self.plr_num_val)
         maf_num_val = int(self.maf_num_val)
         include_doc_val = bool(self.include_doc_val)
@@ -65,9 +65,13 @@ class guiWidget(FloatLayout):
 
     def on_doc_swtich_active(self, widget):
         print("Include Doctor? " + str(widget.active))
+        global include_doc_val
+        include_doc_val = widget.active
     
     def on_det_swtich_active(self, widget):
         print("Include Detective? " + str(widget.active))
+        global include_det_val
+        include_det_val = widget.active
     
     def on_plr_slider_value(self, widget):
         self.plr_num_val = str(int(widget.value))
