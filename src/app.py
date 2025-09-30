@@ -5,7 +5,6 @@ from kivy.uix.floatlayout import FloatLayout
 #from kivy.uix.stacklayout import StackLayout
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
-from pathlib import Path
 from kivy.core.window import Window
 from kivy.config import Config
 
@@ -38,6 +37,7 @@ class guiWidget(FloatLayout):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
     roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
     press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
+    main_image = get_path("assets", "images", "mafia_logo.png")
 
     outputText = StringProperty("Welcome to Mafia! I am your host ChadGPT.")
     count = 0
@@ -58,6 +58,7 @@ class guiWidget(FloatLayout):
         maf_num_val = int(self.maf_num_val)
         include_doc_val = bool(self.include_doc_val)
         include_det_val = bool(self.include_det_val)
+        App.get_running_app().stop()
         app.stop()
         
     def toggle(self):
@@ -91,3 +92,5 @@ def setup():
     app = guiApp() 
     app.run()
     app.build()
+
+setup()

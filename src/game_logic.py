@@ -1,11 +1,10 @@
 from random import choice
-import random
+from random import randint
 from time import sleep
+#import os
 
 from files import get_path
 from files import clearAudioFiles
-import os
-
 import audio
 import player
 import app
@@ -204,7 +203,7 @@ def night():
             healed.heal()
             print(healed.name + " has been healed!")
         else:
-            randWait = random.randint(3, 8)
+            randWait = randint(3, 8)
             print("Doctor is dead :P")
             print("Continuing game in " + str(randWait) + " seconds...")
             wait(randWait)
@@ -230,7 +229,7 @@ def night():
             print(investigated.name + " has been investigated!")
             investigated.revealTeam()
         else:
-            randWait = random.randint(3, 8)
+            randWait = randint(3, 8)
             print("Detective is dead :P")
             print("Continuing game in " + str(randWait) + " seconds...")
             wait(randWait)
@@ -323,7 +322,7 @@ def execution():
     print("It's execution time! The player being executed is...")
 
     
-    executedPlayer = random.choice(executedPlayers)
+    executedPlayer = choice(executedPlayers)
 
 
     audio.playAudio(audio.EXECUTION)
