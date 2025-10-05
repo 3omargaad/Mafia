@@ -5,6 +5,7 @@ from time import sleep
 
 from files import get_path
 from files import clearAudioFiles
+import game_setup
 import audio
 import player
 import app
@@ -73,19 +74,23 @@ def intro():
     clearAudioFiles()
     clear()
     app.setup()
-    global includeDoc, includeDet
-    playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, bool(app.include_doc_val), bool(app.include_det_val))
-    print(app.include_doc_val, app.include_det_val)
+    #global includeDoc, includeDet
+    app.start()
+    #playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, bool(app.include_doc_val), bool(app.include_det_val))
+    #print(app.include_doc_val, app.include_det_val)
+
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
+    print(game_setup.plr_num)
+    print(game_setup.maf_num)
 
-    global goodTeamNumber 
-    goodTeamNumber = playerNumber - mafiaNumber
+    #global goodTeamNumber 
+    #goodTeamNumber = playerNumber - mafiaNumber
 
-    global badTeamNumber 
-    badTeamNumber = mafiaNumber
+    #global badTeamNumber 
+    #badTeamNumber = mafiaNumber
 
-    for i in range(playerNumber):
+    for i in range(game_setup.plr_num):
         plrName = input("Enter name of player #" + str(i+1) + " ")
         #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
         plrAudio = None
@@ -104,7 +109,7 @@ def intro():
 
     clear()
     
-    for maf in range(mafiaNumber):
+    for maf in range(game_setup.maf_num):
         while True:
             mafiaPlayer = choice(players)
             if mafiaPlayer.role != "Mafia":
@@ -117,7 +122,7 @@ def intro():
     global doctorPlayer
 
     print(includeDoc)
-    if bool(app.include_doc_val) == True:
+    if game_setup.include_doc_val == True:
         while True:
             doctorPlayer = choice(players)
             if doctorPlayer.role != "Mafia":
@@ -130,7 +135,7 @@ def intro():
 
     global detectivePlayer
 
-    if bool(app.include_det_val) == True:
+    if game_setup.include_det_val == True:
         while True:
             detectivePlayer = choice(players)
             if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
@@ -140,7 +145,7 @@ def intro():
 
     # Chooses Player as detective
 
-    for i in range(playerNumber):
+    for i in range(game_setup.plr_num):
         wait(1)
         #players[i].sayName()
         input(players[i].name + " Press Enter to check your role ")
@@ -189,7 +194,7 @@ def night():
     
     clear()
 
-    if bool(app.include_doc_val) == True:
+    if game_setup.include_doc_val == True:
         print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
         audio.playAudio(audio.DOCTOR)
         wait(1)
@@ -215,7 +220,7 @@ def night():
 
     clear()
 
-    if bool(app.include_det_val) == True:
+    if game_setup.include_det_val == True:
         print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
         audio.playAudio(audio.DETECTIVE)
         wait(1)

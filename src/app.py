@@ -9,6 +9,7 @@ from kivy.core.window import Window
 from kivy.config import Config
 
 from files import get_path
+import game_setup
 #Window.fullscreen = 'auto'  # Let Kivy choose best full screen mode
 
 class guiApp(App):
@@ -85,7 +86,11 @@ class guiMenu(FloatLayout):
 
 
 def start():
-    return (plr_num_val, maf_num_val, include_doc_val, include_det_val)
+    game_setup.plr_num = plr_num_val
+    game_setup.maf_num = maf_num_val
+    game_setup.include_doc = include_doc_val
+    game_setup.include_det = include_det_val
+    #return (plr_num_val, maf_num_val, include_doc_val, include_det_val)
 
 def setup():
     global app
