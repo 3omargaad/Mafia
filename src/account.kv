@@ -1,0 +1,9 @@
+<ScreenTwo>:
+    BoxLayout:
+        Button:
+            text: "account.kv"
+            background_color : 1, 1, 0, 1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'screen_three'

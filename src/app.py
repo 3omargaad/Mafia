@@ -7,6 +7,7 @@ from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
 from kivy.core.window import Window
 from kivy.config import Config
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 from files import get_path
 import game_setup
