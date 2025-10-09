@@ -13,20 +13,22 @@ from files import get_path
 #Window.fullscreen = 'auto'  # Let Kivy choose best full screen mode
 
 class guiApp(App):
-    def build(self):
-        icon = get_path("assets", "images", "mafia_logo.ico")
+    pass
+    #def build(self):
+    #    icon = get_path("assets", "images", "mafia_logo.ico")
 
-        self.icon = icon
+    #    self.icon = icon
 
-    def on_stop(self):
-        print("App is closing. Cleaning up...")
+    #def on_stop(self):
+    #    print("App is closing. Cleaning up...")
         # Perform any necessary cleanup here (e.g., closing files, saving data, etc.)
-        return super().on_stop()
+        #return super().on_stop()
 
-    def on_request_close(self, instance, value):
-        print("Window close requested")
-        self.stop()  # Stops the app cleanly
-        return True  # Return True to indicate that the close event is handled
+    #def on_request_close(self, instance, value):
+    #    pass
+        #print("Window close requested")
+        #App.stop()  # Stops the app cleanly
+        #return True  # Return True to indicate that the close event is handled
 
 #class stackLayout(StackLayout):
 #    def __init__(self, **kwargs):
@@ -58,7 +60,7 @@ class guiWidget(FloatLayout):
         maf_num_val = int(self.maf_num_val)
         include_doc_val = bool(self.include_doc_val)
         include_det_val = bool(self.include_det_val)
-        app.stop()
+        #app.stop()
         
     def toggle(self):
         pass
@@ -90,4 +92,4 @@ def setup():
     global app
     app = guiApp() 
     app.run()
-    app.build()
+    #app.build()
