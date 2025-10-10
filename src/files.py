@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from glob import glob
 from os import remove
 
@@ -20,6 +21,3 @@ def clearAudioFiles():
 # Example usage:
 #font_file = get_path("assets", "fonts", "Rye-Regular.ttf")
 #audio_file = get_path("assets", "audio", "preset", "welcome.wav")
-
-#print(font_file)
-#print(audio_file)

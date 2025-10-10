@@ -1,0 +1,10 @@
+plr_num = 4
+maf_num = 1
+include_doc = False
+include_det = False
+discussion_time = 30
+anonymous_voting = True
+execute_if_tie = True
+allow_skip = False
+host_name = "ChadGPT"
+host_accent = "uk"
