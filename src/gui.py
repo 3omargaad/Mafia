@@ -81,7 +81,6 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
     roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
     press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
-    main_image = get_path("assets", "images", "mafia_logo.png")
 
     outputText = StringProperty("Welcome to Mafia! I am your host ChadGPT.")
     count = 0
@@ -92,6 +91,25 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
 
     include_doc_val = BooleanProperty(False)
     include_det_val = BooleanProperty(False)
+
+    def toggle(self):
+        pass
+
+    def on_doc_swtich_active(self, widget):
+        print("Include Doctor? " + str(widget.active))
+        global include_doc_val
+        include_doc_val = widget.active
+    
+    def on_det_swtich_active(self, widget):
+        print("Include Detective? " + str(widget.active))
+        global include_det_val
+        include_det_val = widget.active
+    
+    def on_plr_slider_value(self, widget):
+        self.plr_num_val = str(int(widget.value))
+          
+    def on_maf_slider_value(self, widget):
+        self.maf_num_val = str(int(widget.value))
 
 class ScreenFour(Screen):
     pass

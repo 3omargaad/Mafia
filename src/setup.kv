@@ -17,7 +17,7 @@
             text: "Game Setup"
             size_hint: 0.5, None
             height: 50
-            pos_hint: {"center_x": 0.25, "center_y": 0.95}
+            pos_hint: {"center_x": 0.5, "center_y": 0.95}
             color: "#7b9fecff"
             font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "50dp"
@@ -25,7 +25,7 @@
             text: "Players"
             size_hint: 0.5, None
             height: 50
-            pos_hint: {"center_x": 0.75, "center_y": 0.95}
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
             color: "#7b9fecff"
             font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "50dp"
@@ -38,97 +38,97 @@
             row_force_default: True
             size_hint: None, None
             size: self.minimum_size
-            pos_hint: {"center_x": 0.25, "center_y": 0.4}
+            pos_hint: {"center_x": 0.5, "center_y": 0.7}
             spacing: 135, 10   # (horizontal, vertical) space between widgets
             padding: 20       # space around the edges of the GridLayout
 
-        Label:
-            text: "No. Players"
-            size_hint: 0.5, None
-            height: 50
-            #pos_hint: {"center_x": 0.15, "center_y": 0.55}
-            color: "#e0e0e0ff"
-            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
-            font_size: "22dp"   
-        Slider:
-            id: plr_num_slider
-            pos: "400dp", "100dp"
-            size_hint_x: None
-            width: 300
-            disabled: False
-            #pos_hint: {"center_x": 0.35, "center_y": 0.55}
-            min: 4
-            max: 15
-            value: 4
-            on_value: root.on_plr_slider_value(self)
-        Label:
-            text: root.plr_num_val
-            font: "200dp"
-            #pos_hint: {"center_x": 0.475, "center_y": 0.55}
-            color: "#e0e0e0ff"
-            font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-            font_size: "25dp"
-        ###########################################################################
-        Label:
-            text: "No. Mafia"
-            size_hint: 0.5, None
-            height: 50
-            #pos_hint: {"center_x": 0.15, "center_y": 0.45}
-            color: "#e0e0e0ff"
-            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
-            font_size: "22dp"   
-        Slider:
-            id: maf_num_slider
-            pos: "400dp", "100dp"
-            size_hint_x: None
-            width: 300
-            disabled: False
-            #pos_hint: {"center_x": 0.35, "center_y": 0.45}
-            min: 1
-            max: 5
-            value: 1
-            on_value: root.on_maf_slider_value(self)
-        Label:
-            text: root.maf_num_val
-            font: "200dp"
-            #pos_hint: {"center_x": 0.475, "center_y": 0.45}
-            color: "#e0e0e0ff"
-            font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-            font_size: "25dp"
-        ###########################################################################
-        Label:
-            text: "Include Doctor?"
-            size_hint: 0.5, None
-            height: 50
-            #pos_hint: {"center_x": 0.15, "center_y": 0.45}
-            color: "#e0e0e0ff"
-            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
-            font_size: "22dp"
-        Switch:
-            on_active: root.on_doc_swtich_active(self)
-        Label:
-        ###########################################################################
-        Label:
-            text: "Include Detective?"
-            size_hint: 0.5, None
-            height: 50
-            #pos_hint: {"center_x": 0.15, "center_y": 0.45}
-            color: "#e0e0e0ff"
-            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
-            font_size: "22dp"
-        Switch:
-            on_active: root.on_det_swtich_active(self)
-        Label:
+            Label:
+                text: "No. Players"
+                size_hint: 0.5, None
+                height: 50
+                #pos_hint: {"center_x": 0.15, "center_y": 0.55}
+                color: "#e0e0e0ff"
+                font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+                font_size: "22dp"   
+            Slider:
+                id: plr_num_slider
+                pos: "400dp", "100dp"
+                size_hint_x: None
+                width: 300
+                disabled: False
+                #pos_hint: {"center_x": 0.35, "center_y": 0.55}
+                min: 4
+                max: 15
+                value: 4
+                on_value: root.on_plr_slider_value(self)
+            Label:
+                text: root.plr_num_val
+                font: "200dp"
+                #pos_hint: {"center_x": 0.475, "center_y": 0.55}
+                color: "#e0e0e0ff"
+                font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
+                font_size: "25dp"
+            ###########################################################################
+            Label:
+                text: "No. Mafia"
+                size_hint: 0.5, None
+                height: 50
+                #pos_hint: {"center_x": 0.15, "center_y": 0.45}
+                color: "#e0e0e0ff"
+                font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+                font_size: "22dp"   
+            Slider:
+                id: maf_num_slider
+                pos: "400dp", "100dp"
+                size_hint_x: None
+                width: 300
+                disabled: False
+                #pos_hint: {"center_x": 0.35, "center_y": 0.45}
+                min: 1
+                max: 5
+                value: 1
+                on_value: root.on_maf_slider_value(self)
+            Label:
+                text: root.maf_num_val
+                font: "200dp"
+                #pos_hint: {"center_x": 0.475, "center_y": 0.45}
+                color: "#e0e0e0ff"
+                font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
+                font_size: "25dp"
+            ###########################################################################
+            Label:
+                text: "Include Doctor?"
+                size_hint: 0.5, None
+                height: 50
+                #pos_hint: {"center_x": 0.15, "center_y": 0.45}
+                color: "#e0e0e0ff"
+                font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+                font_size: "22dp"
+            Switch:
+                on_active: root.on_doc_swtich_active(self)
+            Label:
+            ###########################################################################
+            Label:
+                text: "Include Detective?"
+                size_hint: 0.5, None
+                height: 50
+                #pos_hint: {"center_x": 0.15, "center_y": 0.45}
+                color: "#e0e0e0ff"
+                font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+                font_size: "22dp"
+            Switch:
+                on_active: root.on_det_swtich_active(self)
+            Label:
 
         GridLayout:
-            rows: 2
-            cols: 2
+            rows: 3
+            cols: 5
             row_default_height: '40dp'
             row_force_default: True
             size_hint: None, None
             size: self.minimum_size
-            pos_hint: {"center_x": 0.75, "center_y": 0.4}
-            spacing: 135, 10   # (horizontal, vertical) space between widgets
+            pos_hint: {"center_x": 0.5, "center_y": 0.275}
+            spacing: 50, 5   # (horizontal, vertical) space between widgets
             padding: 20       # space around the edges of the GridLayout
 
             TextInput:
@@ -136,13 +136,66 @@
                 width: "100dp"
                 text: "Name"
                 multiline: False
-
             TextInput:
                 size_hint: None, 1
                 width: "100dp"
                 text: "Name"
                 multiline: False
-            ###########################################################################
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
+            TextInput:
+                size_hint: None, 1
+                width: "100dp"
+                text: "Name"
+                multiline: False
             TextInput:
                 size_hint: None, 1
                 width: "100dp"
@@ -159,7 +212,7 @@
             pos: "100dp", "200dp"
             color: "#25AB58FF"
             size_hint: (0.3, 0.1)
-            pos_hint: {"center_x": 0.5, "center_y": 0.2}
+            pos_hint: {"center_x": 0.5, "center_y": 0.1}
             #on_press: root.on_play()
             on_press:
                 root.manager.transition.direction = 'left'

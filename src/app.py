@@ -8,6 +8,8 @@ from kivy.properties import BooleanProperty
 from kivy.core.window import Window
 from kivy.config import Config
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.textinput import TextInput
+
 
 from files import get_path
 import game_setup
@@ -81,6 +83,8 @@ class guiWidget(FloatLayout):
           
     def on_maf_slider_value(self, widget):
         self.maf_num_val = str(int(widget.value))
+
+    
 
 class guiMenu(FloatLayout):
     pass
