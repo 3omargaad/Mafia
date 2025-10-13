@@ -88,6 +88,7 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
 
     plr_num_val = StringProperty("4")
     maf_num_val = StringProperty("1")
+    discussion_time_val = StringProperty("30")
 
     include_doc_val = BooleanProperty(False)
     include_det_val = BooleanProperty(False)
@@ -110,10 +111,12 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
           
     def on_maf_slider_value(self, widget):
         self.maf_num_val = str(int(widget.value))
+        
+    def on_time_slider_value(self, widget):
+        self.discussion_time_val = str(int(widget.value))
 
 class ScreenFour(Screen):
     pass
- 
  
 # The ScreenManager controls moving between screens
 screen_manager = ScreenManager()
