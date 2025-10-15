@@ -156,7 +156,7 @@
                 font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
                 font_size: "22dp"
             Switch:
-                on_active: root.on_doc_swtich_active(self)
+                on_active: root.on_anonymous_swtich_active(self)
             Label:
             ############################################################################
             Label:
@@ -168,7 +168,7 @@
                 font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
                 font_size: "22dp"
             Switch:
-                on_active: root.on_doc_swtich_active(self)
+                on_active: root.on_skip_swtich_active(self)
             Label:
             ############################################################################
             Label:
@@ -180,7 +180,7 @@
                 font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
                 font_size: "22dp"
             Switch:
-                on_active: root.on_doc_swtich_active(self)
+                on_active: root.on_execute_swtich_active(self)
             Label:
             ############################################################################
             Label:
@@ -190,7 +190,8 @@
                 #pos_hint: {"center_x": 0.15, "center_y": 0.55}
                 color: "#e0e0e0ff"
                 font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
-                font_size: "22dp"  
+                font_size: "22dp"
+                #on_enter: root.on_host_name_validate(self)
             TextInput:
                 id: root.username
                 multiline: False
@@ -217,104 +218,21 @@
                 halign: "left"
                 valign: "center"
 
-        #GridLayout:
-        #    rows: 3
-        #    cols: 5
-        #    row_default_height: '40dp'
-        #    row_force_default: True
-        #    size_hint: None, None
-        #    size: self.minimum_size
-        #    pos_hint: {"center_x": 0.5, "center_y": 0.275}
-        #    spacing: 50, 5   # (horizontal, vertical) space between widgets
-        #    padding: 20       # space around the edges of the GridLayout
-#
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-        #    TextInput:
-        #        size_hint: None, 1
-        #        width: "100dp"
-        #        text: "Name"
-        #        multiline: False
-
         Button:
             text: "PLAY"
             pos: "100dp", "200dp"
             color: "#25AB58FF"
             size_hint: (0.3, 0.1)
             pos_hint: {"center_x": 0.5, "center_y": 0.1}
-            #on_press: root.on_play()
-            on_press:
+            on_press: 
+                root.on_play()
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = 1
                 root.manager.current = 'screen_four'
+            #on_press:
+            #    root.manager.transition.direction = 'left'
+            #    root.manager.transition.duration = 1
+            #    root.manager.current = 'screen_four'
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
             font_size: "30dp"
         #Button:
@@ -324,3 +242,111 @@
         #        root.manager.transition.direction = 'left'
         #        root.manager.transition.duration = 1
         #        root.manager.current = 'screen_four'
+
+<ScreenFour>:
+    Label:
+        text: "Players"
+        size_hint: 0.5, None
+        height: 50
+        pos_hint: {"center_x": 0.5, "center_y": 0.45}
+        color: "#7b9fecff"
+        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+        font_size: "50dp"
+    GridLayout:
+        rows: 3
+        cols: 5
+        row_default_height: '40dp'
+        row_force_default: True
+        size_hint: None, None
+        size: self.minimum_size
+        pos_hint: {"center_x": 0.5, "center_y": 0.275}
+        spacing: 50, 5   # (horizontal, vertical) space between widgets
+        padding: 20       # space around the edges of the GridLayout
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+        TextInput:
+            size_hint: None, 1
+            width: "100dp"
+            text: "Name"
+            multiline: False
+
+    Button:
+        text: "PLAY"
+        pos: "100dp", "200dp"
+        color: "#25AB58FF"
+        size_hint: (0.3, 0.1)
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        on_press: 
+            root.manager.transition.direction = 'left'
+            root.manager.transition.duration = 1
+            root.manager.current = 'screen_five'
+        font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
+        font_size: "30dp"
