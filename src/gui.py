@@ -6,8 +6,9 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
-#from kivy.uix.stacklayout import StackLayout
+from kivy.uix.stacklayout import StackLayout
 from kivy.uix.popup import Popup
+from kivy.uix.textinput import TextInput
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
 from kivy.properties import ObjectProperty
@@ -79,6 +80,8 @@ class ScreenOne(Screen):
 class ScreenTwo(Screen):
     pass
 
+play = False
+
 class ScreenThree(Screen, FloatLayout, GridLayout):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
     roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
@@ -91,15 +94,6 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
     plr_num_val = StringProperty("4")
     maf_num_val = StringProperty("1")
     discussion_time_val = StringProperty("30")
-
-    include_doc_val = BooleanProperty(False)
-    include_det_val = BooleanProperty(False)
-    anonymous_voting_val = BooleanProperty(False)
-    allow_skip_val = BooleanProperty(False)
-    execute_if_tie_val = BooleanProperty(False)
-    host_name_val = StringProperty("")
-    host_accent_val = StringProperty("")
-
 
     def toggle(self):
         pass
@@ -117,34 +111,25 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
         game_setup.discussion_time = int(widget.value)
 
     def on_doc_swtich_active(self, widget):
-        print("Include Doctor? " + str(widget.active))
-        self.include_doc_val = widget.active
-        game_setup.include_doc = self.include_doc_val
+        game_setup.include_doc = widget.active
     
     def on_det_swtich_active(self, widget):
-        print("Include Detective? " + str(widget.active))
-        self.include_det_val = widget.active
-        game_setup.include_det = self.include_det_val
+        game_setup.include_det = widget.active
 
     def on_anonymous_swtich_active(self, widget):
-        print("Anonymous Voting? " + str(widget.active))
-        self.anonymous_voting_val = widget.active
-        game_setup.anonymous_voting = self.anonymous_voting_val
+        game_setup.anonymous_voting = widget.active
         
     def on_skip_swtich_active(self, widget):
-        print("Allow Skip? " + str(widget.active))
-        self.allow_skip_val = widget.active
-        game_setup.allow_skip = self.allow_skip_val
+        game_setup.allow_skip = widget.active
     
     def on_execute_swtich_active(self, widget):
-        print("Execute If TIe? " + str(widget.active))
-        self.execute_if_tie_val = widget.active
-        game_setup.execute_if_tie = self.execute_if_tie_val
+        game_setup.execute_if_tie = widget.active
     
-    def on_host_name_validate(self, widget):
-        print("Host Name: " + str(widget.value))
-        self.host_name_val = widget.active
-        game_setup.host_name = self.host_name_val
+    def on_host_name_enter(self, widget):
+        game_setup.host_name = widget.text
+
+    def on_host_accent_enter(self, widget):
+        game_setup.host_accent = widget.text
 
     def on_play(self):
         print("Player Number:", game_setup.plr_num)
@@ -158,10 +143,43 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
         print("Host Name:", game_setup.host_name)
         print("Host Accent:", game_setup.host_accent)
 
-class ScreenFour(Screen):
+class ScreenFour(Screen, StackLayout):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
     roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
     press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        
+        for i in range(game_setup.plr_num):
+            x = 0.3
+            y = 0.85 - (i/15)
+            match (i+1):
+                case 1 | 2 | 3:
+                    y = 0.85 - (1/15)
+                case 4 | 5 | 6:
+                    y = 0.85 - (2/15)
+                case 7 | 8 | 9:
+                    y = 0.85 - (3/15)
+                case 10 | 11 | 12:
+                    y = 0.85 - (4/15)
+                case 13 | 14 | 15:
+                    y = 0.85 - (5/15)
+
+            if (i+1)%3 == 0:
+                x=0.7
+            elif (i+2)%3 == 0:
+                x=0.5
+
+            print(str(x), str(y))
+            t = TextInput(
+                hint_text="Player #"+str(i+1)+" Name",
+                size_hint= (0.2, 0.05),
+                width= "100dp",
+                multiline= False,
+                pos_hint={'center_x': x, 'center_y': y}
+                )
+            self.add_widget(t)
 
 class ScreenFive(Screen):
     pass

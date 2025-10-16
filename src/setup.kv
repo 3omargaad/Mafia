@@ -97,7 +97,7 @@
                 font_size: "25dp"
             ###########################################################################
             Label:
-                text: "Disscussion Time"
+                text: "Discussion Time"
                 size_hint: 0.5, None
                 height: 50
                 #pos_hint: {"center_x": 0.15, "center_y": 0.45}
@@ -191,14 +191,14 @@
                 color: "#e0e0e0ff"
                 font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
                 font_size: "22dp"
-                #on_enter: root.on_host_name_validate(self)
             TextInput:
-                id: root.username
+                id: host_name_widget
                 multiline: False
                 size_hint: 0.3, 0.05
                 text_size: self.width, None
                 halign: "left"
                 valign: "center"
+                on_text: root.on_host_name_enter(self)
             Label:
             ############################################################################
             Label:
@@ -210,13 +210,14 @@
                 font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
                 font_size: "22dp"  
             TextInput:
-                id: root.username
+                id: host_accent_widget
                 hint_text: "(au, uk, us, ca, in, za, ng)"
                 multiline: False
                 size_hint: 0.3, 0.05
                 text_size: self.width, None
                 halign: "left"
                 valign: "center"
+                on_text: root.on_host_accent_enter(self)
 
         Button:
             text: "PLAY"
@@ -248,102 +249,188 @@
         text: "Players"
         size_hint: 0.5, None
         height: 50
-        pos_hint: {"center_x": 0.5, "center_y": 0.45}
+        pos_hint: {"center_x": 0.5, "center_y": 0.95}
         color: "#7b9fecff"
         font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
         font_size: "50dp"
-    GridLayout:
-        rows: 3
-        cols: 5
-        row_default_height: '40dp'
-        row_force_default: True
-        size_hint: None, None
-        size: self.minimum_size
-        pos_hint: {"center_x": 0.5, "center_y": 0.275}
-        spacing: 50, 5   # (horizontal, vertical) space between widgets
-        padding: 20       # space around the edges of the GridLayout
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
-        TextInput:
-            size_hint: None, 1
-            width: "100dp"
-            text: "Name"
-            multiline: False
+    #GridLayout:
+    #    rows: 5
+    #    cols: 3
+    #    row_default_height: '40dp'
+    #    row_force_default: True
+    #    size_hint: None, None
+    #    size: self.minimum_size
+    #    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+    #    spacing: 50, 5   # (horizontal, vertical) space between widgets
+    #    padding: 20       # space around the edges of the GridLayout
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+    #    TextInput:
+    #        size_hint: None, 1
+    #        width: "100dp"
+    #        text: "Name"
+    #        multiline: False
+        
+        #GridLayout:
+        #    rows: 5
+        #    cols: 3
+        #    row_default_height: '40dp'
+        #    row_force_default: True
+        #    size_hint: None, None
+        #    size: self.minimum_size
+        #    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        #    spacing: 50, 5   # (horizontal, vertical) space between widgets
+        #    padding: 20       # space around the edges of the GridLayout
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
+        #    Label:
+        #        text: "#1"
+        #        size_hint: None, 1
+        #        width: "100dp"
+        #        multiline: False
 
     Button:
         text: "PLAY"
         pos: "100dp", "200dp"
         color: "#25AB58FF"
         size_hint: (0.3, 0.1)
-        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        pos_hint: {"center_x": 0.5, "center_y": 0.4}
         on_press: 
             root.manager.transition.direction = 'left'
             root.manager.transition.duration = 1
