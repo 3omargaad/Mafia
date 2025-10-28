@@ -8,7 +8,6 @@ from files import clearAudioFiles
 import game_setup
 import audio
 import player
-import app
 
 wait = lambda t : sleep(t)
 clear = lambda : print("\033c", end="")
@@ -71,13 +70,14 @@ def hasGameEnded():
 # Functions
 
 def intro():
+    wait(5)
     clearAudioFiles()
     clear()
-    app.setup()
+    #app.setup()
     #global includeDoc, includeDet
-    app.start()
-    #playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, bool(app.include_doc_val), bool(app.include_det_val))
-    #print(app.include_doc_val, app.include_det_val)
+    #app.start()
+    #playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, bool(app.include_doc), bool(app.include_det))
+    #print(app.include_doc, app.include_det)
 
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
@@ -90,9 +90,23 @@ def intro():
     #global badTeamNumber 
     #badTeamNumber = mafiaNumber
 
-    for i in range(game_setup.plr_num):
-        plrName = input("Enter name of player #" + str(i+1) + " ")
-        #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
+    #for i in range(game_setup.plr_num):
+    #    plrName = input("Enter name of player #" + str(i+1) + " ")
+    #    #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
+    #    plrAudio = None
+    #    try:
+    #        audio.textToSpeech(plrName, f'plr_{plrName}')
+    #        plrAudio = audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
+    #        #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
+    #    except Exception as error:
+    #        print(error)
+    #    plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=plrAudio, votes=0)
+    #    # DEFAULT SETTINGS FOR PLAYER OBJECT
+    #    players.append(plrObject)
+    #    livingPlayers.append(plrObject)
+    #    clear()
+
+    for plrName in game_setup.players:
         plrAudio = None
         try:
             audio.textToSpeech(plrName, f'plr_{plrName}')
@@ -105,7 +119,6 @@ def intro():
         players.append(plrObject)
         livingPlayers.append(plrObject)
         clear()
-
 
     clear()
     
@@ -121,8 +134,7 @@ def intro():
 
     global doctorPlayer
 
-    print(includeDoc)
-    if game_setup.include_doc_val == True:
+    if game_setup.include_doc == True:
         while True:
             doctorPlayer = choice(players)
             if doctorPlayer.role != "Mafia":
@@ -135,7 +147,7 @@ def intro():
 
     global detectivePlayer
 
-    if game_setup.include_det_val == True:
+    if game_setup.include_det == True:
         while True:
             detectivePlayer = choice(players)
             if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
@@ -160,7 +172,7 @@ def intro():
     print("You Have 15 seconds to talk before night!")
     audio.playAudio(audio.INTRO)
     wait(1)
-    countdown(15)
+    #countdown(15)
 
 def night():
     print("The game continues!")
@@ -194,7 +206,7 @@ def night():
     
     clear()
 
-    if game_setup.include_doc_val == True:
+    if game_setup.include_doc == True:
         print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
         audio.playAudio(audio.DOCTOR)
         wait(1)
@@ -220,7 +232,7 @@ def night():
 
     clear()
 
-    if game_setup.include_det_val == True:
+    if game_setup.include_det == True:
         print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
         audio.playAudio(audio.DETECTIVE)
         wait(1)

@@ -8,3 +8,4 @@ allow_skip = False
 execute_if_tie = False
 host_name = "ChadGPT"
 host_accent = "uk"
+players = []

@@ -8,6 +8,7 @@ import tempfile
 import os
 import subprocess
 
+import game_setup
 from files import get_path
 
 temp_dir = "C:/Mafia/temp"
@@ -34,27 +35,28 @@ def textToSpeech(text, filename):
 
 # Module Functions
 
-WELCOME = get_path("assets", "audio", "preset", "welcome.wav")
-INTRO = get_path("assets", "audio", "preset", "intro.wav")
-POP = get_path("assets", "audio", "preset", "pop.wav")
-MORNING = get_path("assets", "audio", "preset", "morning.wav")
-GOODNIGHT = get_path("assets", "audio", "preset", "goodnight.wav")
-GOODMORNING = get_path("assets", "audio", "preset", "goodmorning.wav")
-ANNOUNCEMENT = get_path("assets", "audio", "preset", "announcement.wav")
-FORTUNATELY = get_path("assets", "audio", "preset", "fortunately.wav")
-DISCUSS = get_path("assets", "audio", "preset", "discuss.wav")
-VOTE = get_path("assets", "audio", "preset", "vote.wav")
-EXECUTION = get_path("assets", "audio", "preset", "execution.wav")
-REVEAL = get_path("assets", "audio", "preset", "reveal.wav")
-GAMECONTINUES = get_path("assets", "audio", "preset", "gamecontinues.wav")
-GAMEOVER = get_path("assets", "audio", "preset", "gameover.wav")
 
-MAFIA = get_path("assets", "audio", "preset", "mafia.wav")
-MAFIA_SLEEP = get_path("assets", "audio", "preset", "mafia_sleep.wav")
+WELCOME = get_path("assets", "audio", "preset", game_setup.host_accent, "welcome.wav")
+INTRO = get_path("assets", "audio", "preset", game_setup.host_accent, "intro.wav")
+POP = get_path("assets", "audio", "preset", game_setup.host_accent, "pop.wav")
+MORNING = get_path("assets", "audio", "preset", game_setup.host_accent, "morning.wav")
+GOODNIGHT = get_path("assets", "audio", "preset", game_setup.host_accent, "goodnight.wav")
+GOODMORNING = get_path("assets", "audio", "preset", game_setup.host_accent, "goodmorning.wav")
+ANNOUNCEMENT = get_path("assets", "audio", "preset", game_setup.host_accent, "announcement.wav")
+FORTUNATELY = get_path("assets", "audio", "preset", game_setup.host_accent, "fortunately.wav")
+DISCUSS = get_path("assets", "audio", "preset", game_setup.host_accent, "discuss.wav")
+VOTE = get_path("assets", "audio", "preset", game_setup.host_accent, "vote.wav")
+EXECUTION = get_path("assets", "audio", "preset", game_setup.host_accent, "execution.wav")
+REVEAL = get_path("assets", "audio", "preset", game_setup.host_accent, "reveal.wav")
+GAMECONTINUES = get_path("assets", "audio", "preset", game_setup.host_accent, "gamecontinues.wav")
+GAMEOVER = get_path("assets", "audio", "preset", game_setup.host_accent, "gameover.wav")
 
-DOCTOR = get_path("assets", "audio", "preset", "doctor.wav")
-DOCTOR_SLEEP = get_path("assets", "audio", "preset", "doctor_sleep.wav")
+MAFIA = get_path("assets", "audio", "preset", game_setup.host_accent, "mafia.wav")
+MAFIA_SLEEP = get_path("assets", "audio", "preset", game_setup.host_accent, "mafia_sleep.wav")
 
-DETECTIVE = get_path("assets", "audio", "preset", "detective.wav")
-DETECTIVE_SLEEP = get_path("assets", "audio", "preset", "detective_sleep.wav")
+DOCTOR = get_path("assets", "audio", "preset", game_setup.host_accent, "doctor.wav")
+DOCTOR_SLEEP = get_path("assets", "audio", "preset", game_setup.host_accent, "doctor_sleep.wav")
+
+DETECTIVE = get_path("assets", "audio", "preset", game_setup.host_accent, "detective.wav")
+DETECTIVE_SLEEP = get_path("assets", "audio", "preset", game_setup.host_accent, "detective_sleep.wav")
 # Audio Constants

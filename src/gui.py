@@ -7,6 +7,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.stacklayout import StackLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 from kivy.properties import StringProperty
@@ -14,7 +15,7 @@ from kivy.properties import BooleanProperty
 from kivy.properties import ObjectProperty
 from kivy.core.window import Window
 from kivy.config import Config
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, CardTransition, SwapTransition, SlideTransition
 # base Class of your App inherits from the App class.    
 # app:always refers to the instance of your application   
 from kivy.app import App 
@@ -55,7 +56,7 @@ def popFun():
     window = Popup(title = "Error", content = show,
                    size_hint = (None, None), size = (300, 300))
     window.open()
- 
+
 # Create a class for all screens in which you can include
 # helpful methods specific to that screen
 class ScreenOne(Screen):
@@ -79,8 +80,6 @@ class ScreenOne(Screen):
  
 class ScreenTwo(Screen):
     pass
-
-play = False
 
 class ScreenThree(Screen, FloatLayout, GridLayout):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
@@ -132,6 +131,15 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
         game_setup.host_accent = widget.text
 
     def on_play(self):
+        print(s4)
+        count = 1
+        for child in s4.children:
+            if isinstance(child, TextInput):
+                child.disabled = True
+                if count == (15 - game_setup.plr_num):
+                   break
+                count += 1
+
         print("Player Number:", game_setup.plr_num)
         print("Mafia Number:", game_setup.maf_num)
         print("Discussion Time:", game_setup.discussion_time)
@@ -142,6 +150,7 @@ class ScreenThree(Screen, FloatLayout, GridLayout):
         print("Execute If Tie?", game_setup.execute_if_tie)
         print("Host Name:", game_setup.host_name)
         print("Host Accent:", game_setup.host_accent)
+        
 
 class ScreenFour(Screen, StackLayout):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
@@ -151,7 +160,7 @@ class ScreenFour(Screen, StackLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         
-        for i in range(game_setup.plr_num):
+        for i in range(15):
             x = 0.3
             y = 0.85 - (i/15)
             match (i+1):
@@ -171,29 +180,55 @@ class ScreenFour(Screen, StackLayout):
             elif (i+2)%3 == 0:
                 x=0.5
 
-            print(str(x), str(y))
             t = TextInput(
                 hint_text="Player #"+str(i+1)+" Name",
                 size_hint= (0.2, 0.05),
                 width= "100dp",
                 multiline= False,
-                pos_hint={'center_x': x, 'center_y': y}
+                pos_hint={'center_x': x, 'center_y': y},
+                disabled= False
                 )
             self.add_widget(t)
 
+    def start_game(self):
+        count = 0
+        for child in s4.children:
+            if child.disabled == False and isinstance(child, TextInput):
+                print(child.text)
+                game_setup.players.append(child.text)
+        
+        
+        #App.get_running_app().stop()
+        #app.stop()
+
 class ScreenFive(Screen):
     pass
+
+class ScreenSix(Screen):
+    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+    roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
+    press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
+
+    info = "Players in game: "
+
+    for plr in game_setup.players:
+        info = plr + "Press to check your role..."
+        print(plr)
+
  
 # The ScreenManager controls moving between screens
-screen_manager = ScreenManager()
+screen_manager = ScreenManager(transition=SlideTransition())
+
+s4 = ScreenFour(name ="screen_four")
  
 # Add the screens to the manager and then supply a name
 # that is used to switch screens
 screen_manager.add_widget(ScreenOne(name ="screen_one"))
 screen_manager.add_widget(ScreenTwo(name ="screen_two"))
 screen_manager.add_widget(ScreenThree(name ="screen_three"))
-screen_manager.add_widget(ScreenFour(name ="screen_four"))
-screen_manager.add_widget(ScreenFour(name ="screen_five"))
+screen_manager.add_widget(s4)
+screen_manager.add_widget(ScreenFive(name="screen_five"))
+screen_manager.add_widget(ScreenSix(name="screen_six"))
 
 # Create the App class
 class MafiaApp(App):
@@ -203,6 +238,9 @@ class MafiaApp(App):
         self.icon = icon
         return screen_manager
 
+app = MafiaApp()
 # run the app 
-sample_app = MafiaApp()
-sample_app.run()
+def setup():
+    app.run()
+
+setup()
