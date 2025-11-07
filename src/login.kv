@@ -1,6 +1,6 @@
 <P>:
     Label:
-        text: "Password is incorrect or account already exists."
+        text: "Account creation is currently unavailable."
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         size_hint: 0.5, 0.1
         text_size: self.width, None
@@ -11,48 +11,6 @@
 <ScreenOne>:
     FloatLayout:
         size: root.width, root.height
-        #Label:
-        #    text: "Mafia"
-        #    size_hint: 0.5, None
-        #    height: 50
-        #    pos_hint: {"center_x": 0.5, "center_y": 0.85}
-        #    color: "#d73612ff"
-        #    font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
-        #    font_size: "100dp"
-        ##Image:
-        ##    source: root.main_image
-        ##    allow_stretch: True
-        ##    size_hint: 0.25, 0.25
-        ##    pos_hint: {"center_x": 0.5, "center_y": 0.55}
-        #TextInput:
-        #Button:
-        #    text: "Login/Signup"
-        #    pos: "100dp", "200dp"
-        #    color: "#25AB58FF"
-        #    size_hint: (0.5, 0.1)
-        #    pos_hint: {"center_x": 0.5, "center_y": 0.35}
-        #    #on_press: root.on_play()
-        #    on_press:
-        #        root.manager.transition.direction = 'left'
-        #        root.manager.transition.duration = 1
-        #        root.manager.current = 'screen_two'
-        #    font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-        #    font_size: "30dp"
-#
-        #Button:
-        #    text: "Play as Guest"
-        #    pos: "100dp", "200dp"
-        #    color: "#25AB58FF"
-        #    size_hint: (0.5, 0.1)
-        #    pos_hint: {"center_x": 0.5, "center_y": 0.2}
-        #    #on_press: root.on_play()
-        #    on_press:
-        #        root.manager.transition.direction = 'left'
-        #        root.manager.transition.duration = 1
-        #        root.manager.current = 'screen_three'
-        #    font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-        #    font_size: "30dp"
-
         Label:
             text: "Mafia"
             size_hint: 0.5, None
@@ -69,6 +27,7 @@
 
         Label:
             text: "Username: "
+            font_name: root.roboto_font
             size_hint: 0.1, 0.1
             text_size: self.width, None
             halign: "center"
@@ -84,6 +43,7 @@
             pos_hint: {"center_x": 0.55, "center_y" : 0.45}
         Label:
             text: "Password: "
+            font_name: root.roboto_font
             size_hint: 0.1, 0.1
             text_size: self.width, None
             halign: "center"
@@ -124,24 +84,3 @@
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = 1
                 root.manager.current = 'screen_three'
-        #Button:
-        #    text : "Play as Guest"
-        #    text_size: self.width, None
-        #    halign: "center"
-        #    valign: "center"
-        #    size_hint : 0.3, 0.1
-        #    pos_hint : {"center_x" : 0.5, "top" : 0.1}
-        #    on_release: 
-        #        root.validate()
-        #        root.manager.transition.direction = "up"
-
-
-        #Button:
-        #    text: "login.kv"
-        #    background_color : 0, 0, 1, 1
-        #    on_press:
-        #        # You can define the duration of the change
-        #        # and the direction of the slide
-        #        root.manager.transition.direction = 'left'
-        #        root.manager.transition.duration = 1
-        #        root.manager.current = 'screen_two'

@@ -1,10 +1,11 @@
 plr_num = 4
 maf_num = 1
+discussion_time = 30
 include_doc = False
 include_det = False
-discussion_time = 30
-anonymous_voting = True
-execute_if_tie = True
+anonymous_voting = False
 allow_skip = False
+execute_if_tie = False
 host_name = "ChadGPT"
 host_accent = "uk"
+players = []

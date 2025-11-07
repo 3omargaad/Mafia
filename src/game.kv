@@ -1,4 +1,4 @@
-<ScreenFour>:
+<ScreenFive>:
     BoxLayout:
         Button:
             text: "game.kv"
@@ -6,4 +6,13 @@
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = 1
-                root.manager.current = 'screen_one'
+                root.manager.current = "role1"
+
+<ScreenSix>:
+    Button:
+        text: root.info
+        background_color : 0, 1, 1, 1
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.transition.duration = 1
+            root.manager.current = 'screen_five'
