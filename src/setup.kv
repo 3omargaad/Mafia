@@ -5,8 +5,9 @@
             size_hint: 0.5, None
             height: 50
             pos_hint: {"center_x": 0.5, "center_y": 0.95}
-            color: "#7b9fecff"
-            font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+            #color: "#7b9fecff"
+            color: "#d73612ff"
+            font_name: root.rye_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "50dp"
             
         GridLayout:
@@ -171,6 +172,7 @@
                 font_size: "22dp"
             TextInput:
                 id: host_name_widget
+                font_name: root.roboto_font
                 multiline: False
                 size_hint: 0.3, 0.05
                 text_size: self.width, None
@@ -189,6 +191,7 @@
                 font_size: "22dp"  
             TextInput:
                 id: host_accent_widget
+                font_name: root.roboto_font
                 hint_text: "(au, uk, us, ca, in, za, ng)"
                 multiline: False
                 size_hint: 0.3, 0.05
@@ -200,7 +203,9 @@
         Button:
             text: "PLAY"
             pos: "100dp", "200dp"
-            color: "#25AB58FF"
+            background_normal: ''
+            background_color: "#25AB58FF"
+            color: "#e0e0e0ff"
             size_hint: (0.3, 0.1)
             pos_hint: {"center_x": 0.5, "center_y": 0.1}
             on_press: 
@@ -217,14 +222,17 @@
         size_hint: 0.5, None
         height: 50
         pos_hint: {"center_x": 0.5, "center_y": 0.95}
-        color: "#7b9fecff"
-        font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+        #color: "#7b9fecff"
+        color: "#d73612ff"
+        font_name: root.rye_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
         font_size: "50dp"
 
     Button:
         text: "PLAY"
         pos: "100dp", "200dp"
-        color: "#25AB58FF"
+        color: "#e0e0e0ff"
+        background_normal: ''
+        background_color: "#25AB58FF"
         size_hint: (0.3, 0.1)
         pos_hint: {"center_x": 0.5, "center_y": 0.4}
         on_press: 

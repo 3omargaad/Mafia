@@ -35,6 +35,7 @@
             pos_hint: {"center_x": 0.35, "center_y": 0.45}
         TextInput:
             id: root.username
+            font_name: root.roboto_font
             multiline: False
             size_hint: 0.3, 0.05
             text_size: self.width, None
@@ -51,6 +52,7 @@
             pos_hint: {"center_x": 0.35, "center_y" : 0.35}
         TextInput:
             id: root.password
+            font_name: root.roboto_font
             multiline: False
             password: True
             size_hint: 0.3, 0.05
@@ -62,7 +64,9 @@
             text : "Login/Signup"
             text_size: self.width, None
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-            color: "#25AB58FF"
+            background_normal: ''
+            background_color: "#25AB58FF"
+            color: "#e0e0e0ff"
             halign: "center"
             valign: "center"
             size_hint : 0.3, 0.1
@@ -75,7 +79,9 @@
             text : "Play as Guest"
             text_size: self.width, None
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-            color: "#25AB58FF"
+            background_normal: ''
+            background_color: "#25AB58FF"
+            color: "#e0e0e0ff"
             halign: "center"
             valign: "center"
             size_hint : 0.3, 0.1

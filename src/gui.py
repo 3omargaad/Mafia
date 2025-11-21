@@ -162,6 +162,7 @@ class ScreenFour(Screen, StackLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
         
         for i in range(15):
             x = 0.3
@@ -188,6 +189,7 @@ class ScreenFour(Screen, StackLayout):
                 size_hint= (0.2, 0.05),
                 width= "100dp",
                 multiline= False,
+                font_name= roboto_font,
                 pos_hint={'center_x': x, 'center_y': y},
                 disabled= False
                 )
