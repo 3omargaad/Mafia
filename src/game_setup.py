@@ -9,3 +9,5 @@ execute_if_tie = False
 host_name = "ChadGPT"
 host_accent = "uk"
 players = []
+good_team_num = 3
+bad_team_num = 1

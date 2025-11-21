@@ -4,7 +4,6 @@ import game_logic
 # Modules
 
 if __name__ == "__main__":
-    #app.setup()
     gui.setup()
     game_logic.intro()
     while True: # Main Game Loop

@@ -44,11 +44,13 @@ def removeDeadPlayers():
             livingPlayers.remove(deadPlayer)
 
             if deadPlayer.team == "Bad":
-                global badTeamNumber
-                badTeamNumber -= 1
+                #global badTeamNumber
+                #badTeamNumber -= 1
+                game_setup.bad_team_num -= 1
             elif deadPlayer.team == "Good":
-                global goodTeamNumber
-                goodTeamNumber -= 1
+                #global goodTeamNumber
+                #goodTeamNumber -= 1
+                game_setup.good_team_num -= 1
             # Assuming 1 player MAX dies each night
 
 def eliminate(playerNumber): 
@@ -57,10 +59,12 @@ def eliminate(playerNumber):
 
 def hasGameEnded():
     global winningTeam
-    if badTeamNumber == 0:
+    #if badTeamNumber == 0:
+    if game_setup.bad_team_num == 0:
         winningTeam = "Good"
         return True
-    elif goodTeamNumber <= badTeamNumber:
+    #elif goodTeamNumber <= badTeamNumber:
+    elif game_setup.good_team_num <= game_setup.bad_team_num:
         winningTeam = "Bad"
         return True
     else:
@@ -370,8 +374,8 @@ def endGame():
 
 # Procedures
 
-badTeamNumber = 0
-goodTeamNumber = 0
+#badTeamNumber = 0
+#goodTeamNumber = 0
 winningTeam = ""
 
 mafiaPlayer1 = None
