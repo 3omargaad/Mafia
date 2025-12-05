@@ -3,20 +3,41 @@ from random import randint
 from time import sleep
 #import os
 
+# Libraries
+
 from files import get_path
 from files import clearAudioFiles
 import game_setup
 import audio
 import player
 
+# Modules
+
+#badTeamNumber = 0
+#goodTeamNumber = 0
+winningTeam = ""
+
+mafiaPlayer1 = None
+mafiaPlayer2 = None
+doctorPlayer = None
+detectivePlayer = None
+
+
+# Variables
+
+players = []
+livingPlayers = []
+deadPlayers = []
+votes = []
+executedPlayers = []
+
+# Arrays
+
 wait = lambda t : sleep(t)
 clear = lambda : print("\033c", end="")
+#resetVotes = map(lambda i: i.resetVote(), players)
+#revealRoles = map(lambda i: i.finalReveal(), players)
 # Lambda Functions
-
-def countdown(t):
-    for i in range(t+1):
-        print(t-i)
-        audio.playAudio(audio.POP)
 
 def resetVotes():
     for plr in players:
@@ -25,6 +46,11 @@ def resetVotes():
 def revealRoles():
     for plr in players:
         plr.finalReveal()
+
+def countdown(t):
+    for i in range(t+1):
+        print(t-i)
+        audio.playAudio(audio.POP)
 
 def printPlayerList(list, exception=None):
     i = 0
@@ -44,11 +70,14 @@ def removeDeadPlayers():
             livingPlayers.remove(deadPlayer)
 
             if deadPlayer.team == "Bad":
-                global badTeamNumber
-                badTeamNumber -= 1
+                #global badTeamNumber
+                #badTeamNumber -= 1
+                game_setup.bad_team_num -= 1
             elif deadPlayer.team == "Good":
-                global goodTeamNumber
-                goodTeamNumber -= 1
+                #global goodTeamNumber
+                #goodTeamNumber -= 1
+                game_setup.good_team_num -= 1
+
             # Assuming 1 player MAX dies each night
 
 def eliminate(playerNumber): 
@@ -57,10 +86,10 @@ def eliminate(playerNumber):
 
 def hasGameEnded():
     global winningTeam
-    if badTeamNumber == 0:
+    if game_setup.bad_team_num == 0:
         winningTeam = "Good"
         return True
-    elif goodTeamNumber <= badTeamNumber:
+    elif game_setup.good_team_num <= game_setup.bad_team_num:
         winningTeam = "Bad"
         return True
     else:
@@ -73,11 +102,6 @@ def intro():
     wait(5)
     clearAudioFiles()
     clear()
-    #app.setup()
-    #global includeDoc, includeDet
-    #app.start()
-    #playerNumber, mafiaNumber, includeDoc, includeDet  = (app.plr_num_val, app.maf_num_val, bool(app.include_doc), bool(app.include_det))
-    #print(app.include_doc, app.include_det)
 
     print("Welcome to Mafia! I am your host ChadGPT.")
     audio.playAudio(audio.WELCOME)
@@ -285,7 +309,7 @@ def day():
     print("You have 30 seconds to discuss who you think is the Mafia!")
     audio.playAudio(audio.DISCUSS)
     wait(2)
-    countdown(30)
+    countdown(game_setup.discussion_time)
 
 def vote():
     print("Times up! Now you must vote on which player to execute!")
@@ -367,25 +391,4 @@ def endGame():
     print("---------------------------------------------------------")
     revealRoles()
 
-
 # Procedures
-
-badTeamNumber = 0
-goodTeamNumber = 0
-winningTeam = ""
-
-mafiaPlayer1 = None
-mafiaPlayer2 = None
-doctorPlayer = None
-detectivePlayer = None
-
-
-# Variables
-
-players = []
-livingPlayers = []
-deadPlayers = []
-votes = []
-executedPlayers = []
-
-# Arrays
