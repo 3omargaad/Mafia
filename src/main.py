@@ -1,4 +1,3 @@
-#import app
 import gui
 import game_logic
 # Modules
