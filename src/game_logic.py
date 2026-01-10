@@ -15,13 +15,14 @@ import player
 
 #badTeamNumber = 0
 #goodTeamNumber = 0
+skip = 0
+
 winningTeam = ""
 
 mafiaPlayer1 = None
 mafiaPlayer2 = None
 doctorPlayer = None
 detectivePlayer = None
-
 
 # Variables
 
@@ -39,14 +40,6 @@ clear = lambda : print("\033c", end="")
 #revealRoles = map(lambda i: i.finalReveal(), players)
 # Lambda Functions
 
-def resetVotes():
-    for plr in players:
-        plr.resetVote()
-
-def revealRoles():
-    for plr in players:
-        plr.finalReveal()
-
 def countdown(t):
     for i in range(t+1):
         print(t-i)
@@ -60,6 +53,12 @@ def printPlayerList(list, exception=None):
             print(str(i) + ") " + plr.name + " (YOU)")
         else:
             print(str(i) + ") " + plr.name)
+
+def eliminate(playerNumber): 
+    livingPlayers[playerNumber-1].die()
+    livingPlayers.remove(livingPlayers[playerNumber-1])
+
+# Functions
 
 def removeDeadPlayers():
     for plr in livingPlayers:
@@ -80,9 +79,13 @@ def removeDeadPlayers():
 
             # Assuming 1 player MAX dies each night
 
-def eliminate(playerNumber): 
-    livingPlayers[playerNumber-1].die()
-    livingPlayers.remove(livingPlayers[playerNumber-1])
+def resetVotes():
+    for plr in players:
+        plr.resetVote()
+
+def revealRoles():
+    for plr in players:
+        plr.finalReveal()
 
 def hasGameEnded():
     global winningTeam
@@ -95,8 +98,6 @@ def hasGameEnded():
     else:
         return False
     # Check to see if game ended
-
-# Functions
 
 def intro():
     wait(5)
@@ -285,7 +286,6 @@ def night():
 
     removeDeadPlayers()
     clear()
-    
 
 def announcement():
     clear()
@@ -304,7 +304,6 @@ def announcement():
         #    audio.playAudio(f"assets\\audio\\player_names\\{i.name}_tts.wav")
         wait(4)
 
-
 def day():
     print("You have 30 seconds to discuss who you think is the Mafia!")
     audio.playAudio(audio.DISCUSS)
@@ -315,16 +314,21 @@ def vote():
     print("Times up! Now you must vote on which player to execute!")
     audio.playAudio(audio.VOTE)
     wait(1)
-
+    can_skip = game_setup.allow_skip
     while True:
         try:
             for i in range(len(livingPlayers)):
                 print(livingPlayers[i].name + " choose who to vote.")
                 print("List of players:")
+                if can_skip:
+                    print("0) Skip Vote")
                 printPlayerList(livingPlayers)
                 vote = int(input("Enter the NUMBER of the player you want to vote: "))
-                playerVoted = livingPlayers[vote-1]
-                playerVoted.addVote()
+                if can_skip and (vote == 0):
+                    skip += 1
+                else:
+                    playerVoted = livingPlayers[vote-1]
+                    playerVoted.addVote()
                 wait(2)
                 clear()
             break
@@ -338,15 +342,21 @@ def vote():
         #global votes
         votes.append(plr.votes)
 
+    if can_skip:
+        votes.append(skip)
+
     maxVoteVal = max(votes)
 
     for plr in livingPlayers:
         if plr.votes == maxVoteVal:
-            executedPlayers.append(plr)
+            executedPlayers.append(plr) 
 
-    
+    if skip == maxVoteVal:
+        executedPlayers.append(None)
 
 def execution():
+    can_skip = game_setup.allow_skip
+
     print("It's time to reveal the votes!")
     audio.playAudio(audio.REVEAL)
     wait(3)
@@ -358,25 +368,28 @@ def execution():
 
         print(currentPlayer.name + " has " + str(currentPlayer.votes) + " votes")
 
+    if can_skip:
+        print("Skip" + " has " + str(skip) + " votes")
     wait(5)
     
     print("It's execution time! The player being executed is...")
-
     
     executedPlayer = choice(executedPlayers)
-
-
     audio.playAudio(audio.EXECUTION)
 
-    print(executedPlayer.name)
-    wait(2)
-    executedPlayer.die()
+    if executedPlayer == None:
+        print("Nobody is being executed! Vote has skipped!")
+        wait(2)
+    else:
+        print(executedPlayer.name)
+        executedPlayer.die()
+        wait(2)
+        print(executedPlayer.name + " has been executed and is no longer alive!")
     executedPlayers.clear()
     resetVotes()
     votes.clear()
     removeDeadPlayers()
-    print(executedPlayer.name + " has been executed and is no longer alive!")
-
+    skip = 0
     #print(executedPlayer.name)
     #audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
     wait(3)

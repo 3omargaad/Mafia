@@ -1,3 +1,15 @@
+<Slider>
+    size_hint_x: None
+    width: 300
+    disabled: False
+
+<TextInput>
+    multiline: False
+    size_hint: 0.3, 0.05
+    text_size: self.width, None
+    halign: "left"
+    valign: "center"
+
 <ScreenThree>:
     FloatLayout:
         Label:
@@ -32,9 +44,6 @@
             Slider:
                 id: plr_num_slider
                 pos: "400dp", "100dp"
-                size_hint_x: None
-                width: 300
-                disabled: False
                 #pos_hint: {"center_x": 0.35, "center_y": 0.55}
                 min: 4
                 max: 15
@@ -59,9 +68,6 @@
             Slider:
                 id: maf_num_slider
                 pos: "400dp", "100dp"
-                size_hint_x: None
-                width: 300
-                disabled: False
                 #pos_hint: {"center_x": 0.35, "center_y": 0.45}
                 min: 1
                 max: 5
@@ -86,9 +92,6 @@
             Slider:
                 id: discussion_time_slider
                 pos: "400dp", "100dp"
-                size_hint_x: None
-                width: 300
-                disabled: False
                 #pos_hint: {"center_x": 0.35, "center_y": 0.45}
                 min: 0
                 max: 60
@@ -173,11 +176,6 @@
             TextInput:
                 id: host_name_widget
                 font_name: root.roboto_font
-                multiline: False
-                size_hint: 0.3, 0.05
-                text_size: self.width, None
-                halign: "left"
-                valign: "center"
                 on_text: root.on_host_name_enter(self)
             Label:
             ############################################################################
@@ -193,11 +191,6 @@
                 id: host_accent_widget
                 font_name: root.roboto_font
                 hint_text: "(au, uk, us, ca, in, za, ng)"
-                multiline: False
-                size_hint: 0.3, 0.05
-                text_size: self.width, None
-                halign: "left"
-                valign: "center"
                 on_text: root.on_host_accent_enter(self)
 
         Button:

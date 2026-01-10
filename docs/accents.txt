@@ -1,0 +1,7 @@
+Australia: com.au
+United Kingdom: co.uk
+United States: us
+Canada: ca
+India: co.in
+South Africa: co.za
+Nigeria: com.ng
