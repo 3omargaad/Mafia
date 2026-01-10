@@ -51,6 +51,11 @@
         TextInput:
             font_name: root.roboto_font
             id: root.username
+            multiline: False
+            size_hint: 0.3, 0.05
+            text_size: self.width, None
+            halign: "left"
+            valign: "center"
             pos_hint: {"center_x": 0.55, "center_y" : 0.45}
         Label:
             text: "Password: "
@@ -63,20 +68,21 @@
         TextInput:
             font_name: root.roboto_font
             id: root.password
+            multiline: False
             password: True
             pos_hint: {"center_x": 0.55, "center_y" : 0.35}
         Button:
-            text : "Login/Signup"
+            text: "Login/Signup"
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-            pos_hint : {"center_x" : 0.5, "center_y" : 0.225}
+            pos_hint: {"center_x" : 0.5, "center_y" : 0.225}
             on_release: 
                 #app.root.current = 'signup'
                 #root.manager.transition.direction = "left"
                 root.accountSetup()
         Button:
-            text : "Play as Guest"
+            text: "Play as Guest"
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
-            pos_hint : {"center_x" : 0.5, "center_y" : 0.1}
+            pos_hint: {"center_x" : 0.5, "center_y" : 0.1}
             on_release:
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = 1

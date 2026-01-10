@@ -20,15 +20,23 @@
             #color: "#7b9fecff"
             color: "#d73612ff"
             font_name: root.rye_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+            pos_hint: {"center_x": 0.5, "center_y": 0.95}
+            #color: "#7b9fecff"
+            color: "#d73612ff"
+            font_name: root.rye_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
             font_size: "50dp"
             
+            
         GridLayout:
+            rows: 10
             rows: 10
             cols: 3
             row_default_height: '40dp'
             row_force_default: True
             size_hint: None, None
             size: self.minimum_size
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            spacing: 130, 5   # (horizontal, vertical) space between widgets
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
             spacing: 130, 5   # (horizontal, vertical) space between widgets
             padding: 20       # space around the edges of the GridLayout
@@ -199,7 +207,13 @@
             background_normal: ''
             background_color: "#25AB58FF"
             color: "#e0e0e0ff"
+            background_normal: ''
+            background_color: "#25AB58FF"
+            color: "#e0e0e0ff"
             size_hint: (0.3, 0.1)
+            pos_hint: {"center_x": 0.5, "center_y": 0.1}
+            on_press: 
+                root.on_play()
             pos_hint: {"center_x": 0.5, "center_y": 0.1}
             on_press: 
                 root.on_play()
@@ -223,6 +237,63 @@
                 root.manager.current = 'screen_one'
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
             font_size: "30dp"
+
+<ScreenFour>:
+    Label:
+        text: "Players"
+        size_hint: 0.5, None
+        height: 50
+        pos_hint: {"center_x": 0.5, "center_y": 0.95}
+        #color: "#7b9fecff"
+        color: "#d73612ff"
+        font_name: root.rye_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+        font_size: "50dp"
+
+    Button:
+        text: "PLAY"
+        pos: "100dp", "200dp"
+        color: "#e0e0e0ff"
+        background_normal: ''
+        background_color: "#25AB58FF"
+        size_hint: (0.3, 0.1)
+        pos_hint: {"center_x": 0.5, "center_y": 0.4}
+        on_press: 
+            root.start_game()
+            root.manager.transition.direction = 'left'
+            root.manager.transition.duration = 1
+            root.manager.current = 'screen_five'
+        font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
+        font_size: "30dp"
+
+    Button:
+        text: "←"
+        pos: "100dp", "200dp"
+        color: "#e0e0e0ff"
+        background_normal: ''
+        background_color: "#676767"
+        size_hint: (0.1, 0.1)
+        pos_hint: {"center_x": 0.1, "center_y": 0.9}
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.transition.duration = 1
+            root.manager.current = 'screen_three'
+        font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
+        font_size: "30dp"
+
+        #Button:
+        #    text: "←"
+        #    pos: "100dp", "200dp"
+        #    color: "#e0e0e0ff"
+        #    background_normal: ''
+        #    background_color: "#676767"
+        #    size_hint: (0.1, 0.1)
+        #    pos_hint: {"center_x": 0.1, "center_y": 0.9}
+        #    on_press:
+        #        root.manager.transition.direction = 'right'
+        #        root.manager.transition.duration = 1
+        #        root.manager.current = 'screen_one'
+        #    font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
+        #    font_size: "30dp"
 
 <ScreenFour>:
     Label:

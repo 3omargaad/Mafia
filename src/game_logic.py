@@ -314,6 +314,7 @@ def vote():
     print("Times up! Now you must vote on which player to execute!")
     audio.playAudio(audio.VOTE)
     wait(1)
+    skip = 0
     can_skip = game_setup.allow_skip
     while True:
         try:
