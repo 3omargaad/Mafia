@@ -13,11 +13,7 @@ import player
 
 # Modules
 
-#badTeamNumber = 0
-#goodTeamNumber = 0
-skip = 0
-
-winningTeam = ""
+#winningTeam = ""
 
 mafiaPlayer1 = None
 mafiaPlayer2 = None
@@ -88,14 +84,13 @@ def revealRoles():
         plr.finalReveal()
 
 def hasGameEnded():
-    global winningTeam
     if game_setup.bad_team_num == 0:
-        winningTeam = "Good"
+        game_setup.winnning_team = "Good"
         return True
     elif game_setup.good_team_num <= game_setup.bad_team_num:
-        winningTeam = "Bad"
+        game_setup.winnning_team = "Bad"
         return True
-    else:
+    else: 
         return False
     # Check to see if game ended
 
@@ -314,7 +309,7 @@ def vote():
     print("Times up! Now you must vote on which player to execute!")
     audio.playAudio(audio.VOTE)
     wait(1)
-    skip = 0
+    game_setup.skip_vote = 0
     can_skip = game_setup.allow_skip
     while True:
         try:
@@ -326,7 +321,7 @@ def vote():
                 printPlayerList(livingPlayers)
                 vote = int(input("Enter the NUMBER of the player you want to vote: "))
                 if can_skip and (vote == 0):
-                    skip += 1
+                    game_setup.skip_vote += 1
                 else:
                     playerVoted = livingPlayers[vote-1]
                     playerVoted.addVote()
@@ -344,7 +339,7 @@ def vote():
         votes.append(plr.votes)
 
     if can_skip:
-        votes.append(skip)
+        votes.append(game_setup.skip_vote)
 
     maxVoteVal = max(votes)
 
@@ -352,7 +347,7 @@ def vote():
         if plr.votes == maxVoteVal:
             executedPlayers.append(plr) 
 
-    if skip == maxVoteVal:
+    if game_setup.skip_vote == maxVoteVal:
         executedPlayers.append(None)
 
 def execution():
@@ -370,7 +365,7 @@ def execution():
         print(currentPlayer.name + " has " + str(currentPlayer.votes) + " votes")
 
     if can_skip:
-        print("Skip" + " has " + str(skip) + " votes")
+        print("Skip" + " has " + str(game_setup.skip_vote) + " votes")
     wait(5)
     
     print("It's execution time! The player being executed is...")
@@ -390,7 +385,7 @@ def execution():
     resetVotes()
     votes.clear()
     removeDeadPlayers()
-    skip = 0
+    game_setup.skip_vote = 0
     #print(executedPlayer.name)
     #audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
     wait(3)
@@ -400,7 +395,7 @@ def endGame():
     print("The game is over!")
     audio.playAudio(audio.GAMEOVER)
     wait(2)
-    print("THE " + str(winningTeam) + " TEAM HAS WON!!!")
+    print("THE " + game_setup.winnning_team + " TEAM HAS WON!!!")
     wait(2)
     print("---------------------------------------------------------")
     revealRoles()

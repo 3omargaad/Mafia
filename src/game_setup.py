@@ -8,7 +8,9 @@ allow_skip = False
 execute_if_tie = False
 host_name = "ChadGPT"
 host_accent = "uk"
-players = []
 
+players = []
+skip_vote = 0
 good_team_num = 3
 bad_team_num = 1
+winnning_team = ""
