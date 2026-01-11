@@ -1,0 +1,13 @@
+[project]
+name = "Mafia"
+version = "1.0.0"
+
+[project.scripts]
+ssay = "src.__main__:main"
+
+[tool.setuptools.dynamic]
++dependencies = { file = ["requirements.txt"] }
+
+[project.urls]
+Repository = "https://github.com/3omargaad/Mafia.git"
+Issues = "https://github.com/me/3omargaad/Mafia/issues"

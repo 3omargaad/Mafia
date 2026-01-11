@@ -1,0 +1,403 @@
+from random import choice
+from random import randint
+from time import sleep
+#import os
+
+# Libraries
+
+from files import get_path
+from files import clearAudioFiles
+import game_setup
+import audio
+import player
+
+# Modules
+
+#winningTeam = ""
+
+mafiaPlayer1 = None
+mafiaPlayer2 = None
+doctorPlayer = None
+detectivePlayer = None
+
+# Variables
+
+players = []
+livingPlayers = []
+deadPlayers = []
+votes = []
+executedPlayers = []
+
+# Arrays
+
+wait = lambda t : sleep(t)
+clear = lambda : print("\033c", end="")
+#resetVotes = map(lambda i: i.resetVote(), players)
+#revealRoles = map(lambda i: i.finalReveal(), players)
+# Lambda Functions
+
+def countdown(t):
+    for i in range(t+1):
+        print(t-i)
+        audio.playAudio(audio.POP)
+
+def printPlayerList(list, exception=None):
+    i = 0
+    for plr in list:
+        i += 1
+        if plr.role == exception:
+            print(str(i) + ") " + plr.name + " (YOU)")
+        else:
+            print(str(i) + ") " + plr.name)
+
+def eliminate(playerNumber): 
+    livingPlayers[playerNumber-1].die()
+    livingPlayers.remove(livingPlayers[playerNumber-1])
+
+# Functions
+
+def removeDeadPlayers():
+    for plr in livingPlayers:
+        if plr.isAlive == False:
+            deadPlayer = plr
+
+            deadPlayers.append(deadPlayer)
+            livingPlayers.remove(deadPlayer)
+
+            if deadPlayer.team == "Bad":
+                #global badTeamNumber
+                #badTeamNumber -= 1
+                game_setup.bad_team_num -= 1
+            elif deadPlayer.team == "Good":
+                #global goodTeamNumber
+                #goodTeamNumber -= 1
+                game_setup.good_team_num -= 1
+
+            # Assuming 1 player MAX dies each night
+
+def resetVotes():
+    for plr in players:
+        plr.resetVote()
+
+def revealRoles():
+    for plr in players:
+        plr.finalReveal()
+
+def hasGameEnded():
+    if game_setup.bad_team_num == 0:
+        game_setup.winnning_team = "Good"
+        return True
+    elif game_setup.good_team_num <= game_setup.bad_team_num:
+        game_setup.winnning_team = "Bad"
+        return True
+    else: 
+        return False
+    # Check to see if game ended
+
+def intro():
+    wait(5)
+    clearAudioFiles()
+    clear()
+
+    print("Welcome to Mafia! I am your host ChadGPT.")
+    audio.playAudio(audio.WELCOME)
+    print(game_setup.plr_num)
+    print(game_setup.maf_num)
+
+    #global goodTeamNumber 
+    #goodTeamNumber = playerNumber - mafiaNumber
+
+    #global badTeamNumber 
+    #badTeamNumber = mafiaNumber
+
+    #for i in range(game_setup.plr_num):
+    #    plrName = input("Enter name of player #" + str(i+1) + " ")
+    #    #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
+    #    plrAudio = None
+    #    try:
+    #        audio.textToSpeech(plrName, f'plr_{plrName}')
+    #        plrAudio = audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
+    #        #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
+    #    except Exception as error:
+    #        print(error)
+    #    plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=plrAudio, votes=0)
+    #    # DEFAULT SETTINGS FOR PLAYER OBJECT
+    #    players.append(plrObject)
+    #    livingPlayers.append(plrObject)
+    #    clear()
+
+    for plrName in game_setup.players:
+        plrAudio = None
+        try:
+            audio.textToSpeech(plrName, f'plr_{plrName}')
+            plrAudio = audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
+            #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
+        except Exception as error:
+            print(error)
+        plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=plrAudio, votes=0)
+        # DEFAULT SETTINGS FOR PLAYER OBJECT
+        players.append(plrObject)
+        livingPlayers.append(plrObject)
+        clear()
+
+    clear()
+    
+    for maf in range(game_setup.maf_num):
+        while True:
+            mafiaPlayer = choice(players)
+            if mafiaPlayer.role != "Mafia":
+                break   
+        mafiaPlayer.role = "Mafia"
+        mafiaPlayer.team = "Bad"
+
+    # Chooses Player(s) as mafia
+
+    global doctorPlayer
+
+    if game_setup.include_doc == True:
+        while True:
+            doctorPlayer = choice(players)
+            if doctorPlayer.role != "Mafia":
+                break
+        
+        doctorPlayer.role = "Doctor"
+
+    # Chooses Player as doctor
+
+
+    global detectivePlayer
+
+    if game_setup.include_det == True:
+        while True:
+            detectivePlayer = choice(players)
+            if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
+                break
+
+        detectivePlayer.role = "Detective"
+
+    # Chooses Player as detective
+
+    for i in range(game_setup.plr_num):
+        wait(1)
+        #players[i].sayName()
+        input(players[i].name + " Press Enter to check your role ")
+        print("You are " + players[i].role)
+        wait(1)
+        input("Press Enter to clear")
+        clear()
+
+    # Shows each player their role seperately
+
+    print("The game has begun!")
+    print("You Have 15 seconds to talk before night!")
+    audio.playAudio(audio.INTRO)
+    wait(1)
+    #countdown(15)
+
+def night():
+    print("The game continues!")
+    audio.playAudio(audio.GAMECONTINUES)
+    wait(2)
+    clear()
+    print("The night approached... Everyone falls asleep")
+    audio.playAudio(audio.GOODNIGHT)
+    wait(5)
+    print("While everyone else is fast alseep... the mafia wakes up. The mafia chooses who to eliminate tonight.")
+    audio.playAudio(audio.MAFIA)
+    wait(1)
+    print()
+    print("List of players:")
+    printPlayerList(livingPlayers, "Mafia")
+
+    print()
+    #------------- changes by ali
+    try:
+        victimNum = int(input("Enter the NUMBER of the player you want to eliminate: "))
+        victim = livingPlayers[victimNum-1]
+        victim.die()
+        print(victim.name + " has been attacked!")
+        wait(2)
+        print("Mafia go back to sleep")
+        audio.playAudio(audio.MAFIA_SLEEP)
+        wait(4)
+        # MAFIA STAGE
+    except Exception as e:
+        print(e)
+    
+    clear()
+
+    if game_setup.include_doc == True:
+        print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
+        audio.playAudio(audio.DOCTOR)
+        wait(1)
+        print()
+        if doctorPlayer.isAlive or doctorPlayer in livingPlayers:
+            print("List of players:")
+            printPlayerList(livingPlayers, "Doctor")
+            print()
+            healedNum = int(input("Enter the NUMBER of the player you want to heal: "))
+            healed = livingPlayers[healedNum-1]
+            healed.heal()
+            print(healed.name + " has been healed!")
+        else:
+            randWait = randint(3, 8)
+            print("Doctor is dead :P")
+            print("Continuing game in " + str(randWait) + " seconds...")
+            wait(randWait)
+        wait(2)
+        print("Doctor go back to sleep.")
+        audio.playAudio(audio.DOCTOR_SLEEP)
+        wait(4)
+    # DOCTOR STAGE
+
+    clear()
+
+    if game_setup.include_det == True:
+        print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
+        audio.playAudio(audio.DETECTIVE)
+        wait(1)
+        if detectivePlayer.isAlive or detectivePlayer in livingPlayers:
+            print()
+            print("List of players:")
+            printPlayerList(livingPlayers, "Detective")
+            print()
+            investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
+            investigated = livingPlayers[investigatedNum-1]
+            print(investigated.name + " has been investigated!")
+            investigated.revealTeam()
+        else:
+            randWait = randint(3, 8)
+            print("Detective is dead :P")
+            print("Continuing game in " + str(randWait) + " seconds...")
+            wait(randWait)
+        wait(2)
+        print("The detective goes back to sleep.")
+        audio.playAudio(audio.DETECTIVE_SLEEP)
+        wait(4)
+    # DETECTIVE STAGE
+
+    # Checks if attacked player is dead
+    # If dead then move to deadPlayers array and remove from livingPlayers
+
+    removeDeadPlayers()
+    clear()
+
+def announcement():
+    clear()
+    wait(1)
+    print("Good morning everyone!")
+    audio.playAudio(audio.GOODMORNING)
+    wait(2)
+    if len(deadPlayers) == 0:
+        print("Fortunately, everyone is still alive.")
+        audio.playAudio(audio.FORTUNATELY)
+    else:
+        print("Unfortunately, the following players are no longer alive:")
+        audio.playAudio(audio.ANNOUNCEMENT)
+        printPlayerList(deadPlayers)
+        #for i in deadPlayers:
+        #    audio.playAudio(f"assets\\audio\\player_names\\{i.name}_tts.wav")
+        wait(4)
+
+def day():
+    print("You have 30 seconds to discuss who you think is the Mafia!")
+    audio.playAudio(audio.DISCUSS)
+    wait(2)
+    countdown(game_setup.discussion_time)
+
+def vote():
+    print("Times up! Now you must vote on which player to execute!")
+    audio.playAudio(audio.VOTE)
+    wait(1)
+    game_setup.skip_vote = 0
+    can_skip = game_setup.allow_skip
+    while True:
+        try:
+            for i in range(len(livingPlayers)):
+                print(livingPlayers[i].name + " choose who to vote.")
+                print("List of players:")
+                if can_skip:
+                    print("0) Skip Vote")
+                printPlayerList(livingPlayers)
+                vote = int(input("Enter the NUMBER of the player you want to vote: "))
+                if can_skip and (vote == 0):
+                    game_setup.skip_vote += 1
+                else:
+                    playerVoted = livingPlayers[vote-1]
+                    playerVoted.addVote()
+                wait(2)
+                clear()
+            break
+        except Exception as e:
+            resetVotes()
+            print(e)
+            print("invalid input")
+            continue
+    
+    for plr in livingPlayers:
+        #global votes
+        votes.append(plr.votes)
+
+    if can_skip:
+        votes.append(game_setup.skip_vote)
+
+    maxVoteVal = max(votes)
+
+    for plr in livingPlayers:
+        if plr.votes == maxVoteVal:
+            executedPlayers.append(plr) 
+
+    if game_setup.skip_vote == maxVoteVal:
+        executedPlayers.append(None)
+
+def execution():
+    can_skip = game_setup.allow_skip
+
+    print("It's time to reveal the votes!")
+    audio.playAudio(audio.REVEAL)
+    wait(3)
+    executedVotes = 0
+    for i in range(len(livingPlayers)):
+        currentPlayer = livingPlayers[i]
+        if currentPlayer.votes >= executedVotes:
+            executedPlayer = currentPlayer
+
+        print(currentPlayer.name + " has " + str(currentPlayer.votes) + " votes")
+
+    if can_skip:
+        print("Skip" + " has " + str(game_setup.skip_vote) + " votes")
+    wait(5)
+    
+    print("It's execution time! The player being executed is...")
+    
+    executedPlayer = choice(executedPlayers)
+    audio.playAudio(audio.EXECUTION)
+
+    if executedPlayer == None:
+        print("Nobody is being executed! Vote has skipped!")
+        wait(2)
+    else:
+        print(executedPlayer.name)
+        executedPlayer.die()
+        wait(2)
+        print(executedPlayer.name + " has been executed and is no longer alive!")
+    executedPlayers.clear()
+    resetVotes()
+    votes.clear()
+    removeDeadPlayers()
+    game_setup.skip_vote = 0
+    #print(executedPlayer.name)
+    #audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
+    wait(3)
+    clear()
+
+def endGame():
+    print("The game is over!")
+    audio.playAudio(audio.GAMEOVER)
+    wait(2)
+    print("THE " + game_setup.winnning_team + " TEAM HAS WON!!!")
+    wait(2)
+    print("---------------------------------------------------------")
+    revealRoles()
+
+# Procedures

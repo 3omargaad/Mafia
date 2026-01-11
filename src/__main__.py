@@ -2,8 +2,7 @@ import gui
 import game_logic
 # Modules
 
-if __name__ == "__main__":
-    #app.setup()
+def main():
     gui.setup()
     game_logic.intro()
     while True: # Main Game Loop
@@ -18,3 +17,6 @@ if __name__ == "__main__":
             break
         
     game_logic.endGame()
+
+if __name__ == "__main__":
+    main()
