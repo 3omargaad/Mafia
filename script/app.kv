@@ -1,0 +1,47 @@
+<LoginScreen>:
+    name: 'login'
+
+    MDLabel:
+        text: "Mafia"
+        pos_hint: {'center_x':0.5, 'center_y':0.8}
+        size_hint: (0.6, None)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "64dp"
+
+    MDTextField:
+        hint_text: "Username"
+        pos_hint: {'center_x':0.5, 'center_y':0.55}
+        size_hint: (0.5, None)
+
+    MDTextField:
+        hint_text: "Password"
+        password: True
+        pos_hint: {'center_x':0.5, 'center_y':0.45}
+        size_hint: (0.5, None)
+
+    
+    MDRectangleFlatButton:
+        text: "Login/Signup"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.325}
+        size_hint: (0.4, 0.1)
+        on_release: 
+            root.account()
+
+    MDRectangleFlatButton:
+        text: "Play as Guest"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.2}
+        size_hint: (0.4, 0.1)
+        on_release:
+            #root.manager.current = 'setup'
+            print("Start Game")
+
+<SetupScreen>:
+    name: 'setup'
+
+    MDToolbar:
+        title: "Game Setup"
+        elevation: 10

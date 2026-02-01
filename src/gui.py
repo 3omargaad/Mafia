@@ -1,7 +1,7 @@
 # Program to Show how to create a switch 
 # import kivy module    
 import kivy  
-    
+
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.gridlayout import GridLayout
@@ -10,6 +10,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
@@ -202,12 +203,30 @@ class ScreenFour(Screen, StackLayout):
                 print(child.text)
                 game_setup.players.append(child.text)
         
-        
+        #s5.flashcards()
         #App.get_running_app().stop()
         #app.stop()
 
 class ScreenFive(Screen):
-    pass
+    host_name = game_setup.host_name
+    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+    roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
+    press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
+    main_image = get_path("assets", "images", "mafia_logo.png")
+
+
+    def flashcards(self, **kwargs):
+        print(game_setup.host_name)
+        super().__init__(**kwargs)
+        t = TextInput(
+                text= game_setup.players[0],
+                size_hint= (0.2, 0.05),
+                width= "100dp",
+                multiline= False,
+                pos_hint={'center_x': 0.5, 'center_y': 0.5},
+                disabled= False
+        )
+        self.add_widget(t)
 
 
 class Role1(Screen):
@@ -422,6 +441,7 @@ class ScreenSix(Screen):
 screen_manager = ScreenManager(transition=SlideTransition())
 
 s4 = ScreenFour(name ="screen_four")
+s5 = ScreenFour(name ="screen_five")
  
 # Add the screens to the manager and then supply a name
 # that is used to switch screens
@@ -429,24 +449,24 @@ screen_manager.add_widget(ScreenOne(name ="screen_one"))
 screen_manager.add_widget(ScreenTwo(name ="screen_two"))
 screen_manager.add_widget(ScreenThree(name ="screen_three"))
 screen_manager.add_widget(s4)
-screen_manager.add_widget(ScreenFive(name="screen_five"))
+screen_manager.add_widget(s5)
 screen_manager.add_widget(ScreenSix(name="screen_six"))
 
-screen_manager.add_widget(Role1(name="role1"))
-screen_manager.add_widget(Role2(name="role2"))
-screen_manager.add_widget(Role3(name="role3"))
-screen_manager.add_widget(Role4(name="role4"))
-screen_manager.add_widget(Role5(name="role5"))
-screen_manager.add_widget(Role6(name="role6"))
-screen_manager.add_widget(Role7(name="role7"))
-screen_manager.add_widget(Role8(name="role8"))
-screen_manager.add_widget(Role9(name="role9"))
-screen_manager.add_widget(Role10(name="role10"))
-screen_manager.add_widget(Role11(name="role11"))
-screen_manager.add_widget(Role12(name="role12"))
-screen_manager.add_widget(Role13(name="role13"))
-screen_manager.add_widget(Role14(name="role14"))
-screen_manager.add_widget(Role15(name="role15"))
+#screen_manager.add_widget(Role1(name="role1"))
+#screen_manager.add_widget(Role2(name="role2"))
+#screen_manager.add_widget(Role3(name="role3"))
+#screen_manager.add_widget(Role4(name="role4"))
+#screen_manager.add_widget(Role5(name="role5"))
+#screen_manager.add_widget(Role6(name="role6"))
+#screen_manager.add_widget(Role7(name="role7"))
+#screen_manager.add_widget(Role8(name="role8"))
+#screen_manager.add_widget(Role9(name="role9"))
+#screen_manager.add_widget(Role10(name="role10"))
+#screen_manager.add_widget(Role11(name="role11"))
+#screen_manager.add_widget(Role12(name="role12"))
+#screen_manager.add_widget(Role13(name="role13"))
+#screen_manager.add_widget(Role14(name="role14"))
+#screen_manager.add_widget(Role15(name="role15"))
 
 # Create the App class
 class MafiaApp(App):
