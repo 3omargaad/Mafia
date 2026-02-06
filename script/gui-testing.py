@@ -1,7 +1,7 @@
 from kivy.lang import Builder
 
 from kivymd.app import MDApp
-from kivymd.uix.screen import Screen
+from kivymd.uix.screen import Screen, MDScreen
 from kivymd.uix.button import MDRoundFlatButton, MDRectangleFlatButton, MDIconButton
 from kivymd.uix.textfield import MDTextField
 from kivymd import GridLayout
@@ -9,7 +9,7 @@ from kivymd import GridLayout
 
 Builder.load_file("gui.kv")
 
-class Login(GridLayout):
+class Login(MDScreen):
     return
 
 class Mafia(MDApp):
@@ -26,6 +26,6 @@ class Mafia(MDApp):
         #screen.add_widget(btn2)
         #screen.add_widget(btn3)
         #screen.add_widget(tf)
-    return Login()
+        return Login()
 
 Mafia().run()

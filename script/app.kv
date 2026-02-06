@@ -8,7 +8,7 @@
         halign: 'center'
         font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
         color: "#F44336" # "#d73612ff"
-        font_size: "64dp"
+        font_size: "60dp"
 
     MDTextField:
         hint_text: "Username"
@@ -36,12 +36,93 @@
         pos_hint: {'center_x':0.5, 'center_y':0.2}
         size_hint: (0.4, 0.1)
         on_release:
-            #root.manager.current = 'setup'
+            root.manager.transition.direction = "left"
+            root.manager.current = 'setup'
             print("Start Game")
 
 <SetupScreen>:
     name: 'setup'
 
-    MDToolbar:
-        title: "Game Setup"
-        elevation: 10
+    MDLabel:
+        text: "Game Setup"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.6, None)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "60dp"
+
+    MDLabel:
+        text: "No. Players"
+        pos_hint: {'center_x':0.4, 'center_y':0.675}
+        size_hint: (0.6, None)
+
+    MDSlider:
+        pos_hint: {'center_x':0.6, 'center_y':0.675}
+        min: 4
+        max: 15
+        size_hint: (0.4, None)
+
+    MDLabel:
+        text: "No. Mafia"
+        pos_hint: {'center_x':0.4, 'center_y':0.575}
+        size_hint: (0.6, None)
+
+    MDSlider:
+        pos_hint: {'center_x':0.6, 'center_y':0.575}
+        min: 1
+        max: 4
+        size_hint: (0.4, None)
+
+    MDSwitch:
+        pos_hint: {'center_x':0.5, 'center_y':0.4}
+    MDSwitch:
+        pos_hint: {'center_x':0.5, 'center_y':0.3}
+    MDSwitch:
+        pos_hint: {'center_x':0.5, 'center_y':0.2}
+    MDSwitch:
+        pos_hint: {'center_x':0.5, 'center_y':0.1}
+    
+    MDRoundFlatIconButton:
+        icon: "arrow-left-bold-circle-outline"
+        icon_align:"center"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.15, 'center_y':0.85}
+        size_hint: (0.05, 0.05)
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.current = 'login'
+            print("Start Game")
+    
+    MDRectangleFlatButton:
+        text: "Continue"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.2}
+        size_hint: (0.4, 0.1)
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = 'player'
+            print("Start Game")
+
+<PlayerScreen>:
+    name: 'player'
+
+    MDLabel:
+        text: "Players"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.6, None)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "60dp"
+
+    MDRoundFlatIconButton:
+        icon: "arrow-left-bold-circle-outline"
+        icon_align:"center"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.15, 'center_y':0.85}
+        size_hint: (0.05, 0.05)
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.current = 'setup'
+            print("Start Game")

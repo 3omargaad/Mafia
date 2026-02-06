@@ -1,6 +1,6 @@
 from kivy.lang import Builder
 from kivy.core.window import Window
-#from kivymd.uix.screenmanager import ScreenManager
+from kivymd.uix.screenmanager import ScreenManager
 from kivymd.uix.screen import Screen
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
@@ -26,6 +26,12 @@ class LoginScreen(MDScreen, Screen):
         popup = MDDialog(title='Error', text="Account creation is currently unavailable.")
         popup.open()
 
+class SetupScreen(MDScreen, Screen):
+    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+
+class PlayerScreen(MDScreen, Screen):
+    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+
 class MafiaApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = 'Red'
@@ -33,12 +39,14 @@ class MafiaApp(MDApp):
         self.theme_cls.theme_style = 'Dark' # Creates red/dark theme
         Window.size = (360, 640)
 
-        return LoginScreen()
+        sm = ScreenManager()
+
+        sm.add_widget(LoginScreen(name='login'))
+        sm.add_widget(SetupScreen(name='setup'))
+        sm.add_widget(SetupScreen(name='player'))
+
+        return sm
 
 #
-#sm = ScreenManager()
-#
-#sm.add_widget(LoginScreen(name='login'))
-#sm.add_widget(SetupScreen(name='setup'))
 #
 MafiaApp().run()
