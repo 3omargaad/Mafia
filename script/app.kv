@@ -3,8 +3,8 @@
 
     MDLabel:
         text: "Mafia"
-        pos_hint: {'center_x':0.5, 'center_y':0.8}
-        size_hint: (0.6, None)
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.7, None)
         halign: 'center'
         font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
         color: "#F44336" # "#d73612ff"
@@ -25,16 +25,18 @@
     MDRectangleFlatButton:
         text: "Login/Signup"
         #font_name: root.press_font
-        pos_hint: {'center_x':0.5, 'center_y':0.325}
+        pos_hint: {'center_x':0.5, 'center_y':0.275}
         size_hint: (0.4, 0.1)
+        font_size: "20dp"
         on_release: 
             root.account()
 
     MDRectangleFlatButton:
         text: "Play as Guest"
         #font_name: root.press_font
-        pos_hint: {'center_x':0.5, 'center_y':0.2}
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
+        font_size: "20dp"
         on_release:
             root.manager.transition.direction = "left"
             root.manager.current = 'setup'
@@ -46,14 +48,14 @@
     MDLabel:
         text: "Game Setup"
         pos_hint: {'center_x':0.5, 'center_y':0.85}
-        size_hint: (0.6, None)
+        size_hint: (0.7, None)
         halign: 'center'
         font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
         color: "#F44336" # "#d73612ff"
         font_size: "60dp"
 
     MDLabel:
-        text: "No. Players"
+        text: "No. Players (" + str(root.plr_num) + ")"
         pos_hint: {'center_x':0.4, 'center_y':0.675}
         size_hint: (0.6, None)
 
@@ -62,9 +64,10 @@
         min: 4
         max: 15
         size_hint: (0.4, None)
+        on_value: root.on_plr_slider_value(self)
 
     MDLabel:
-        text: "No. Mafia"
+        text: "No. Mafia (" + str(root.maf_num) + ")"
         pos_hint: {'center_x':0.4, 'center_y':0.575}
         size_hint: (0.6, None)
 
@@ -73,15 +76,50 @@
         min: 1
         max: 4
         size_hint: (0.4, None)
+        on_value: root.on_maf_slider_value(self)
+
+    MDLabel:
+        text: "Add Doctor?"
+        pos_hint: {'center_x':0.175, 'center_y':0.46}
+        size_hint: (0.25, None)
 
     MDSwitch:
-        pos_hint: {'center_x':0.5, 'center_y':0.4}
+        pos_hint: {'center_x':0.325, 'center_y':0.45}
+        on_active: root.on_include_doc_switch_active(self)
+
+    
+    MDLabel:
+        text: "Add Detective?"
+        pos_hint: {'center_x':0.175, 'center_y':0.385}
+        size_hint: (0.25, None)
+    
     MDSwitch:
-        pos_hint: {'center_x':0.5, 'center_y':0.3}
+        pos_hint: {'center_x':0.325, 'center_y':0.375}
+        on_active: root.on_include_det_switch_active(self)
+
+    MDLabel:
+        text: "Anonymous Vote?"
+        pos_hint: {'center_x':0.175, 'center_y':0.3}
+        size_hint: (0.25, None)
+    
     MDSwitch:
-        pos_hint: {'center_x':0.5, 'center_y':0.2}
+        pos_hint: {'center_x':0.325, 'center_y':0.3}
+
+    MDLabel:
+        text: "Skip Vote?"
+        pos_hint: {'center_x':0.6, 'center_y':0.46}
+        size_hint: (0.25, None)
+    
     MDSwitch:
-        pos_hint: {'center_x':0.5, 'center_y':0.1}
+        pos_hint: {'center_x':0.75, 'center_y':0.45}
+
+    MDLabel:
+        text: "Execute If Tie?"
+        pos_hint: {'center_x':0.6, 'center_y':0.385}
+        size_hint: (0.25, None)
+
+    MDSwitch:
+        pos_hint: {'center_x':0.75, 'center_y':0.375}
     
     MDRoundFlatIconButton:
         icon: "arrow-left-bold-circle-outline"
@@ -97,8 +135,9 @@
     MDRectangleFlatButton:
         text: "Continue"
         #font_name: root.press_font
-        pos_hint: {'center_x':0.5, 'center_y':0.2}
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
+        font_size: "20dp"
         on_release:
             root.manager.transition.direction = "left"
             root.manager.current = 'player'
@@ -107,10 +146,11 @@
 <PlayerScreen>:
     name: 'player'
 
+    
     MDLabel:
         text: "Players"
         pos_hint: {'center_x':0.5, 'center_y':0.85}
-        size_hint: (0.6, None)
+        size_hint: (0.7, None)
         halign: 'center'
         font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
         color: "#F44336" # "#d73612ff"
@@ -125,4 +165,84 @@
         on_release:
             root.manager.transition.direction = "right"
             root.manager.current = 'setup'
+            print("e")
+    
+    MDTextField:
+        hint_text: "Player #1"
+        pos_hint: {'center_x':0.5, 'center_y':0.55}
+        size_hint: (0.5, None)
+    
+    MDTextField:
+        hint_text: "Player #2"
+        pos_hint: {'center_x':0.5, 'center_y':0.35}
+        size_hint: (0.5, None)
+
+    MDRectangleFlatButton:
+        text: "Play"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = 'role'
             print("Start Game")
+
+<RoleScreen>:
+    MDRectangleFlatButton:
+        text: "Play"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = 'game'
+            print("Start Game")
+
+<GameScreen>:
+    ScrollView:
+        size: self.size
+        GridLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            width: self.minimum_width
+            cols: 2
+            spacing: "20dp"
+            padding: "20dp"
+
+            MDCard:
+                orientation: "vertical"
+                padding: "8dp"
+                size_hint: 1, None
+                height: "210dp"
+                elevation: 5
+                border_radius: 20
+                radius: [15]
+
+            MDCard:
+                orientation: "vertical"
+                padding: "8dp"
+                size_hint: 1, None
+                height: "210dp"
+                elevation: 5
+                border_radius: 20
+                radius: [15]
+
+            MDCard:
+                orientation: "vertical"
+                padding: "8dp"
+                size_hint: 1, None
+                height: "210dp"
+                elevation: 5
+                border_radius: 20
+                radius: [15]
+
+            MDCard:
+                orientation: "vertical"
+                padding: "8dp"
+                size_hint: 1, None
+                height: "210dp"
+                elevation: 5
+                border_radius: 20
+                radius: [15]

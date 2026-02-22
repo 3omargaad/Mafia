@@ -1,0 +1,16 @@
+plr_num = 4
+maf_num = 1
+discussion_time = 30
+include_doc = False
+include_det = False
+anonymous_voting = False
+allow_skip = False
+execute_if_tie = False
+host_name = "ChadGPT"
+host_accent = "uk"
+
+players = []
+skip_vote = 0
+good_team_num = 3
+bad_team_num = 1
+winnning_team = ""
