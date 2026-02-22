@@ -1,3 +1,12 @@
+<MDCard>:
+    orientation: "vertical"
+    padding: "8dp"
+    size_hint: 1, None
+    height: "210dp"
+    elevation: 5
+    border_radius: 20
+    radius: [15]
+
 <LoginScreen>:
     name: 'login'
 
@@ -212,37 +221,48 @@
             padding: "20dp"
 
             MDCard:
-                orientation: "vertical"
-                padding: "8dp"
-                size_hint: 1, None
-                height: "210dp"
-                elevation: 5
-                border_radius: 20
-                radius: [15]
+                MDIcon:
+                MDLabel:
+                    text: "Player #1"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.4}
+                    size_hint: (None, None)
+                MDLabel:
+                    text: "Alive"
+                    color: "#36F456"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.25}
+                    size_hint: (None, None)
 
             MDCard:
-                orientation: "vertical"
-                padding: "8dp"
-                size_hint: 1, None
-                height: "210dp"
-                elevation: 5
-                border_radius: 20
-                radius: [15]
+                MDLabel:
+                    text: "Player #2"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.4}
+                    size_hint: (None, None)
+                MDLabel:
+                    text: "Dead"
+                    color: "#F44336"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.25}
+                    size_hint: (None, None)
 
             MDCard:
-                orientation: "vertical"
-                padding: "8dp"
-                size_hint: 1, None
-                height: "210dp"
-                elevation: 5
-                border_radius: 20
-                radius: [15]
 
             MDCard:
-                orientation: "vertical"
-                padding: "8dp"
-                size_hint: 1, None
-                height: "210dp"
-                elevation: 5
-                border_radius: 20
-                radius: [15]
+            MDCard:
+
+            MDCard:
+            MDCard:
+
+            MDCard:
+            MDCard:
+
+            MDCard:
+            MDCard:
+
+            MDCard:
+            MDCard:
+
+            MDCard:
+            MDCard:
