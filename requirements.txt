@@ -3,3 +3,4 @@ kivymd
 pathlib
 pydub
 gtts
+pytest
