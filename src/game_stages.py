@@ -1,7 +1,7 @@
 from random import choice
 from random import randint
 from time import sleep
-#import os
+# import os
 
 # Libraries
 
@@ -13,7 +13,7 @@ import player
 
 # Modules
 
-#winningTeam = ""
+# winningTeam = ""
 
 mafiaPlayer1 = None
 mafiaPlayer2 = None
@@ -30,16 +30,24 @@ executedPlayers = []
 
 # Arrays
 
-wait = lambda t : sleep(t)
-clear = lambda : print("\033c", end="")
-#resetVotes = map(lambda i: i.resetVote(), players)
-#revealRoles = map(lambda i: i.finalReveal(), players)
+# resetVotes = map(lambda i: i.resetVote(), players)
+# revealRoles = map(lambda i: i.finalReveal(), players)
 # Lambda Functions
+
+
+def wait(t):
+    sleep(t)
+
+
+def clear():
+    print("\033c", end="")
+
 
 def countdown(t):
     for i in range(t+1):
         print(t-i)
         audio.playAudio(audio.POP)
+
 
 def printPlayerList(list, exception=None):
     i = 0
@@ -50,38 +58,43 @@ def printPlayerList(list, exception=None):
         else:
             print(str(i) + ") " + plr.name)
 
-def eliminate(playerNumber): 
+
+def eliminate(playerNumber):
     livingPlayers[playerNumber-1].die()
     livingPlayers.remove(livingPlayers[playerNumber-1])
 
 # Functions
 
+
 def removeDeadPlayers():
     for plr in livingPlayers:
-        if plr.isAlive == False:
+        if plr.isAlive is False:
             deadPlayer = plr
 
             deadPlayers.append(deadPlayer)
             livingPlayers.remove(deadPlayer)
 
             if deadPlayer.team == "Bad":
-                #global badTeamNumber
-                #badTeamNumber -= 1
+                # global badTeamNumber
+                # badTeamNumber -= 1
                 game_setup.bad_team_num -= 1
             elif deadPlayer.team == "Good":
-                #global goodTeamNumber
-                #goodTeamNumber -= 1
+                # global goodTeamNumber
+                # goodTeamNumber -= 1
                 game_setup.good_team_num -= 1
 
             # Assuming 1 player MAX dies each night
+
 
 def resetVotes():
     for plr in players:
         plr.resetVote()
 
+
 def revealRoles():
     for plr in players:
         plr.finalReveal()
+
 
 def hasGameEnded():
     if game_setup.bad_team_num == 0:
@@ -90,9 +103,10 @@ def hasGameEnded():
     elif game_setup.good_team_num <= game_setup.bad_team_num:
         game_setup.winnning_team = "Bad"
         return True
-    else: 
+    else:
         return False
     # Check to see if game ended
+
 
 def intro():
     wait(5)
@@ -104,49 +118,74 @@ def intro():
     print(game_setup.plr_num)
     print(game_setup.maf_num)
 
-    #global goodTeamNumber 
-    #goodTeamNumber = playerNumber - mafiaNumber
+    # global goodTeamNumber
+    # goodTeamNumber = playerNumber - mafiaNumber
 
-    #global badTeamNumber 
-    #badTeamNumber = mafiaNumber
+    # global badTeamNumber
+    # badTeamNumber = mafiaNumber
 
-    #for i in range(game_setup.plr_num):
-    #    plrName = input("Enter name of player #" + str(i+1) + " ")
-    #    #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
-    #    plrAudio = None
-    #    try:
-    #        audio.textToSpeech(plrName, f'plr_{plrName}')
-    #        plrAudio = audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
-    #        #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
-    #    except Exception as error:
-    #        print(error)
-    #    plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=plrAudio, votes=0)
-    #    # DEFAULT SETTINGS FOR PLAYER OBJECT
-    #    players.append(plrObject)
-    #    livingPlayers.append(plrObject)
-    #    clear()
+    # for i in range(game_setup.plr_num):
+    #     plrName = input("Enter name of player #" + str(i+1) + " ")
+    #     #nameAudio = audio.textToSpeech(plrName, "plr_" + plrName)
+    #     plrAudio = None
+    #     try:
+    #         audio.textToSpeech(plrName, f'plr_{plrName}')
+    #         plrAudio = audio.convertToWav(get_path("assets",
+    #                    "audio",
+    #                    "player_names",
+    #                    f"plr_{plrName}.mp3)"
+    #                    )
+    #         )
+    #         #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
+    #     except Exception as error:
+    #         print(error)
+    #     plrObject = player.Player(
+    #                   name=plrName,
+    #                   role="Civilian",
+    #                   team="Good",
+    #                   isAlive=True,
+    #                   audioFile=plrAudio,
+    #                   votes=0
+    #     )
+    #     # DEFAULT SETTINGS FOR PLAYER OBJECT
+    #     players.append(plrObject)
+    #     livingPlayers.append(plrObject)
+    #     clear()
 
     for plrName in game_setup.players:
         plrAudio = None
         try:
             audio.textToSpeech(plrName, f'plr_{plrName}')
-            plrAudio = audio.convertToWav(get_path("assets", "audio", "player_names", f"plr_{plrName}.mp3)"))
-            #os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
+            plrAudio = audio.convertToWav(get_path(
+                    "assets",
+                    "audio",
+                    "player_names",
+                    f"plr_{plrName}.mp3)"
+                    )
+                    )
+            # os.remove(str(Path(f'assets\\audio\\player_names\\plr_{plrName}.mp3')))
         except Exception as error:
             print(error)
-        plrObject = player.Player(name=plrName, role="Civilian", team="Good", isAlive=True, audioFile=plrAudio, votes=0)
+        plrObject = player.Player(
+                        name=plrName,
+                        role="Civilian",
+                        team="Good",
+                        isAlive=True,
+                        audioFile=plrAudio,
+                        votes=0
+                    )
         # DEFAULT SETTINGS FOR PLAYER OBJECT
         players.append(plrObject)
         livingPlayers.append(plrObject)
         clear()
 
     clear()
-    
+
     for maf in range(game_setup.maf_num):
         while True:
             mafiaPlayer = choice(players)
             if mafiaPlayer.role != "Mafia":
-                break   
+                break
         mafiaPlayer.role = "Mafia"
         mafiaPlayer.team = "Bad"
 
@@ -154,23 +193,21 @@ def intro():
 
     global doctorPlayer
 
-    if game_setup.include_doc == True:
+    if game_setup.include_doc is True:
         while True:
             doctorPlayer = choice(players)
             if doctorPlayer.role != "Mafia":
                 break
-        
+
         doctorPlayer.role = "Doctor"
 
     # Chooses Player as doctor
-
-
     global detectivePlayer
 
-    if game_setup.include_det == True:
+    if game_setup.include_det is True:
         while True:
             detectivePlayer = choice(players)
-            if detectivePlayer.role != "Mafia" and detectivePlayer.role != "Doctor":
+            if detectivePlayer.role not in ("Mafia", "Doctor"):
                 break
 
         detectivePlayer.role = "Detective"
@@ -179,7 +216,7 @@ def intro():
 
     for i in range(game_setup.plr_num):
         wait(1)
-        #players[i].sayName()
+        # players[i].sayName()
         input(players[i].name + " Press Enter to check your role ")
         print("You are " + players[i].role)
         wait(1)
@@ -192,7 +229,8 @@ def intro():
     print("You Have 15 seconds to talk before night!")
     audio.playAudio(audio.INTRO)
     wait(1)
-    #countdown(15)
+    # countdown(15)
+
 
 def night():
     print("The game continues!")
@@ -202,7 +240,9 @@ def night():
     print("The night approached... Everyone falls asleep")
     audio.playAudio(audio.GOODNIGHT)
     wait(5)
-    print("While everyone else is fast alseep... the mafia wakes up. The mafia chooses who to eliminate tonight.")
+    print("""While everyone else is fast alseep...
+            the mafia wakes up. The mafia chooses
+            who to eliminate tonight.""")
     audio.playAudio(audio.MAFIA)
     wait(1)
     print()
@@ -210,9 +250,11 @@ def night():
     printPlayerList(livingPlayers, "Mafia")
 
     print()
-    #------------- changes by ali
+    # ------------ changes by ali
     try:
-        victimNum = int(input("Enter the NUMBER of the player you want to eliminate: "))
+        victimNum = int(
+            input("Enter the NUMBER of the player you want to eliminate: ")
+        )
         victim = livingPlayers[victimNum-1]
         victim.die()
         print(victim.name + " has been attacked!")
@@ -223,11 +265,12 @@ def night():
         # MAFIA STAGE
     except Exception as e:
         print(e)
-    
+
     clear()
 
-    if game_setup.include_doc == True:
-        print("Soon after... The doctor wakes up. The doctor chooses who to heal tonight.")
+    if game_setup.include_doc is True:
+        print("""Soon after... The doctor wakes up.
+                The doctor chooses who to heal tonight.""")
         audio.playAudio(audio.DOCTOR)
         wait(1)
         print()
@@ -235,7 +278,10 @@ def night():
             print("List of players:")
             printPlayerList(livingPlayers, "Doctor")
             print()
-            healedNum = int(input("Enter the NUMBER of the player you want to heal: "))
+            healedNum = int(input(
+                "Enter the NUMBER of the player you want to heal: "
+                )
+            )
             healed = livingPlayers[healedNum-1]
             healed.heal()
             print(healed.name + " has been healed!")
@@ -252,8 +298,9 @@ def night():
 
     clear()
 
-    if game_setup.include_det == True:
-        print("Then... The detective wakes up. The detective chooses who to investigate tonight.")
+    if game_setup.include_det is True:
+        print("""Then... The detective wakes up.
+                The detective chooses who to investigate tonight.""")
         audio.playAudio(audio.DETECTIVE)
         wait(1)
         if detectivePlayer.isAlive or detectivePlayer in livingPlayers:
@@ -261,7 +308,11 @@ def night():
             print("List of players:")
             printPlayerList(livingPlayers, "Detective")
             print()
-            investigatedNum = int(input("Enter the NUMBER of the player you want to investigate: "))
+            investigatedNum = int(
+                input(
+                    "Enter the NUMBER of the player you want to investigate: "
+                )
+            )
             investigated = livingPlayers[investigatedNum-1]
             print(investigated.name + " has been investigated!")
             investigated.revealTeam()
@@ -282,6 +333,7 @@ def night():
     removeDeadPlayers()
     clear()
 
+
 def announcement():
     clear()
     wait(1)
@@ -295,15 +347,17 @@ def announcement():
         print("Unfortunately, the following players are no longer alive:")
         audio.playAudio(audio.ANNOUNCEMENT)
         printPlayerList(deadPlayers)
-        #for i in deadPlayers:
-        #    audio.playAudio(f"assets\\audio\\player_names\\{i.name}_tts.wav")
+        # for i in deadPlayers:
+        #     audio.playAudio(f"assets\\audio\\player_names\\{i.name}_tts.wav")
         wait(4)
+
 
 def day():
     print("You have 30 seconds to discuss who you think is the Mafia!")
     audio.playAudio(audio.DISCUSS)
     wait(2)
     countdown(game_setup.discussion_time)
+
 
 def vote():
     print("Times up! Now you must vote on which player to execute!")
@@ -319,7 +373,9 @@ def vote():
                 if can_skip:
                     print("0) Skip Vote")
                 printPlayerList(livingPlayers)
-                vote = int(input("Enter the NUMBER of the player you want to vote: "))
+                vote = int(
+                    input("Enter the NUMBER of the player you want to vote: ")
+                )
                 if can_skip and (vote == 0):
                     game_setup.skip_vote += 1
                 else:
@@ -333,9 +389,9 @@ def vote():
             print(e)
             print("invalid input")
             continue
-    
+
     for plr in livingPlayers:
-        #global votes
+        # global votes
         votes.append(plr.votes)
 
     if can_skip:
@@ -345,10 +401,11 @@ def vote():
 
     for plr in livingPlayers:
         if plr.votes == maxVoteVal:
-            executedPlayers.append(plr) 
+            executedPlayers.append(plr)
 
     if game_setup.skip_vote == maxVoteVal:
         executedPlayers.append(None)
+
 
 def execution():
     can_skip = game_setup.allow_skip
@@ -362,34 +419,37 @@ def execution():
         if currentPlayer.votes >= executedVotes:
             executedPlayer = currentPlayer
 
-        print(currentPlayer.name + " has " + str(currentPlayer.votes) + " votes")
+        print(currentPlayer.name + " has "
+              + str(currentPlayer.votes) + " votes")
 
     if can_skip:
         print("Skip" + " has " + str(game_setup.skip_vote) + " votes")
     wait(5)
-    
+
     print("It's execution time! The player being executed is...")
-    
+
     executedPlayer = choice(executedPlayers)
     audio.playAudio(audio.EXECUTION)
 
-    if executedPlayer == None:
+    if executedPlayer is None:
         print("Nobody is being executed! Vote has skipped!")
         wait(2)
     else:
         print(executedPlayer.name)
         executedPlayer.die()
         wait(2)
-        print(executedPlayer.name + " has been executed and is no longer alive!")
+        print(executedPlayer.name +
+              " has been executed and is no longer alive!")
     executedPlayers.clear()
     resetVotes()
     votes.clear()
     removeDeadPlayers()
     game_setup.skip_vote = 0
-    #print(executedPlayer.name)
-    #audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
+    # print(executedPlayer.name)
+    # audio.playAudio(f"assets\\audio\\player_names\\{executedPlayer.name}_tts.wav")
     wait(3)
     clear()
+
 
 def endGame():
     print("The game is over!")
