@@ -12,7 +12,7 @@ from files import get_path
 
 import game_setup
 
-Builder.load_file("app.kv")
+Builder.load_file("app.kv") # Loads kivy file
 
 
 class LoginScreen(MDScreen, Screen):
@@ -32,11 +32,14 @@ class SetupScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
     plr_num = StringProperty("4")
     maf_num = StringProperty("1")
+    max_maf = StringProperty("1")
 
     def on_plr_slider_value(self, widget):
         self.plr_num = str(int(widget.value))
         game_setup.plr_num = int(widget.value)
-        print(str(game_setup.plr_num))
+
+        self.max_maf = str((game_setup.plr_num // 2) - 1)  # Sets max mafia value
+        print(self.max_maf)
 
     def on_maf_slider_value(self, widget):
         self.maf_num = str(int(widget.value))
