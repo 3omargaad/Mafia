@@ -1,5 +1,3 @@
-# Program to Show how to create a switch
-# import kivy module
 from kivy import require
 from kivy.app import App
 from kivy.uix.widget import Widget
@@ -11,15 +9,17 @@ from kivy.uix.textinput import TextInput
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
-# base Class of your App inherits from the App class.
-# app:always refers to the instance of your application
-from files import get_path
 from kivy.lang import Builder
+# Imports kivy submodules needed to create UI Elements
+
+from files import get_path
 import game_setup
+# Custom modules to access global variables and files
+
 # this restrict the kivy version i.e
 # below this kivy version you cannot
 # use the app or software
-require('1.9.0')
+require('2.3.1')
 
 # Builder is used when .kv file is
 # to be used in .py file
@@ -31,29 +31,30 @@ Builder.load_file("login.kv")
 Builder.load_file("account.kv")
 Builder.load_file("setup.kv")
 Builder.load_file("game.kv")
-# class to call the popup function
+# Builder loads .kv code in files for the creation of UI Elements
 
 
 class PopupWindow(Widget):
     def btn(self):
-        popFun()
+        popFun()  # Calls function when login button pressed
+# Class to build GUI for a popup window
 
 
-# class to build GUI for a popup window
 class P(FloatLayout):
     pass
 
-# function that displays the content
+# Layout class required for the popup window
 
 
 def popFun():
     show = P()
     window = Popup(title="Error", content=show,
                    size_hint=(None, None), size=(300, 300))
+    # Initial UI settings
     window.open()
+    # Opens the popup window when called
 
-# Create a class for all screens in which you can include
-# helpful methods specific to that screen
+# Function which creates the popup window
 
 
 class ScreenOne(Screen):
@@ -61,19 +62,23 @@ class ScreenOne(Screen):
     roboto_font = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
     press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
     main_image = get_path("assets", "images", "mafia_logo.png")
+    # Loads fonts and mafia image for the UI
 
     username = ""
     password = ""
+    # Initial username and password given in the textboxes
 
     def accountSetup(self):
-        # print(self.username.text + " | " + self.password.text)
-        popFun()
+        popFun()  # Default pop-up to show account creation is unavaiable
 
     def userVal(self):
         pass
 
     def pwdVal(self):
         pass
+
+    # Functions to be implemented once the database is created
+    # Currently 'passed' as account system remains unfinished
 
 
 class ScreenTwo(Screen):

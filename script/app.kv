@@ -71,7 +71,7 @@
     MDSlider:
         pos_hint: {'center_x':0.6, 'center_y':0.675}
         min: 4
-        max: 15
+        max: 16
         size_hint: (0.4, None)
         on_value: root.on_plr_slider_value(self)
 
@@ -131,15 +131,26 @@
         pos_hint: {'center_x':0.75, 'center_y':0.375}
     
     MDRoundFlatIconButton:
-        icon: "arrow-left-bold-circle-outline"
-        icon_align:"center"
-        #font_name: root.press_font
-        pos_hint: {'center_x':0.15, 'center_y':0.85}
-        size_hint: (0.05, 0.05)
+        size_hint: (None, None)
+        size: (dp(64), dp(64))
+        pos_hint: {"center_x": 0.1, "center_y": 0.9}
+        line_color: [0,0,0,0]
+
         on_release:
             root.manager.transition.direction = "right"
             root.manager.current = 'login'
             print("Start Game")
+
+        MDIcon:
+            icon_size: dp(128)
+            theme_text_color: "Custom"  # Set text color to custom
+            text_color: "#F44336"  # Use accent color for the icon
+            icon: "arrow-left-bold-circle-outline"
+            icon_align: "center"
+            size_hint: (None, None)
+            size: (dp(64), dp(64))  # Set a size for the icon
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center the icon
+
     
     MDRectangleFlatButton:
         text: "Continue"

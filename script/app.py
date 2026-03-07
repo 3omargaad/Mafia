@@ -1,18 +1,23 @@
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.properties import StringProperty
+from kivy import require
+# Imports kivy sub-modules
 
 from kivymd.uix.screenmanager import ScreenManager
 from kivymd.uix.screen import Screen
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.dialog import MDDialog
+# Imports kivymd sub-modules
 
 from files import get_path
 
 import game_setup
 
-Builder.load_file("app.kv") # Loads kivy file
+require('2.3.1')
+
+Builder.load_file("app.kv")  # Loads kivy file
 
 
 class LoginScreen(MDScreen, Screen):
@@ -26,6 +31,7 @@ class LoginScreen(MDScreen, Screen):
             text="Account creation is currently unavailable."
         )
         popup.open()
+    # Creates a popup window to show account creation is unavaiable
 
 
 class SetupScreen(MDScreen, Screen):
@@ -38,7 +44,7 @@ class SetupScreen(MDScreen, Screen):
         self.plr_num = str(int(widget.value))
         game_setup.plr_num = int(widget.value)
 
-        self.max_maf = str((game_setup.plr_num // 2) - 1)  # Sets max mafia value
+        self.max_maf = str((game_setup.plr_num // 2) - 1)  # Sets max mafia val
         print(self.max_maf)
 
     def on_maf_slider_value(self, widget):
@@ -54,8 +60,8 @@ class SetupScreen(MDScreen, Screen):
         game_setup.maf_num = widget.active
         print(str(game_setup.include_det))
 
-    # def on_maf_slider_value(self, widget):
-    #     self.maf_num_val = str(int(widget.value))
+    def on_continue(self, widget):
+        self.maf_num_val = str(int(widget.value))
 
 
 class PlayerScreen(MDScreen, Screen):
@@ -84,8 +90,10 @@ class MafiaApp(MDApp):
         sm.add_widget(PlayerScreen(name='player'))
         sm.add_widget(RoleScreen(name='role'))
         sm.add_widget(GameScreen(name='game'))
+        # Sets up kivy screen manager
 
         return sm
 
 
 MafiaApp().run()
+# Runs application GUI

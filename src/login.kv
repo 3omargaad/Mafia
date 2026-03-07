@@ -6,6 +6,7 @@
         text_size: self.width, None
         halign: "center"
         valign: "center"
+# Popup
 
 <TextInput>
     multiline: False
@@ -13,6 +14,7 @@
     text_size: self.width, None
     halign: "left"
     valign: "center"
+# Default user text input
 
 <Button>
     text_size: self.width, None
@@ -22,10 +24,11 @@
     halign: "center"
     valign: "center"
     size_hint : 0.3, 0.1
+# Default button design
 
 <ScreenOne>:
-    FloatLayout:
-        size: root.width, root.height
+    FloatLayout: # Layout used for login screen
+        size: root.width, root.height # Layout fills the screen
         Label:
             text: "Mafia"
             size_hint: 0.5, None
@@ -34,11 +37,14 @@
             color: "#d73612ff"
             font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
             font_size: "100dp"
+        # "Mafia" title at the top of the screen
+
         Image:
             source: root.main_image
             allow_stretch: True
             size_hint: 0.25, 0.25
             pos_hint: {"center_x": 0.5, "center_y": 0.65}
+        # Image of logo below the title
 
         Label:
             text: "Username: "
@@ -57,6 +63,8 @@
             halign: "left"
             valign: "center"
             pos_hint: {"center_x": 0.55, "center_y" : 0.45}
+        # Username label and text input pair
+
         Label:
             text: "Password: "
             font_name: root.roboto_font
@@ -71,6 +79,9 @@
             multiline: False
             password: True
             pos_hint: {"center_x": 0.55, "center_y" : 0.35}
+        # Password label and text input pair
+
+
         Button:
             text: "Login/Signup"
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
@@ -79,6 +90,8 @@
                 #app.root.current = 'signup'
                 #root.manager.transition.direction = "left"
                 root.accountSetup()
+        # Button to login/signup (currently disabled)
+
         Button:
             text: "Play as Guest"
             font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
@@ -87,3 +100,4 @@
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = 1
                 root.manager.current = 'screen_three'
+        # Button to play as guest (functional)
