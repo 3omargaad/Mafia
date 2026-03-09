@@ -20,7 +20,7 @@ jobs:
 
         - name: Ensure AIDL Exists
           run: |
-            if [ ! -f "$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | sort -V | tail -n 1)/aidl" ]; then
+            if [ ! -f "$HOME/android-sdk/build-tools/$(ls $HOME/android-sdk/build-tools | sort -V | tail -n 1)/aidl" ]; then
               echo "AIDL not found, installing manually."
               sudo apt-get install aidl
             fi
