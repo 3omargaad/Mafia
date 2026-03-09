@@ -44,4 +44,23 @@ jobs:
         else
           echo "No tests to run."
         fi
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: Install Buildozer and dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y python3-pip python3-setuptools python3-wheel python3-venv openjdk-11-jdk
+        pip install buildozer
+    - name: Build APK
+      run: |
+        buildozer -v android debug
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: myapp-debug
+        path: bin/*.apk
 
