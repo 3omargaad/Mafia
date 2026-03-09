@@ -15,10 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - name: Install Android SDK Build Tools
-          run: |
-            yes | sudo sdkmanager --licenses
-            sdkmanager "build-tools;33.0.0" "platform-tools" "platforms;android-33"
         - name: Set up ANDROID_HOME
           run: echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
 
@@ -40,7 +36,7 @@ jobs:
             sudo mv cmdline-tools /usr/local/android-sdk/cmdline-tools/latest
             export PATH=$PATH:/usr/local/android-sdk/cmdline-tools/latest/bin
             yes | sdkmanager --licenses
-            sdkmanager "build-tools;34.0.0" "platforms;android-34"
+            sdkmanager "build-tools;33.0.0" "platform-tools" "platforms;android-33"
             yes | sdkmanager --licenses
 
         - name: Checkout code
