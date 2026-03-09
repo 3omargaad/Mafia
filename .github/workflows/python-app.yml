@@ -15,70 +15,81 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+        - name: Install Android SDK Build-Tools
+          run: |
+            sudo apt-get update
+            sudo apt-get install android-sdk-build-tools
 
-      - name: Install Android SDK build-tools
-        run: |
-
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip -O cmdline-tools.zip
-          unzip cmdline-tools.zip
-          sudo mkdir -p /usr/local/android-sdk/cmdline-tools
-          sudo mv cmdline-tools /usr/local/android-sdk/cmdline-tools/latest
-          export PATH=$PATH:/usr/local/android-sdk/cmdline-tools/latest/bin
-          yes | sdkmanager --licenses
-          sdkmanager "build-tools;34.0.0" "platforms;android-34"
-          yes | sdkmanager --licenses
-
-      - name: Checkout code
-        uses: actions/checkout@v4
+        - name: Ensure AIDL Exists
+          run: |
+            if [ ! -f "$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | sort -V | tail -n 1)/aidl" ]; then
+              echo "AIDL not found, installing manually."
+              sudo apt-get install aidl
+            fi
+  
+        - name: Install Android SDK build-tools
+          run: |
+  
+            sudo apt-get update
+            sudo apt-get install -y wget unzip
+            wget https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip -O cmdline-tools.zip
+            unzip cmdline-tools.zip
+            sudo mkdir -p /usr/local/android-sdk/cmdline-tools
+            sudo mv cmdline-tools /usr/local/android-sdk/cmdline-tools/latest
+            export PATH=$PATH:/usr/local/android-sdk/cmdline-tools/latest/bin
+            yes | sdkmanager --licenses
+            sdkmanager "build-tools;34.0.0" "platforms;android-34"
+            yes | sdkmanager --licenses
+  
+        - name: Checkout code
+          uses: actions/checkout@v4
+          
+        - name: Set up Python 3.11.4
+          uses: actions/setup-python@v3
+          with:
+            python-version: "3.11.4"
+  
+        - name: Install ffmpeg
+          run: sudo apt-get update && sudo apt-get install -y ffmpeg
+  
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install flake8 pytest
+            pip install -r requirements.txt
+  
+        - name: Lint with flake8
+          run: |
+            flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+            flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+  
+        - name: Test with pytest
+          run: |
+            if [ -n "$(ls tests/*.py 2> /dev/null)" ]; then
+              python -m pytest tests/
+            else
+              echo "No tests to run."
+            fi
         
-      - name: Set up Python 3.11.4
-        uses: actions/setup-python@v3
-        with:
-          python-version: "3.11.4"
-
-      - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest
-          pip install -r requirements.txt
-
-      - name: Lint with flake8
-        run: |
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
-      - name: Test with pytest
-        run: |
-          if [ -n "$(ls tests/*.py 2> /dev/null)" ]; then
-            python -m pytest tests/
-          else
-            echo "No tests to run."
-          fi
-      
-      - name: Set up Python for Buildozer
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.8'
-
-      - name: Install Buildozer and dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y python3-pip python3-setuptools python3-wheel python3-venv openjdk-11-jdk
-          pip install buildozer
-
-      - name: Build APK
-        run: |
-          buildozer -v android debug
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: myapp-debug
-          path: bin/*.apk
+        - name: Set up Python for Buildozer
+          uses: actions/setup-python@v3
+          with:
+            python-version: '3.8'
+  
+        - name: Install Buildozer and dependencies
+          run: |
+            sudo apt update
+            sudo apt install -y python3-pip python3-setuptools python3-wheel python3-venv openjdk-11-jdk
+            pip install buildozer
+  
+        - name: Build APK
+          run: |
+            buildozer -v android debug
+  
+        - name: Upload APK artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: myapp-debug
+            path: bin/*.apk
 
 
