@@ -1,3 +1,6 @@
+<BackButton>:
+    disabled: False
+
 <MDCard>:
     orientation: "vertical"
     padding: "8dp"
@@ -6,6 +9,11 @@
     elevation: 5
     border_radius: 20
     radius: [15]
+
+<MDTextField>:
+    size_hint: (0.5, None)
+    padding: "5dp", "5dp"
+    disabled: True
 
 <LoginScreen>:
     name: 'login'
@@ -22,12 +30,14 @@
     MDTextField:
         hint_text: "Username"
         pos_hint: {'center_x':0.5, 'center_y':0.55}
+        disabled: False
         size_hint: (0.5, None)
 
     MDTextField:
         hint_text: "Password"
         password: True
         pos_hint: {'center_x':0.5, 'center_y':0.45}
+        disabled: False
         size_hint: (0.5, None)
 
     
@@ -37,6 +47,9 @@
         pos_hint: {'center_x':0.5, 'center_y':0.275}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
+
+        on_press:
+            root.click()
         on_release: 
             root.account()
 
@@ -46,6 +59,10 @@
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
+
+        on_press:
+            root.click()
+
         on_release:
             root.manager.transition.direction = "left"
             root.manager.current = 'setup'
@@ -133,8 +150,11 @@
     MDRoundFlatIconButton:
         size_hint: (None, None)
         size: (dp(64), dp(64))
-        pos_hint: {"center_x": 0.1, "center_y": 0.9}
+        pos_hint: {"center_x": 0.075, "center_y": 0.95}
         line_color: [0,0,0,0]
+
+        on_press:
+            root.click()
 
         on_release:
             root.manager.transition.direction = "right"
@@ -158,7 +178,12 @@
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
+
+        on_press:
+            root.click()
+
         on_release:
+            root.on_continue(self)
             root.manager.transition.direction = "left"
             root.manager.current = 'player'
             print("Start Game")
@@ -176,26 +201,108 @@
         color: "#F44336" # "#d73612ff"
         font_size: "60dp"
 
+    
+    ScrollView:
+        size: self.size
+    
+        GridLayout:  # Layout for all the game's settings
+            rows: 4
+            cols: 4
+
+            size_hint_y: None
+            height: self.minimum_height
+            width: self.minimum_width
+            spacing: "5dp"
+            padding: "5dp", "150dp", "5dp", "5dp"
+            #position: (0.5, 0.95)
+
+            MDTextField:
+                id: "name1"
+                hint_text: "Player #1"
+
+            MDTextField:
+                id: "name2"
+                hint_text: "Player #2"
+
+            MDTextField:
+                id: "name3"
+                hint_text: "Player #3"
+
+            MDTextField:
+                id: "name4"
+                hint_text: "Player #4"
+
+            MDTextField:
+                id: "name5"
+                hint_text: "Player #5"
+
+            MDTextField:
+                id: "name6"
+                hint_text: "Player #6"
+
+            MDTextField:
+                id: "name7"
+                hint_text: "Player #7"
+
+            MDTextField:
+                id: "name8"
+                hint_text: "Player #8"
+
+            MDTextField:
+                id: "name9"
+                hint_text: "Player #9"
+
+            MDTextField:
+                id: "name10"
+                hint_text: "Player #10"
+
+            MDTextField:
+                id: "name11"
+                hint_text: "Player #11"
+
+            MDTextField:
+                id: "name12"
+                hint_text: "Player #12"
+
+            MDTextField:
+                id: "name13"
+                hint_text: "Player #13"
+
+            MDTextField:
+                id: "name14"
+                hint_text: "Player #14"
+
+            MDTextField:
+                id: "name15"
+                hint_text: "Player #15"
+
+            MDTextField:
+                id: "name16"
+                hint_text: "Player #16"
+
     MDRoundFlatIconButton:
-        icon: "arrow-left-bold-circle-outline"
-        icon_align:"center"
-        #font_name: root.press_font
-        pos_hint: {'center_x':0.15, 'center_y':0.85}
-        size_hint: (0.05, 0.05)
+        size_hint: (None, None)
+        size: (dp(64), dp(64))
+        pos_hint: {"center_x": 0.075, "center_y": 0.95}
+        line_color: [0,0,0,0]
+
+        on_press:
+            root.click()
+
         on_release:
             root.manager.transition.direction = "right"
             root.manager.current = 'setup'
-            print("e")
-    
-    MDTextField:
-        hint_text: "Player #1"
-        pos_hint: {'center_x':0.5, 'center_y':0.55}
-        size_hint: (0.5, None)
-    
-    MDTextField:
-        hint_text: "Player #2"
-        pos_hint: {'center_x':0.5, 'center_y':0.35}
-        size_hint: (0.5, None)
+            print("Start Game")
+
+        MDIcon:
+            icon_size: dp(128)
+            theme_text_color: "Custom"  # Set text color to custom
+            text_color: "#F44336"  # Use accent color for the icon
+            icon: "arrow-left-bold-circle-outline"
+            icon_align: "center"
+            size_hint: (None, None)
+            size: (dp(64), dp(64))  # Set a size for the icon
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center the icon
 
     MDRectangleFlatButton:
         text: "Play"
@@ -203,6 +310,10 @@
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
+
+        on_press:
+            root.click()
+
         on_release:
             root.manager.transition.direction = "left"
             root.manager.current = 'role'
@@ -215,6 +326,10 @@
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
+
+        on_press:
+            root.click()
+
         on_release:
             root.manager.transition.direction = "left"
             root.manager.current = 'game'

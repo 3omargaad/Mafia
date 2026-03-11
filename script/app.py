@@ -12,7 +12,9 @@ from kivymd.uix.dialog import MDDialog
 # Imports kivymd sub-modules
 
 from files import get_path
+from concurrency import run_concurrent
 
+import audio
 import game_setup
 
 require('2.3.1')
@@ -32,6 +34,9 @@ class LoginScreen(MDScreen, Screen):
         )
         popup.open()
     # Creates a popup window to show account creation is unavaiable
+
+    def click(self):
+        run_concurrent(audio.playAudio, audio.UI_CLICK)
 
 
 class SetupScreen(MDScreen, Screen):
@@ -61,19 +66,32 @@ class SetupScreen(MDScreen, Screen):
         print(str(game_setup.include_det))
 
     def on_continue(self, widget):
-        self.maf_num_val = str(int(widget.value))
+        print(self.ids)
+        print(game_setup.plr_num)
+
+    def click(self):
+        run_concurrent(audio.playAudio, audio.UI_CLICK)
 
 
 class PlayerScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
 
+    def click(self):
+        run_concurrent(audio.playAudio, audio.UI_CLICK)
+
 
 class RoleScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
 
+    def click(self):
+        run_concurrent(audio.playAudio, audio.UI_CLICK)
+
 
 class GameScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+
+    def click(self):
+        run_concurrent(audio.playAudio, audio.UI_CLICK)
 
 
 class MafiaApp(MDApp):

@@ -2,6 +2,7 @@
     size_hint_x: None
     width: 300
     disabled: False
+# Creates a template for the Slider with default attributes
 
 <TextInput>
     multiline: False
@@ -9,6 +10,7 @@
     text_size: self.width, None
     halign: "left"
     valign: "center"
+# Creates a template for the TextInput with default attributes
 
 <ScreenThree>:
     FloatLayout:
@@ -16,54 +18,47 @@
             text: "Game Setup"
             size_hint: 0.5, None
             height: 50
-            pos_hint: {"center_x": 0.5, "center_y": 0.95}
-            #color: "#7b9fecff"
+            pos_hint: {"center_x": 0.5, "center_y": 0.95}  # Positions at the top-center
             color: "#d73612ff"
-            font_name: root.rye_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
-            pos_hint: {"center_x": 0.5, "center_y": 0.95}
-            #color: "#7b9fecff"
-            color: "#d73612ff"
-            font_name: root.rye_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
-            font_size: "50dp"
+            font_name: root.rye_font  # Font Path "assets\\fonts\\RobotoSlab-Medium.ttf"
+            font_size: "50dp"  # Large Heading
+        # "Game Setup" Title
             
-            
-        GridLayout:
-            rows: 10
+        GridLayout:  # Layout for all the game's settings
             rows: 10
             cols: 3
+            # Layout dimensions 10x3
+
             row_default_height: '40dp'
             row_force_default: True
             size_hint: None, None
             size: self.minimum_size
-            pos_hint: {"center_x": 0.5, "center_y": 0.5}
-            spacing: 130, 5   # (horizontal, vertical) space between widgets
-            pos_hint: {"center_x": 0.5, "center_y": 0.5}
-            spacing: 130, 5   # (horizontal, vertical) space between widgets
-            padding: 20       # space around the edges of the GridLayout
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Positioned at the center
+            spacing: 130, 5   # (horizontal, vertical) Space between widgets
+            padding: 20       # Space around the edges of the GridLayout
 
-            Label:
+            Label:  #Label for number of players
                 text: "No. Players"
                 size_hint: 0.5, None
                 height: 50
-                #pos_hint: {"center_x": 0.15, "center_y": 0.55}
                 color: "#e0e0e0ff"
-                font_name: root.roboto_font #"assets\\fonts\\RobotoSlab-Medium.ttf"
+                font_name: root.roboto_font  # Font Path "assets\\fonts\\RobotoSlab-Medium.ttf"
                 font_size: "22dp"   
-            Slider:
+            Slider:  # Slider for the number of players
                 id: plr_num_slider
                 pos: "400dp", "100dp"
-                #pos_hint: {"center_x": 0.35, "center_y": 0.55}
-                min: 4
-                max: 15
-                value: 4
-                on_value: root.on_plr_slider_value(self)
-            Label:
+                min: 4  # Minimum no. players
+                max: 15  # Maximum no. players
+                value: 4  # Default value
+                on_value: root.on_plr_slider_value(self)  # Function to adjust value
+            Label:  # Label to shows the number as slider adjusts
                 text: root.plr_num_val
                 font: "200dp"
-                #pos_hint: {"center_x": 0.475, "center_y": 0.55}
                 color: "#e0e0e0ff"
-                font_name: root.press_font #"assets\\fonts\\PressStart2P-Regular.ttf"
+                font_name: root.press_font  # Font Path "assets\\fonts\\PressStart2P-Regular.ttf"
                 font_size: "25dp"
+
+                
             ###########################################################################
             Label:
                 text: "No. Mafia"

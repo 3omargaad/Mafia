@@ -27,5 +27,3 @@ pytest             >= 9.0.2
 requests           >= 2.32.5
 setuptools         >= 66.1.1
 urllib3            >= 2.6.3
-buildozer
-Cython
