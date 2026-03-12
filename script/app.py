@@ -2,6 +2,7 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.properties import StringProperty
 from kivy import require
+from kivy.animation import Animation
 # Imports kivy sub-modules
 
 from kivymd.uix.screenmanager import ScreenManager
@@ -16,6 +17,7 @@ from concurrency import run_concurrent
 
 import audio
 import game_setup
+import game_logic
 
 require('2.3.1')
 
@@ -35,6 +37,12 @@ class LoginScreen(MDScreen, Screen):
         popup.open()
     # Creates a popup window to show account creation is unavaiable
 
+    def hover_on(self, widget):
+        widget.bold = True
+
+    def hover_off(self, widget):
+        widget.bold = False
+
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)
 
@@ -44,6 +52,21 @@ class SetupScreen(MDScreen, Screen):
     plr_num = StringProperty("4")
     maf_num = StringProperty("1")
     max_maf = StringProperty("1")
+
+    def hover_on(self, widget):
+        widget.bold = True
+
+    def hover_off(self, widget):
+        widget.bold = False
+
+    def slide(self):
+        run_concurrent(audio.playAudio, audio.UI_POP)
+
+    def toggle(self, widget):
+        if widget.active:
+            run_concurrent(audio.playAudio, audio.UI_ENABLE)
+        else:
+            run_concurrent(audio.playAudio, audio.UI_DISABLE)
 
     def on_plr_slider_value(self, widget):
         self.plr_num = str(int(widget.value))
@@ -76,12 +99,45 @@ class SetupScreen(MDScreen, Screen):
 class PlayerScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
 
+    def on_enter(self):
+        print(self.ids)
+        fadein = Animation(opacity=1)
+        for i in range(game_setup.plr_num):
+            text_field = self.ids["name" + str(i+1)]
+            text_field.disabled = False
+            fadein.start(text_field)
+            # self.ids["name" + str(i+1)].opacity = 1
+
+    def create_players(self):
+        pass
+
+    def on_leave(self):
+        for i in range(game_setup.plr_num):
+            plr_name = self.ids["name" + str(i+1)].text
+            print(plr_name)
+            game_logic.create_player(plr_name)
+
+        for i in range(16):
+            self.ids["name" + str(i+1)].disabled = True
+            self.ids["name" + str(i+1)].opacity = 0
+
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)
 
 
 class RoleScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+
+    def on_enter(self):
+        player_screen = self.manager.get_screen('player')
+        # game_logic.wait(5)
+        print(game_setup.players)
+        for i in range(game_setup.plr_num):
+            n = str(i+1)
+            self.ids["name" + n].text = player_screen.ids["name" + n].text
+            self.ids["icon" + n].text = player_screen.ids["name" + n].text[0]
+        # for i in range(game_setup.plr_num):
+        #     self.ids["name" + str(i+1)].disabled = False
 
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)

@@ -1,6 +1,24 @@
 <BackButton>:
     disabled: False
 
+<MDTextField>:
+    max_text_length: 20
+
+
+<MDRectangleFlatButton>:
+    allow_hover: True
+    hover_visible: True
+    on_press:
+        self.parent.click()
+#
+    #on_leave:
+    #    self.parent.hover_off()
+
+<MDSwitch>:
+    on_active: 
+        self.parent.toggle(self)
+
+
 <MDCard>:
     orientation: "vertical"
     padding: "8dp"
@@ -14,6 +32,7 @@
     size_hint: (0.5, None)
     padding: "5dp", "5dp"
     disabled: True
+    opacity: 0
 
 <LoginScreen>:
     name: 'login'
@@ -32,6 +51,8 @@
         pos_hint: {'center_x':0.5, 'center_y':0.55}
         disabled: False
         size_hint: (0.5, None)
+        opacity: 1
+
 
     MDTextField:
         hint_text: "Password"
@@ -39,6 +60,7 @@
         pos_hint: {'center_x':0.5, 'center_y':0.45}
         disabled: False
         size_hint: (0.5, None)
+        opacity: 1
 
     
     MDRectangleFlatButton:
@@ -48,8 +70,6 @@
         size_hint: (0.4, 0.1)
         font_size: "20dp"
 
-        on_press:
-            root.click()
         on_release: 
             root.account()
 
@@ -59,9 +79,6 @@
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
-
-        on_press:
-            root.click()
 
         on_release:
             root.manager.transition.direction = "left"
@@ -89,8 +106,11 @@
         pos_hint: {'center_x':0.6, 'center_y':0.675}
         min: 4
         max: 16
+        step: 1
         size_hint: (0.4, None)
-        on_value: root.on_plr_slider_value(self)
+        on_value: 
+            root.slide()
+            root.on_plr_slider_value(self)
 
     MDLabel:
         text: "No. Mafia (" + str(root.maf_num) + ")"
@@ -101,6 +121,7 @@
         pos_hint: {'center_x':0.6, 'center_y':0.575}
         min: 1
         max: root.max_maf
+        step: 1
         size_hint: (0.4, None)
         on_value: root.on_maf_slider_value(self)
 
@@ -111,7 +132,8 @@
 
     MDSwitch:
         pos_hint: {'center_x':0.325, 'center_y':0.45}
-        on_active: root.on_include_doc_switch_active(self)
+        on_active:
+            root.on_include_doc_switch_active(self)
 
     
     MDLabel:
@@ -121,7 +143,8 @@
     
     MDSwitch:
         pos_hint: {'center_x':0.325, 'center_y':0.375}
-        on_active: root.on_include_det_switch_active(self)
+        on_active:
+            root.on_include_det_switch_active(self)
 
     MDLabel:
         text: "Anonymous Vote?"
@@ -130,6 +153,7 @@
     
     MDSwitch:
         pos_hint: {'center_x':0.325, 'center_y':0.3}
+        on_active:
 
     MDLabel:
         text: "Skip Vote?"
@@ -138,6 +162,7 @@
     
     MDSwitch:
         pos_hint: {'center_x':0.75, 'center_y':0.45}
+        on_active:
 
     MDLabel:
         text: "Execute If Tie?"
@@ -146,15 +171,13 @@
 
     MDSwitch:
         pos_hint: {'center_x':0.75, 'center_y':0.375}
+        on_active:
     
     MDRoundFlatIconButton:
         size_hint: (None, None)
         size: (dp(64), dp(64))
         pos_hint: {"center_x": 0.075, "center_y": 0.95}
         line_color: [0,0,0,0]
-
-        on_press:
-            root.click()
 
         on_release:
             root.manager.transition.direction = "right"
@@ -179,9 +202,6 @@
         size_hint: (0.4, 0.1)
         font_size: "20dp"
 
-        on_press:
-            root.click()
-
         on_release:
             root.on_continue(self)
             root.manager.transition.direction = "left"
@@ -203,81 +223,85 @@
 
     
     ScrollView:
-        size: self.size
-    
+        #size: self.size
+        adaptive_height: True
+        halign: "center"
+        valign: "top"
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        size_hint: (0.9, 0.5)
         GridLayout:  # Layout for all the game's settings
-            rows: 4
-            cols: 4
+            rows: 8
+            cols: 2
 
             size_hint_y: None
             height: self.minimum_height
             width: self.minimum_width
             spacing: "5dp"
-            padding: "5dp", "150dp", "5dp", "5dp"
+            padding: "5dp", "5dp", "5dp", "5dp"
             #position: (0.5, 0.95)
 
             MDTextField:
-                id: "name1"
+                id: name1
                 hint_text: "Player #1"
 
             MDTextField:
-                id: "name2"
+                id: name2
                 hint_text: "Player #2"
 
             MDTextField:
-                id: "name3"
+                id: name3
                 hint_text: "Player #3"
 
             MDTextField:
-                id: "name4"
+                id: name4
                 hint_text: "Player #4"
 
             MDTextField:
-                id: "name5"
+                id: name5
                 hint_text: "Player #5"
 
             MDTextField:
-                id: "name6"
+                id: name6
                 hint_text: "Player #6"
 
             MDTextField:
-                id: "name7"
+                id: name7
                 hint_text: "Player #7"
 
             MDTextField:
-                id: "name8"
+                id: name8
                 hint_text: "Player #8"
 
             MDTextField:
-                id: "name9"
+                id: name9
                 hint_text: "Player #9"
 
             MDTextField:
-                id: "name10"
+                id: name10
                 hint_text: "Player #10"
 
             MDTextField:
-                id: "name11"
+                id: name11
                 hint_text: "Player #11"
 
             MDTextField:
-                id: "name12"
+                id: name12
                 hint_text: "Player #12"
 
             MDTextField:
-                id: "name13"
+                id: name13
                 hint_text: "Player #13"
 
             MDTextField:
-                id: "name14"
+                id: name14
                 hint_text: "Player #14"
 
             MDTextField:
-                id: "name15"
+                id: name15
                 hint_text: "Player #15"
 
             MDTextField:
-                id: "name16"
+                id: name16
                 hint_text: "Player #16"
 
     MDRoundFlatIconButton:
@@ -285,9 +309,6 @@
         size: (dp(64), dp(64))
         pos_hint: {"center_x": 0.075, "center_y": 0.95}
         line_color: [0,0,0,0]
-
-        on_press:
-            root.click()
 
         on_release:
             root.manager.transition.direction = "right"
@@ -311,29 +332,197 @@
         size_hint: (0.4, 0.1)
         font_size: "20dp"
 
-        on_press:
-            root.click()
-
         on_release:
             root.manager.transition.direction = "left"
             root.manager.current = 'role'
             print("Start Game")
 
 <RoleScreen>:
-    MDRectangleFlatButton:
-        text: "Play"
-        #font_name: root.press_font
-        pos_hint: {'center_x':0.5, 'center_y':0.15}
-        size_hint: (0.4, 0.1)
-        font_size: "20dp"
+    ScrollView:
+        size: self.size
+        GridLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            width: self.minimum_width
+            cols: 2
+            spacing: "20dp"
+            padding: "20dp"
 
-        on_press:
-            root.click()
+            MDCard:
+                id: card1
+                MDCard:
+                    size_hint: None, None
+                    size: "80dp", "80dp"
+                    radius: 100
+                    pos_hint: {'center_x':0.5, 'center_y':0.6}
+                    MDLabel:
+                        id: icon1
+                        elevation: 2
+                        shadow_softness: 4
+                        shadow_offset: 0, -6
+                        font_name: root.rye_font
+                        halign: "center"
+                        valign: "center"
+                        font_size: "60dp"
+                        color: "#F44336"
+                MDLabel:
+                    id: name1
+                    text: "Player #1"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.4}
+                    size_hint: (None, None)
+                #MDLabel:
+                #    text: "Alive"
+                #    color: "#36F456"
+                #    #align: "center"
+                #    pos_hint: {'center_x':0.5, 'center_y':0.25}
+                #    size_hint: (None, None)
 
-        on_release:
-            root.manager.transition.direction = "left"
-            root.manager.current = 'game'
-            print("Start Game")
+            MDCard:
+                id: card2
+                MDCard:
+                    size_hint: None, None
+                    size: "80dp", "80dp"
+                    radius: 100
+                    pos_hint: {'center_x':0.5, 'center_y':0.6}
+                    MDLabel:
+                        id: icon2
+                        elevation: 2
+                        shadow_softness: 4
+                        shadow_offset: 0, -6
+                        font_name: root.rye_font
+                        halign: "center"
+                        valign: "center"
+                        font_size: "60dp"
+                        color: "#F44336"
+
+                MDLabel:
+                    id: name2
+                    text: "Player #2"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.4}
+                    size_hint: (None, None)
+                #MDLabel:
+                #    text: "Dead"
+                #    color: "#F44336"
+                #    #align: "center"
+                #    pos_hint: {'center_x':0.5, 'center_y':0.25}
+                #    size_hint: (None, None)
+
+            MDCard:
+                id: card3
+                MDCard:
+                    size_hint: None, None
+                    size: "80dp", "80dp"
+                    radius: 100
+                    pos_hint: {'center_x':0.5, 'center_y':0.6}
+                    MDLabel:
+                        id: icon3
+                        elevation: 2
+                        shadow_softness: 4
+                        shadow_offset: 0, -6
+                        font_name: root.rye_font
+                        halign: "center"
+                        valign: "center"
+                        font_size: "60dp"
+                        color: "#F44336"
+                MDLabel:
+                    id: name3
+                    text: "Player #3"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.4}
+                    size_hint: (None, None)
+
+            MDCard:
+                id: card4
+                MDCard:
+                    size_hint: None, None
+                    size: "80dp", "80dp"
+                    radius: 100
+                    pos_hint: {'center_x':0.5, 'center_y':0.6}
+                    MDLabel:
+                        id: icon4
+                        elevation: 2
+                        shadow_softness: 4
+                        shadow_offset: 0, -6
+                        font_name: root.rye_font
+                        halign: "center"
+                        valign: "center"
+                        font_size: "60dp"
+                        color: "#F44336"
+
+                MDLabel:
+                    id: name4
+                    text: "Player #4"
+                    #align: "center"
+                    pos_hint: {'center_x':0.5, 'center_y':0.4}
+                    size_hint: (None, None)
+            MDCard:
+                id: card5
+
+            MDCard:
+                id: card6
+            MDCard:
+                id: card7
+
+            MDCard:
+                id: card8
+            MDCard:
+                id: card9
+
+            MDCard:
+                id: card10
+            MDCard:
+                id: card11
+
+            MDCard:
+                id: card12
+            MDCard:
+                id: card13
+
+            MDCard:
+                id: card14
+            MDCard:
+                id: card15
+            
+            MDCard:
+                id: card16
+
+    #MDLabel:
+    #    id: card1
+    #    text: "Coming soon"
+    #    pos_hint: {'center_x':0.5, 'center_y':0.5}
+    #    size_hint: (0.6, None)
+#
+    #MDLabel:
+    #    id: card2
+    #    text: "Coming soon"
+    #    pos_hint: {'center_x':0.5, 'center_y':0.4}
+    #    size_hint: (0.6, None)
+#
+    #MDLabel:
+    #    id: card3
+    #    text: "Coming soon"
+    #    pos_hint: {'center_x':0.5, 'center_y':0.3}
+    #    size_hint: (0.6, None)
+#
+    #MDLabel:
+    #    id: card4
+    #    text: "Coming soon"
+    #    pos_hint: {'center_x':0.5, 'center_y':0.2}
+    #    size_hint: (0.6, None)
+#
+    #MDRectangleFlatButton:
+    #    text: "Play"
+    #    #font_name: root.press_font
+    #    pos_hint: {'center_x':0.5, 'center_y':0.15}
+    #    size_hint: (0.4, 0.1)
+    #    font_size: "20dp"
+#
+    #    on_release:
+    #        root.manager.transition.direction = "left"
+    #        root.manager.current = 'game'
+    #        print("Start Game")
 
 <GameScreen>:
     ScrollView:

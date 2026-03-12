@@ -10,6 +10,7 @@ host_name = "ChadGPT"  # Default host name
 host_accent = "uk"  # Default host accent
 
 players = []  # List of players in game
+living_players = []  # List of living players in game
 skip_vote = 0  # Amount of people voting skip (if applicable)
 good_team_num = 3  # Default number of good team members
 bad_team_num = 1  # Default number of bad team members
