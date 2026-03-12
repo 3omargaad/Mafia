@@ -23,7 +23,7 @@
     orientation: "vertical"
     padding: "8dp"
     size_hint: 1, None
-    height: "210dp"
+    height: "120dp"
     elevation: 5
     border_radius: 20
     radius: [15]
@@ -338,155 +338,252 @@
             print("Start Game")
 
 <RoleScreen>:
+    MDLabel:
+        text: "Roles"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.7, None)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "60dp"
+    
+    MDRoundFlatIconButton:
+        size_hint: (None, None)
+        size: (dp(64), dp(64))
+        pos_hint: {"center_x": 0.075, "center_y": 0.95}
+        line_color: [0,0,0,0]
+
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.current = 'player'
+            print("Start Game")
+
+        MDIcon:
+            icon_size: dp(128)
+            theme_text_color: "Custom"  # Set text color to custom
+            text_color: "#F44336"  # Use accent color for the icon
+            icon: "arrow-left-bold-circle-outline"
+            icon_align: "center"
+            size_hint: (None, None)
+            size: (dp(64), dp(64))  # Set a size for the icon
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center the icon
+    
     ScrollView:
-        size: self.size
+        adaptive_height: True
+        halign: "center"
+        valign: "top"
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        size_hint: (0.9, 0.5)
+
         GridLayout:
+            rows: 16
+            cols: 1
+
             size_hint_y: None
             height: self.minimum_height
             width: self.minimum_width
-            cols: 2
             spacing: "20dp"
             padding: "20dp"
+            TwoLineAvatarListItem:
+                id: name1
+                text: "Tap to Reveal"
+                secondary_text: "Tap to Reveal"
 
-            MDCard:
-                id: card1
-                MDCard:
-                    size_hint: None, None
-                    size: "80dp", "80dp"
-                    radius: 100
-                    pos_hint: {'center_x':0.5, 'center_y':0.6}
-                    MDLabel:
-                        id: icon1
-                        elevation: 2
-                        shadow_softness: 4
-                        shadow_offset: 0, -6
-                        font_name: root.rye_font
-                        halign: "center"
-                        valign: "center"
-                        font_size: "60dp"
-                        color: "#F44336"
-                MDLabel:
-                    id: name1
-                    text: "Player #1"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.4}
-                    size_hint: (None, None)
-                #MDLabel:
-                #    text: "Alive"
-                #    color: "#36F456"
-                #    #align: "center"
-                #    pos_hint: {'center_x':0.5, 'center_y':0.25}
-                #    size_hint: (None, None)
-
-            MDCard:
-                id: card2
-                MDCard:
-                    size_hint: None, None
-                    size: "80dp", "80dp"
-                    radius: 100
-                    pos_hint: {'center_x':0.5, 'center_y':0.6}
-                    MDLabel:
-                        id: icon2
-                        elevation: 2
-                        shadow_softness: 4
-                        shadow_offset: 0, -6
-                        font_name: root.rye_font
-                        halign: "center"
-                        valign: "center"
-                        font_size: "60dp"
-                        color: "#F44336"
-
-                MDLabel:
-                    id: name2
-                    text: "Player #2"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.4}
-                    size_hint: (None, None)
-                #MDLabel:
-                #    text: "Dead"
-                #    color: "#F44336"
-                #    #align: "center"
-                #    pos_hint: {'center_x':0.5, 'center_y':0.25}
-                #    size_hint: (None, None)
-
-            MDCard:
-                id: card3
-                MDCard:
-                    size_hint: None, None
-                    size: "80dp", "80dp"
-                    radius: 100
-                    pos_hint: {'center_x':0.5, 'center_y':0.6}
-                    MDLabel:
-                        id: icon3
-                        elevation: 2
-                        shadow_softness: 4
-                        shadow_offset: 0, -6
-                        font_name: root.rye_font
-                        halign: "center"
-                        valign: "center"
-                        font_size: "60dp"
-                        color: "#F44336"
-                MDLabel:
-                    id: name3
-                    text: "Player #3"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.4}
-                    size_hint: (None, None)
-
-            MDCard:
-                id: card4
-                MDCard:
-                    size_hint: None, None
-                    size: "80dp", "80dp"
-                    radius: 100
-                    pos_hint: {'center_x':0.5, 'center_y':0.6}
-                    MDLabel:
-                        id: icon4
-                        elevation: 2
-                        shadow_softness: 4
-                        shadow_offset: 0, -6
-                        font_name: root.rye_font
-                        halign: "center"
-                        valign: "center"
-                        font_size: "60dp"
-                        color: "#F44336"
-
-                MDLabel:
-                    id: name4
-                    text: "Player #4"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.4}
-                    size_hint: (None, None)
-            MDCard:
-                id: card5
-
-            MDCard:
-                id: card6
-            MDCard:
-                id: card7
-
-            MDCard:
-                id: card8
-            MDCard:
-                id: card9
-
-            MDCard:
-                id: card10
-            MDCard:
-                id: card11
-
-            MDCard:
-                id: card12
-            MDCard:
-                id: card13
-
-            MDCard:
-                id: card14
-            MDCard:
-                id: card15
+                IconLeftWidget:
+                    icon_size: dp(32)
+                    id: icon1
+                    theme_text_color: "Custom"  # Set text color to custom
+                    text_color: "#F44336"  # Use accent color for the icon
+                    icon: "alpha-a-circle-outline"
             
-            MDCard:
-                id: card16
+            TwoLineAvatarListItem:
+                id: name2
+                text: "Tap to Reveal"
+                secondary_text: "Tap to Reveal"
+
+                IconLeftWidget:
+                    icon_size: dp(32)
+                    id: icon2
+                    theme_text_color: "Custom"  # Set text color to custom
+                    text_color: "#F44336"  # Use accent color for the icon
+                    icon: "alpha-b-circle-outline"
+            
+            TwoLineAvatarListItem:
+                id: name3
+                text: "Tap to Reveal"
+                secondary_text: "Tap to Reveal"
+
+                IconLeftWidget:
+                    icon_size: dp(32)
+                    id: icon3
+                    theme_text_color: "Custom"  # Set text color to custom
+                    text_color: "#F44336"  # Use accent color for the icon
+                    icon: "alpha-c-circle-outline"
+            
+            TwoLineAvatarListItem:
+                id: name4
+                text: "Tap to Reveal"
+                secondary_text: "Tap to Reveal"
+
+                IconLeftWidget:
+                    icon_size: dp(32)
+                    id: icon4
+                    theme_text_color: "Custom"  # Set text color to custom
+                    text_color: "#F44336"  # Use accent color for the icon
+                    icon: "alpha-d-circle-outline"
+
+
+            #MDCard:
+            #    id: card1
+            #    MDCard:
+            #        size_hint: None, None
+            #        size: "80dp", "80dp"
+            #        radius: 100
+            #        pos_hint: {'center_x':0.5, 'center_y':0.6}
+            #        MDLabel:
+            #            id: icon1
+            #            elevation: 2
+            #            shadow_softness: 4
+            #            shadow_offset: 0, -6
+            #            font_name: root.rye_font
+            #            halign: "center"
+            #            valign: "center"
+            #            font_size: "60dp"
+            #            color: "#F44336"
+            #    MDLabel:
+            #        id: name1
+            #        text: "Player #1"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.4}
+            #        size_hint: (None, None)
+            #    MDRectangleFlatButton:
+            #        text: "Reveal"
+            #        #font_name: root.press_font
+            #        pos_hint: {'center_x':0.5, 'center_y':0.15}
+            #        size_hint: (0.4, 0.1)
+            #        font_size: "20dp"
+#
+            #        on_release:
+            #            root.manager.transition.direction = "left"
+            #            root.manager.current = 'role'
+            #            print("Start Game")
+#
+            #    #MDLabel:
+            #    #    text: "Alive"
+            #    #    color: "#36F456"
+            #    #    #align: "center"
+            #    #    pos_hint: {'center_x':0.5, 'center_y':0.25}
+            #    #    size_hint: (None, None)
+#
+            #MDCard:
+            #    id: card2
+            #    MDCard:
+            #        size_hint: None, None
+            #        size: "80dp", "80dp"
+            #        radius: 100
+            #        pos_hint: {'center_x':0.5, 'center_y':0.6}
+            #        MDLabel:
+            #            id: icon2
+            #            elevation: 2
+            #            shadow_softness: 4
+            #            shadow_offset: 0, -6
+            #            font_name: root.rye_font
+            #            halign: "center"
+            #            valign: "center"
+            #            font_size: "60dp"
+            #            color: "#F44336"
+#
+            #    MDLabel:
+            #        id: name2
+            #        text: "Player #2"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.4}
+            #        size_hint: (None, None)
+            #    #MDLabel:
+            #    #    text: "Dead"
+            #    #    color: "#F44336"
+            #    #    #align: "center"
+            #    #    pos_hint: {'center_x':0.5, 'center_y':0.25}
+            #    #    size_hint: (None, None)
+#
+            #MDCard:
+            #    id: card3
+            #    MDCard:
+            #        size_hint: None, None
+            #        size: "80dp", "80dp"
+            #        radius: 100
+            #        pos_hint: {'center_x':0.5, 'center_y':0.6}
+            #        MDLabel:
+            #            id: icon3
+            #            elevation: 2
+            #            shadow_softness: 4
+            #            shadow_offset: 0, -6
+            #            font_name: root.rye_font
+            #            halign: "center"
+            #            valign: "center"
+            #            font_size: "60dp"
+            #            color: "#F44336"
+            #    MDLabel:
+            #        id: name3
+            #        text: "Player #3"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.4}
+            #        size_hint: (None, None)
+#
+            #MDCard:
+            #    id: card4
+            #    MDCard:
+            #        size_hint: None, None
+            #        size: "80dp", "80dp"
+            #        radius: 100
+            #        pos_hint: {'center_x':0.5, 'center_y':0.6}
+            #        MDLabel:
+            #            id: icon4
+            #            elevation: 2
+            #            shadow_softness: 4
+            #            shadow_offset: 0, -6
+            #            font_name: root.rye_font
+            #            halign: "center"
+            #            valign: "center"
+            #            font_size: "60dp"
+            #            color: "#F44336"
+#
+            #    MDLabel:
+            #        id: name4
+            #        text: "Player #4"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.4}
+            #        size_hint: (None, None)
+            #MDCard:
+            #    id: card5
+#
+            #MDCard:
+            #    id: card6
+            #MDCard:
+            #    id: card7
+#
+            #MDCard:
+            #    id: card8
+            #MDCard:
+            #    id: card9
+#
+            #MDCard:
+            #    id: card10
+            #MDCard:
+            #    id: card11
+#
+            #MDCard:
+            #    id: card12
+            #MDCard:
+            #    id: card13
+#
+            #MDCard:
+            #    id: card14
+            #MDCard:
+            #    id: card15
+            #
+            #MDCard:
+            #    id: card16
 
     #MDLabel:
     #    id: card1

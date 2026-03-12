@@ -134,8 +134,9 @@ class RoleScreen(MDScreen, Screen):
         print(game_setup.players)
         for i in range(game_setup.plr_num):
             n = str(i+1)
+            initial = player_screen.ids["name" + n].text[0].lower()
             self.ids["name" + n].text = player_screen.ids["name" + n].text
-            self.ids["icon" + n].text = player_screen.ids["name" + n].text[0]
+            self.ids["icon" + n].icon = "alpha-" + initial + "-circle-outline"
         # for i in range(game_setup.plr_num):
         #     self.ids["name" + str(i+1)].disabled = False
 
