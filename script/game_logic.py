@@ -28,9 +28,9 @@ def assign_mafia():
         while True:
             mafiaPlayer = choice(game_setup.players)
             if mafiaPlayer.role != "Mafia":
+                mafiaPlayer.role = "Mafia"
+                mafiaPlayer.team = "Bad"
                 break
-        mafiaPlayer.role = "Mafia"
-        mafiaPlayer.team = "Bad"
 
     # Chooses Player(s) as mafia
 
@@ -40,9 +40,8 @@ def assign_doctor():
         while True:
             doctorPlayer = choice(game_setup.players)
             if doctorPlayer.role != "Mafia":
+                doctorPlayer.role = "Doctor"
                 break
-
-        doctorPlayer.role = "Doctor"
 
     # Chooses Player as doctor
 
@@ -52,9 +51,14 @@ def assign_detective():
         while True:
             detectivePlayer = choice(game_setup.players)
             if detectivePlayer.role not in ("Mafia", "Doctor"):
+                detectivePlayer.role = "Detective"
                 break
 
-        detectivePlayer.role = "Detective"
+
+def assign_roles():
+    assign_mafia()
+    assign_doctor()
+    assign_detective()
 
 
 def wait(t):

@@ -144,6 +144,11 @@ class PlayerScreen(MDScreen, Screen):
             plr_name = self.ids["name" + str(i+1)].text
             print(plr_name)
             game_logic.create_player(plr_name)
+            print(game_setup.players)
+        game_logic.assign_roles()
+
+        for plr in game_setup.players:
+            print(plr.name + "|" + plr.role)
 
         for i in range(16):
             self.ids["name" + str(i+1)].disabled = True
@@ -158,7 +163,6 @@ class RoleScreen(MDScreen, Screen):
 
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
-        # game_logic.wait(5)
         print(game_setup.players)
         for i in range(game_setup.plr_num):
             alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -174,7 +178,7 @@ class RoleScreen(MDScreen, Screen):
 
     def show_role(self, card):
         print("Pressed")
-
+        print(card.value)
         close_btn = MDFlatButton(
             text="Finish",
             theme_text_color="Custom",
@@ -182,7 +186,7 @@ class RoleScreen(MDScreen, Screen):
         )
 
         popup = MDDialog(
-            title='You are [Role]',
+            title='You are ' + game_setup.players[int(card.value) - 1].role,
             text="[Desc.]. Once this tab closes it won't open again.",
             auto_dismiss=False,
             buttons=[close_btn],
