@@ -2,7 +2,7 @@
     disabled: False
 
 <TwoLineAvatarListItem>:
-    on_release: print("Clicked!")
+    on_release: self.parent.parent.parent.show_role(self)
 
 
 <MDTextField>:
@@ -372,6 +372,20 @@
             size: (dp(64), dp(64))  # Set a size for the icon
             pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center the icon
     
+    MDRectangleFlatButton:
+        text: "Play"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+        disabled: True
+
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = 'role'
+            print("Start Game")
+
+
     ScrollView:
         adaptive_height: True
         halign: "center"
@@ -392,7 +406,6 @@
                 id: name1
                 text: "Tap to Reveal"
                 secondary_text: "Tap to Reveal"
-
                 IconLeftWidget:
                     icon_size: dp(32)
                     id: icon1

@@ -14,6 +14,7 @@ from kivymd.uix.screen import Screen
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
 # Imports kivymd sub-modules
 
 from kivy_gradient import Gradient
@@ -166,6 +167,29 @@ class RoleScreen(MDScreen, Screen):
             self.ids["icon" + n].icon = "alpha-" + initial + "-circle-outline"
         # for i in range(game_setup.plr_num):
         #     self.ids["name" + str(i+1)].disabled = False
+
+    def show_role(self, card):
+        print("Pressed")
+
+        close_btn = MDFlatButton(
+            text="Finish",
+            theme_text_color="Custom",
+            text_color=self.theme_cls.primary_color,
+        )
+
+        popup = MDDialog(
+            title='You are [Role]',
+            text="[Desc.]. Once this tab closes it won't open again.",
+            auto_dismiss=False,
+            buttons=[close_btn],
+
+        )
+
+        close_btn.bind(on_release=popup.dismiss)
+
+        popup.open()
+        card.disabled = True
+    # Creates a popup window to show account creation is unavaiable
 
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)
