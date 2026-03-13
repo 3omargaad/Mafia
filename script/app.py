@@ -21,6 +21,7 @@ from kivy_gradient import Gradient
 
 from files import get_path
 from concurrency import run_concurrent
+from narrative import description
 
 import audio
 import game_setup
@@ -109,11 +110,11 @@ class SetupScreen(MDScreen, Screen):
         print(str(game_setup.maf_num))
 
     def on_include_doc_switch_active(self, widget):
-        game_setup.maf_num = widget.active
+        game_setup.include_doc = widget.active
         print(str(game_setup.include_doc))
 
     def on_include_det_switch_active(self, widget):
-        game_setup.maf_num = widget.active
+        game_setup.include_det = widget.active
         print(str(game_setup.include_det))
 
     def on_continue(self, widget):
@@ -129,6 +130,7 @@ class PlayerScreen(MDScreen, Screen):
 
     def on_enter(self):
         print(self.ids)
+        game_logic.clear_player_list()
         fadein = Animation(opacity=1)
         for i in range(game_setup.plr_num):
             text_field = self.ids["name" + str(i+1)]
@@ -163,7 +165,14 @@ class RoleScreen(MDScreen, Screen):
 
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
+        role_screen = self.manager.get_screen('role')
         print(game_setup.players)
+        role_screen.ids.play.disabled = True
+
+        for card in role_screen.ids["cards"].children:
+            if card.value is not None:
+                card.disabled = False
+
         for i in range(game_setup.plr_num):
             alphabet = "abcdefghijklmnopqrstuvwxyz"
             n = str(i+1)
@@ -177,8 +186,12 @@ class RoleScreen(MDScreen, Screen):
         #     self.ids["name" + str(i+1)].disabled = False
 
     def show_role(self, card):
+        role_screen = self.manager.get_screen('role')
+
         print("Pressed")
         print(card.value)
+        role = game_setup.players[int(card.value) - 1].role
+        extra = " Once this tab closes it won't open again."
         close_btn = MDFlatButton(
             text="Finish",
             theme_text_color="Custom",
@@ -186,8 +199,8 @@ class RoleScreen(MDScreen, Screen):
         )
 
         popup = MDDialog(
-            title='You are ' + game_setup.players[int(card.value) - 1].role,
-            text="[Desc.]. Once this tab closes it won't open again.",
+            title='You are ' + role,
+            text=description[role] + extra,
             auto_dismiss=False,
             buttons=[close_btn],
 
@@ -197,6 +210,14 @@ class RoleScreen(MDScreen, Screen):
 
         popup.open()
         card.disabled = True
+        print(role_screen.ids)
+        for card in role_screen.ids["cards"].children:
+            if card.value is not None:
+                if bool(card.disabled) is False:
+                    role_screen.ids.play.disabled = True
+                    break
+                else:
+                    role_screen.ids.play.disabled = False
     # Creates a popup window to show account creation is unavaiable
 
     def click(self):

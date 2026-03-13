@@ -6,6 +6,11 @@ from player import Player
 import game_setup
 
 
+def clear_player_list():
+    game_setup.players.clear()
+    game_setup.living_players.clear()
+
+
 def create_player(plr_name):
     plrObject = Player(
         name=plr_name,
