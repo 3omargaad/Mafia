@@ -8,10 +8,16 @@
 <MDTextField>:
     max_text_length: 20
 
+<IconLeftWidget>:
+    icon: "account-circle-outline"
+
 
 <MDRectangleFlatButton>:
     allow_hover: True
     hover_visible: True
+    on_press:
+        self.parent.click()
+<MDRoundFlatIconButton>:
     on_press:
         self.parent.click()
 #
@@ -411,7 +417,6 @@
                     id: icon1
                     theme_text_color: "Custom"  # Set text color to custom
                     text_color: "#F44336"  # Use accent color for the icon
-                    icon: "alpha-a-circle-outline"
             
             TwoLineAvatarListItem:
                 id: name2
@@ -423,7 +428,6 @@
                     id: icon2
                     theme_text_color: "Custom"  # Set text color to custom
                     text_color: "#F44336"  # Use accent color for the icon
-                    icon: "alpha-b-circle-outline"
             
             TwoLineAvatarListItem:
                 id: name3
@@ -435,7 +439,6 @@
                     id: icon3
                     theme_text_color: "Custom"  # Set text color to custom
                     text_color: "#F44336"  # Use accent color for the icon
-                    icon: "alpha-c-circle-outline"
             
             TwoLineAvatarListItem:
                 id: name4
@@ -447,7 +450,6 @@
                     id: icon4
                     theme_text_color: "Custom"  # Set text color to custom
                     text_color: "#F44336"  # Use accent color for the icon
-                    icon: "alpha-d-circle-outline"
 
 
             #MDCard:

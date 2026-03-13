@@ -161,10 +161,14 @@ class RoleScreen(MDScreen, Screen):
         # game_logic.wait(5)
         print(game_setup.players)
         for i in range(game_setup.plr_num):
+            alphabet = "abcdefghijklmnopqrstuvwxyz"
             n = str(i+1)
             initial = player_screen.ids["name" + n].text[0].lower()
+            icon = self.ids["icon" + n]
+
             self.ids["name" + n].text = player_screen.ids["name" + n].text
-            self.ids["icon" + n].icon = "alpha-" + initial + "-circle-outline"
+            if initial in alphabet:
+                icon.icon = "alpha-" + initial + "-circle-outline"
         # for i in range(game_setup.plr_num):
         #     self.ids["name" + str(i+1)].disabled = False
 
