@@ -1,8 +1,12 @@
 from kivy.lang import Builder
+# from kivy.storage.jsonstore import JsonStore
 from kivy.core.window import Window
 from kivy.properties import StringProperty
 from kivy import require
 from kivy.animation import Animation
+from kivy.graphics import Rectangle
+from kivy.utils import get_color_from_hex
+from kivy.uix.floatlayout import FloatLayout
 # Imports kivy sub-modules
 
 from kivymd.uix.screenmanager import ScreenManager
@@ -11,6 +15,8 @@ from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.dialog import MDDialog
 # Imports kivymd sub-modules
+
+from kivy_gradient import Gradient
 
 from files import get_path
 from concurrency import run_concurrent
@@ -24,7 +30,28 @@ require('2.3.1')
 Builder.load_file("app.kv")  # Loads kivy file
 
 
+class BackgroundManager(FloatLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        with self.canvas.before:
+            self.rect = Rectangle(
+                size=self.size,
+                pos=self.pos,
+                texture=Gradient.vertical(
+                    get_color_from_hex("000505"),
+                    get_color_from_hex("202020"),
+                    get_color_from_hex("000505"),
+                )
+            )
+        self.bind(size=self._update_rect, pos=self._update_rect)
+
+    def _update_rect(self, *args):
+        self.rect.size = self.size
+        self.rect.pos = self.pos
+
+
 class LoginScreen(MDScreen, Screen):
+    gradient = Gradient
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
     press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
 
@@ -158,6 +185,7 @@ class MafiaApp(MDApp):
         self.theme_cls.theme_style = 'Dark'  # Creates red/dark theme
         Window.size = (360, 640)
 
+        root = BackgroundManager()
         sm = ScreenManager()
 
         sm.add_widget(LoginScreen(name='login'))
@@ -167,7 +195,9 @@ class MafiaApp(MDApp):
         sm.add_widget(GameScreen(name='game'))
         # Sets up kivy screen manager
 
-        return sm
+        root.add_widget(sm)
+
+        return root
 
 
 MafiaApp().run()

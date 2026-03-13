@@ -16,6 +16,7 @@ iniconfig          >= 2.3.0
 Kivy               >= 2.3.1
 Kivy-Garden        >= 0.1.5
 kivymd             >= 1.2.0
+kivygradient
 packaging          >= 26.0
 pathlib            >= 1.0.1
 pillow             >= 12.1.1
