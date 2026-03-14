@@ -176,9 +176,12 @@ class RoleScreen(MDScreen, Screen):
         print(game_setup.players)
         role_screen.ids.play.disabled = True
 
+        fade_in = Animation(opacity=1)
+
         for card in role_screen.ids["cards"].children:
-            if card.value is not None:
+            if card.value is not None and card.value <= game_setup.plr_num:
                 card.disabled = False
+                fade_in.start(card)
 
         for i in range(game_setup.plr_num):
             alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -191,6 +194,14 @@ class RoleScreen(MDScreen, Screen):
                 icon.icon = "alpha-" + initial + "-circle-outline"
         # for i in range(game_setup.plr_num):
         #     self.ids["name" + str(i+1)].disabled = False
+
+    def on_leave(self):
+        role_screen = self.manager.get_screen('role')
+
+        for card in role_screen.ids["cards"].children:
+            if card.value is not None:
+                card.disabled = True
+                card.opacity = 0
 
     def show_role(self, card):
         role_screen = self.manager.get_screen('role')
