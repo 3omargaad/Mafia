@@ -359,7 +359,7 @@
 
     MDRectangleFlatButton:
         id: play
-        text: "Play"
+        text: "Continue"
         #font_name: root.press_font
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
@@ -412,7 +412,7 @@
         disabled: True
 
         on_release:
-            root.manager.transition.direction = "left"
+            root.manager.transition.direction = "up"
             root.manager.current = 'game'
             print("Start Game")
 
@@ -627,22 +627,42 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-            
-
 <GameScreen>:
+    MDRectangleFlatButton:
+        text: "Action"
+        id: action
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+        disabled: True
+
+    MDRoundFlatIconButton:
+        size_hint: (None, None)
+        size: (dp(64), dp(64))
+        pos_hint: {"center_x": 0.075, "center_y": 0.95}
+        line_color: [0,0,0,0]
+
+        on_release: root.quit(self)
+
+        MDIcon:
+            icon_size: dp(128)
+            theme_text_color: "Custom"  # Set text color to custom
+            text_color: "#F44336"  # Use accent color for the icon
+            icon: "close-circle-outline"
+            icon_align: "center"
+            size_hint: (None, None)
+            size: (dp(64), dp(64))  # Set a size for the icon
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center the icon
+
     ScrollView:
-        size: self.size
+        adaptive_height: True
+        halign: "center"
+        valign: "top"
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        size_hint: (0.9, 0.5)
+
+        #size: self.size
         GridLayout:
             size_hint_y: None
             height: self.minimum_height

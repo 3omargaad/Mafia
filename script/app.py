@@ -26,6 +26,7 @@ from narrative import description
 import audio
 import game_setup
 import game_logic
+import narrative
 
 require('2.3.1')
 
@@ -274,6 +275,39 @@ class GameScreen(MDScreen, Screen):
 
     def hover(self, widget):
         widget.bold = True
+
+    def quit(self, widget):
+        manager = widget.parent.parent
+        continue_btn = MDFlatButton(
+            text="Continue"
+        )
+
+        quit_btn = MDFlatButton(
+            text="Quit",
+            theme_text_color="Custom",
+            text_color=self.theme_cls.primary_color,
+        )
+
+        popup = MDDialog(
+            title="Quit Game",
+            text=narrative.quit_msg,
+            auto_dismiss=False,
+            buttons=[continue_btn, quit_btn],
+
+        )
+
+        def complete_quit(manager):
+            popup.dismiss()
+            manager.transition.direction = "down"
+            manager.current = 'setup'
+
+        def quit_button_pressed(self):
+            complete_quit(manager)
+
+        continue_btn.bind(on_release=popup.dismiss)
+        quit_btn.bind(on_release=quit_button_pressed)
+
+        popup.open()
 
 
 class MafiaApp(MDApp):
