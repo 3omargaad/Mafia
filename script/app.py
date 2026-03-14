@@ -74,7 +74,7 @@ class LoginScreen(MDScreen, Screen):
         widget.bold = False
 
     def click(self):
-        run_concurrent(audio.playAudio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, audio.UI_CLICK)
 
 
 class SetupScreen(MDScreen, Screen):
@@ -90,13 +90,13 @@ class SetupScreen(MDScreen, Screen):
         widget.bold = False
 
     def slide(self):
-        run_concurrent(audio.playAudio, audio.UI_POP)
+        run_concurrent(audio.play_audio, audio.UI_POP)
 
     def toggle(self, widget):
         if widget.active:
-            run_concurrent(audio.playAudio, audio.UI_ENABLE)
+            run_concurrent(audio.play_audio, audio.UI_ENABLE)
         else:
-            run_concurrent(audio.playAudio, audio.UI_DISABLE)
+            run_concurrent(audio.play_audio, audio.UI_DISABLE)
 
     def on_plr_slider_value(self, widget):
         self.plr_num = str(int(widget.value))
@@ -123,7 +123,7 @@ class SetupScreen(MDScreen, Screen):
         print(game_setup.plr_num)
 
     def click(self):
-        run_concurrent(audio.playAudio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, audio.UI_CLICK)
 
     def hover(self, widget):
         widget.bold = True
@@ -183,7 +183,7 @@ class PlayerScreen(MDScreen, Screen):
             self.ids["name" + str(i+1)].opacity = 0
 
     def click(self):
-        run_concurrent(audio.playAudio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, audio.UI_CLICK)
 
     def hover(self):
         self.bold = True
@@ -261,7 +261,7 @@ class RoleScreen(MDScreen, Screen):
     # Creates a popup window to show account creation is unavaiable
 
     def click(self):
-        run_concurrent(audio.playAudio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, audio.UI_CLICK)
 
     def hover(self, widget):
         widget.bold = True
@@ -271,7 +271,7 @@ class GameScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
 
     def click(self):
-        run_concurrent(audio.playAudio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, audio.UI_CLICK)
 
     def hover(self, widget):
         widget.bold = True

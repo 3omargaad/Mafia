@@ -5,13 +5,13 @@ from threading import Thread
 from files import get_path
 
 
-def playAudio(audioFile):
+def play_audio(audioFile):
     file = AudioSegment.from_file(file=audioFile, format="wav")
     play(file)
 
 
-def playAudioInParallel(audioFile):
-    thread = Thread(target=playAudio(audioFile))
+def play_audio_in_parallel(audioFile):
+    thread = Thread(target=play_audio(audioFile))
     thread.start()
 
 

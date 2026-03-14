@@ -10,7 +10,7 @@ os.makedirs(temp_dir, exist_ok=True)
 tempfile.tempdir = temp_dir
 
 
-def textToSpeech(text, filename, accent):
+def text_to_speech(text, filename, accent):
     tss = gTTS(text, lang='en', tld=accent)
     return tss.save(get_path(
         "assets",
@@ -21,4 +21,4 @@ def textToSpeech(text, filename, accent):
     )
 
 
-textToSpeech("the quick brown fox jumps over the lazy dog", "uk", "co.uk")
+text_to_speech("the quick brown fox jumps over the lazy dog", "uk", "co.uk")

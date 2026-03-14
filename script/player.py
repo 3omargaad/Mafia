@@ -1,10 +1,10 @@
 class Player:
-    def __init__(self, name, role, team, isAlive, audioFile, votes):
+    def __init__(self, name, role, team, is_alive, audio_file, votes):
         self.name = name
         self.role = role
         self.team = team
-        self.isAlive = isAlive
-        self.audioFile = audioFile
+        self.is_alive = is_alive
+        self.audio_file = audio_file
         self.votes = votes
     # Initialises Default Attributes such as name, role, team, isAlive etc.
 
@@ -17,26 +17,26 @@ class Player:
             self.isAlive = True
     # Saves the player who has been aliminates
 
-    def revealTeam(self):
+    def reveal_team(self):
         print(self.name + " is " + self.team)
     # Reveals the team which the player is in
 
-    def revealRole(self):
+    def reveal_role(self):
         print(self.name + " is " + self.role)
     # Reveals the role which the player has (not in use)
 
-    def finalReveal(self):
+    def final_reveal(self):
         status = "Dead"
         if self.isAlive:
             status = "Alive"
 
         print(self.name + " is " + self.role + " (" + status + ")")
 
-    def addVote(self):
+    def add_vote(self):
         self.votes += 1
     # Adds a vote onto the player
 
-    def resetVote(self):
+    def reset_vote(self):
         self.votes = 0
     # Removes all the player's votes
 
@@ -51,8 +51,8 @@ class Player:
 #             name=plrName,
 #             role="Civilian",
 #             team="Good",
-#             isAlive=True,
-#             audioFile=None,
+#             is_alive=True,
+#             audio_file=None,
 #             votes=0
 # )
 # DEFAULT SETTINGS FOR PLAYEROBJECT
