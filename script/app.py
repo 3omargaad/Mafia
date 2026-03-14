@@ -124,6 +124,9 @@ class SetupScreen(MDScreen, Screen):
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)
 
+    def hover(self, widget):
+        widget.bold = True
+
 
 class PlayerScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
@@ -138,15 +141,16 @@ class PlayerScreen(MDScreen, Screen):
             fadein.start(text_field)
             # self.ids["name" + str(i+1)].opacity = 1
 
-    def create_players(self):
-        pass
-
     def on_leave(self):
-        for i in range(game_setup.plr_num):
-            plr_name = self.ids["name" + str(i+1)].text
-            print(plr_name)
-            game_logic.create_player(plr_name)
-            print(game_setup.players)
+
+        def create_players(self):
+            for i in range(game_setup.plr_num):
+                plr_name = self.ids["name" + str(i+1)].text
+                print(plr_name)
+                game_logic.create_player(plr_name)
+                print(game_setup.players)
+
+        create_players(self)
         game_logic.assign_roles()
 
         for plr in game_setup.players:
@@ -158,6 +162,9 @@ class PlayerScreen(MDScreen, Screen):
 
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)
+
+    def hover(self):
+        self.bold = True
 
 
 class RoleScreen(MDScreen, Screen):
@@ -223,12 +230,18 @@ class RoleScreen(MDScreen, Screen):
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)
 
+    def hover(self, widget):
+        widget.bold = True
+
 
 class GameScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
 
     def click(self):
         run_concurrent(audio.playAudio, audio.UI_CLICK)
+
+    def hover(self, widget):
+        widget.bold = True
 
 
 class MafiaApp(MDApp):
