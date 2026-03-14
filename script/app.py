@@ -132,14 +132,35 @@ class PlayerScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
 
     def on_enter(self):
-        print(self.ids)
+        player_screen = self.manager.get_screen('player')
+
         game_logic.clear_player_list()
         fadein = Animation(opacity=1)
+
         for i in range(game_setup.plr_num):
             text_field = self.ids["name" + str(i+1)]
             text_field.disabled = False
             fadein.start(text_field)
-            # self.ids["name" + str(i+1)].opacity = 1
+
+        for i in range(game_setup.plr_num):
+            text_field = self.ids["name" + str(i+1)]
+            if text_field.text == "":
+                player_screen.ids.play.disabled = True
+                break
+            else:
+                player_screen.ids.play.disabled = False
+
+    def validate_text(self, widget):
+        player_screen = self.manager.get_screen('player')
+
+        for i in range(game_setup.plr_num):
+            plr_name = self.ids["name" + str(i+1)].text
+
+            if plr_name == "":
+                player_screen.ids.play.disabled = True
+                break
+            else:
+                player_screen.ids.play.disabled = False
 
     def on_leave(self):
 
