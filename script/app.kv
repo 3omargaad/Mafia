@@ -1,6 +1,12 @@
 <BackButton>:
     disabled: False
 
+<MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+    size: dp(48), dp(48)
+    pos_hint: {'center_x':0.85, 'center_y':0.5}
+
 <TwoLineAvatarListItem>:
     disabled: True
     opacity: 0
@@ -628,6 +634,16 @@
 
 
 <GameScreen>:
+
+    MDLabel:
+        text: "Welcome to Mafia! I am you're host ChadGPT."
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.7, 0.1)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "20dp"
+
     MDRectangleFlatButton:
         text: "Action"
         id: action
@@ -671,49 +687,261 @@
             spacing: "20dp"
             padding: "20dp"
 
-            MDCard:
-                MDIcon:
-                MDLabel:
-                    text: "Player #1"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.4}
-                    size_hint: (None, None)
-                MDLabel:
-                    text: "Alive"
-                    color: "#36F456"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.25}
-                    size_hint: (None, None)
 
-            MDCard:
-                MDLabel:
-                    text: "Player #2"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.4}
-                    size_hint: (None, None)
-                MDLabel:
-                    text: "Dead"
-                    color: "#F44336"
-                    #align: "center"
-                    pos_hint: {'center_x':0.5, 'center_y':0.25}
-                    size_hint: (None, None)
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
 
-            MDCard:
+                MDCheckbox:
 
-            MDCard:
-            MDCard:
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
 
-            MDCard:
-            MDCard:
+                MDCheckbox:
 
-            MDCard:
-            MDCard:
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
 
-            MDCard:
-            MDCard:
+                MDCheckbox:
 
-            MDCard:
-            MDCard:
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
 
-            MDCard:
-            MDCard:
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+            
+            OneLineListItem:
+                id: name12
+                multiline: True
+                value: 12
+                text: "OnlyTwentyCharacters"
+                secondary_text: "0 Votes"
+
+                MDCheckbox:
+
+                #IconLeftWidget:
+                #    icon_size: dp(32)
+                #    id: icon12
+                #    theme_text_color: "Custom"  # Set text color to custom
+                #    text_color: "#F44336"  # Use accent color for the icon
+
+            #MDCard:
+            #    MDIcon:
+            #    MDLabel:
+            #        text: "Player #1"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.4}
+            #        size_hint: (None, None)
+            #    MDLabel:
+            #        text: "Alive"
+            #        color: "#36F456"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.25}
+            #        size_hint: (None, None)
+#
+            #MDCard:
+            #    MDLabel:
+            #        text: "Player #2"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.4}
+            #        size_hint: (None, None)
+            #    MDLabel:
+            #        text: "Dead"
+            #        color: "#F44336"
+            #        #align: "center"
+            #        pos_hint: {'center_x':0.5, 'center_y':0.25}
+            #        size_hint: (None, None)
+#
+            #MDCard:
+#
+            #MDCard:
+            #MDCard:
+#
+            #MDCard:
+            #MDCard:
+#
+            #MDCard:
+            #MDCard:
+#
+            #MDCard:
+            #MDCard:
+#
+            #MDCard:
+            #MDCard:
+#
+            #MDCard:
+            #MDCard:
+#
