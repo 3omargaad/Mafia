@@ -270,6 +270,27 @@ class RoleScreen(MDScreen, Screen):
 class GameScreen(MDScreen, Screen):
     rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
 
+    def on_enter(self):
+        player_screen = self.manager.get_screen('player')
+
+        fadein = Animation(opacity=1)
+
+        for i in range(game_setup.plr_num):
+            n = str(i+1)
+            card = self.ids["name" + n]
+
+            card.text = player_screen.ids["name" + n].text
+            card.disabled = False
+            fadein.start(card)
+
+        for i in range(16):
+            n = str(i+1)
+            card = self.ids["name" + n]
+
+            if player_screen.ids["name" + n].text == "":
+                card.opacity = 0
+                card.disabled = True
+
     def click(self):
         run_concurrent(audio.play_audio, audio.UI_CLICK)
 
