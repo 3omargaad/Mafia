@@ -1,10 +1,10 @@
 from kivy.properties import StringProperty
 from kivy.animation import Animation
 
-from kivymd.uix.screen import Screen
-from kivymd.uix.screen import MDScreen
+from kivymd.uix.screen import Screen, MDScreen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
+from kivymd.uix.screenmanager import ScreenManager
 
 from files import get_path
 from concurrency import run_concurrent
@@ -15,6 +15,8 @@ import game_setup
 import game_stages
 import game_logic
 import narrative
+
+sm = ScreenManager()
 
 
 class LoginScreen(MDScreen, Screen):

@@ -8,7 +8,6 @@ from kivymd.app import MDApp
 # Imports kivymd sub-modules
 
 from background import bg
-from manager import sm
 
 import screens
 
@@ -26,14 +25,14 @@ class MafiaApp(MDApp):
 
         root = bg
 
-        sm.add_widget(screens.LoginScreen(name='login'))
-        sm.add_widget(screens.SetupScreen(name='setup'))
-        sm.add_widget(screens.PlayerScreen(name='player'))
-        sm.add_widget(screens.RoleScreen(name='role'))
-        sm.add_widget(screens.GameScreen(name='game'))
+        screens.sm.add_widget(screens.LoginScreen(name='login'))
+        screens.sm.add_widget(screens.SetupScreen(name='setup'))
+        screens.sm.add_widget(screens.PlayerScreen(name='player'))
+        screens.sm.add_widget(screens.RoleScreen(name='role'))
+        screens.sm.add_widget(screens.GameScreen(name='game'))
         # Sets up kivy screen manager
 
-        root.add_widget(sm)
+        root.add_widget(screens.sm)
 
         return root
 
