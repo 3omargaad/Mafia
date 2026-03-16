@@ -4,9 +4,6 @@ from kivy.core.window import Window
 from kivy.properties import StringProperty
 from kivy import require
 from kivy.animation import Animation
-from kivy.graphics import Rectangle
-from kivy.utils import get_color_from_hex
-from kivy.uix.floatlayout import FloatLayout
 # Imports kivy sub-modules
 
 from kivymd.uix.screenmanager import ScreenManager
@@ -22,35 +19,17 @@ from kivy_gradient import Gradient
 from files import get_path
 from concurrency import run_concurrent
 from narrative import description
+from background import BackgroundManager
 
 import audio
 import game_setup
+import game_stages
 import game_logic
 import narrative
 
 require('2.3.1')
 
 Builder.load_file("app.kv")  # Loads kivy file
-
-
-class BackgroundManager(FloatLayout):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        with self.canvas.before:
-            self.rect = Rectangle(
-                size=self.size,
-                pos=self.pos,
-                texture=Gradient.vertical(
-                    get_color_from_hex("000505"),
-                    get_color_from_hex("202020"),
-                    get_color_from_hex("000505"),
-                )
-            )
-        self.bind(size=self._update_rect, pos=self._update_rect)
-
-    def _update_rect(self, *args):
-        self.rect.size = self.size
-        self.rect.pos = self.pos
 
 
 class LoginScreen(MDScreen, Screen):
@@ -290,6 +269,8 @@ class GameScreen(MDScreen, Screen):
             if player_screen.ids["name" + n].text == "":
                 card.opacity = 0
                 card.disabled = True
+
+        game_stages.intro()
 
     def click(self):
         run_concurrent(audio.play_audio, audio.UI_CLICK)
