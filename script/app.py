@@ -4,11 +4,11 @@ from kivy.core.window import Window
 from kivy import require
 # Imports kivy sub-modules
 
-from kivymd.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
 # Imports kivymd sub-modules
 
-from background import BackgroundManager
+from background import bg
+from manager import sm
 
 import screens
 
@@ -24,8 +24,7 @@ class MafiaApp(MDApp):
         self.theme_cls.theme_style = 'Dark'  # Creates red/dark theme
         Window.size = (360, 640)
 
-        root = BackgroundManager()
-        sm = ScreenManager()
+        root = bg
 
         sm.add_widget(screens.LoginScreen(name='login'))
         sm.add_widget(screens.SetupScreen(name='setup'))

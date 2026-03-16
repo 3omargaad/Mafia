@@ -636,6 +636,7 @@
 <GameScreen>:
 
     MDLabel:
+        id: dialogue
         text: "Welcome to Mafia! I am you're host ChadGPT."
         pos_hint: {'center_x':0.5, 'center_y':0.85}
         size_hint: (0.7, 0.1)
@@ -645,13 +646,15 @@
         font_size: "20dp"
 
     MDRectangleFlatButton:
-        text: "Action"
+        text: "Start"
         id: action
         #font_name: root.press_font
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
-        disabled: True
+        disabled: False
+
+        on_press: root.start_game()
 
     MDRoundFlatIconButton:
         size_hint: (None, None)

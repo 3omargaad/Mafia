@@ -254,6 +254,15 @@ class GameScreen(MDScreen, Screen):
                 card.opacity = 0
                 card.disabled = True
 
+    def start_game(self):
+        game_screen = self.manager.get_screen('game')
+
+        dialogue = game_screen.ids["dialogue"]
+        action = game_screen.ids["action"]
+
+        dialogue.text = "The quick brown fox jumped over the lazy dog."
+        action.disabled = True
+
         game_stages.intro()
 
     def click(self):

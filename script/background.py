@@ -23,3 +23,6 @@ class BackgroundManager(FloatLayout):
     def _update_rect(self, *args):
         self.rect.size = self.size
         self.rect.pos = self.pos
+
+
+bg = BackgroundManager()
