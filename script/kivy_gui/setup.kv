@@ -1,0 +1,122 @@
+<SetupScreen>:
+    name: 'setup'
+
+    MDLabel:
+        text: "Game Setup"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.7, None)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "60dp"
+
+    MDLabel:
+        text: "No. Players (" + str(root.plr_num) + ")"
+        pos_hint: {'center_x':0.4, 'center_y':0.675}
+        size_hint: (0.6, None)
+
+    MDSlider:
+        pos_hint: {'center_x':0.6, 'center_y':0.675}
+        min: 4
+        max: 16
+        step: 1
+        size_hint: (0.4, None)
+        on_value: 
+            root.slide()
+            root.on_plr_slider_value(self)
+
+    MDLabel:
+        text: "No. Mafia (" + str(root.maf_num) + ")"
+        pos_hint: {'center_x':0.4, 'center_y':0.575}
+        size_hint: (0.6, None)
+
+    MDSlider:
+        pos_hint: {'center_x':0.6, 'center_y':0.575}
+        min: 1
+        max: root.max_maf
+        step: 1
+        size_hint: (0.4, None)
+        on_value: root.on_maf_slider_value(self)
+
+    MDLabel:
+        text: "Add Doctor?"
+        pos_hint: {'center_x':0.175, 'center_y':0.46}
+        size_hint: (0.25, None)
+
+    MDSwitch:
+        pos_hint: {'center_x':0.325, 'center_y':0.45}
+        on_active:
+            root.on_include_doc_switch_active(self)
+
+    
+    MDLabel:
+        text: "Add Detective?"
+        pos_hint: {'center_x':0.175, 'center_y':0.385}
+        size_hint: (0.25, None)
+    
+    MDSwitch:
+        pos_hint: {'center_x':0.325, 'center_y':0.375}
+        on_active:
+            root.on_include_det_switch_active(self)
+
+    MDLabel:
+        text: "Anonymous Vote?"
+        pos_hint: {'center_x':0.175, 'center_y':0.3}
+        size_hint: (0.25, None)
+    
+    MDSwitch:
+        pos_hint: {'center_x':0.325, 'center_y':0.3}
+        on_active:
+
+    MDLabel:
+        text: "Skip Vote?"
+        pos_hint: {'center_x':0.6, 'center_y':0.46}
+        size_hint: (0.25, None)
+    
+    MDSwitch:
+        pos_hint: {'center_x':0.75, 'center_y':0.45}
+        on_active:
+
+    MDLabel:
+        text: "Execute If Tie?"
+        pos_hint: {'center_x':0.6, 'center_y':0.385}
+        size_hint: (0.25, None)
+
+    MDSwitch:
+        pos_hint: {'center_x':0.75, 'center_y':0.375}
+        on_active:
+    
+    MDRoundFlatIconButton:
+        size_hint: (None, None)
+        size: (dp(64), dp(64))
+        pos_hint: {"center_x": 0.075, "center_y": 0.95}
+        line_color: [0,0,0,0]
+
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.current = 'login'
+            print("Start Game")
+
+        MDIcon:
+            icon_size: dp(128)
+            theme_text_color: "Custom"  # Set text color to custom
+            text_color: "#F44336"  # Use accent color for the icon
+            icon: "arrow-left-bold-circle-outline"
+            icon_align: "center"
+            size_hint: (None, None)
+            size: (dp(64), dp(64))  # Set a size for the icon
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center the icon
+
+    
+    MDRectangleFlatButton:
+        text: "Continue"
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+
+        on_release:
+            root.on_continue(self)
+            root.manager.transition.direction = "left"
+            root.manager.current = 'player'
+            print("Start Game")

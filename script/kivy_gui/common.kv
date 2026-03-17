@@ -1,0 +1,57 @@
+<BackButton>:
+    disabled: False
+
+<MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+    size: dp(48), dp(48)
+    pos_hint: {'center_x':0.85, 'center_y':0.5}
+
+<TwoLineAvatarListItem>:
+    disabled: True
+    opacity: 0
+    on_press: self.parent.parent.parent.click()
+    on_release: self.parent.parent.parent.show_role(self)
+
+
+<MDTextField>:
+    max_text_length: 20
+
+<IconLeftWidget>:
+    icon: "account-circle-outline"
+
+
+<MDRectangleFlatButton>:
+    allow_hover: True
+    hover_visible: True
+    bold: True
+    on_press:
+        self.parent.click()
+
+
+<MDRoundFlatIconButton>:
+    on_press:
+        self.parent.click()
+#
+    #on_leave:
+    #    self.parent.hover_off()
+
+<MDSwitch>:
+    on_active: 
+        self.parent.toggle(self)
+
+
+<MDCard>:
+    orientation: "vertical"
+    padding: "8dp"
+    size_hint: 1, None
+    height: "120dp"
+    elevation: 5
+    border_radius: 20
+    radius: [15]
+
+<MDTextField>:
+    size_hint: (0.5, None)
+    padding: "5dp", "5dp"
+    disabled: True
+    opacity: 0

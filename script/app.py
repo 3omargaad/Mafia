@@ -8,12 +8,14 @@ from kivymd.app import MDApp
 # Imports kivymd sub-modules
 
 from background import bg
+from files import get_path
 
 import screens
 
 require('2.3.1')
 
-Builder.load_file("app.kv")  # Loads kivy file
+
+Builder.load_file(get_path("script", "kivy_gui", "app.kv"))  # Loads kivy file
 
 
 class MafiaApp(MDApp):
