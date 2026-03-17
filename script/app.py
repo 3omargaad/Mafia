@@ -39,5 +39,6 @@ class MafiaApp(MDApp):
         return root
 
 
-MafiaApp().run()
+def run():
+    MafiaApp().run()
 # Runs application GUI
