@@ -9,11 +9,12 @@ from kivymd.uix.screenmanager import ScreenManager
 from files import get_path
 from concurrency import run_concurrent
 from narrative import description
+from player import clear_player_list, create_player
 
 import audio
 import game_setup
 import game_stages
-import game_logic
+import host
 import narrative
 
 sm = ScreenManager()
@@ -100,7 +101,7 @@ class PlayerScreen(MDScreen, Screen):
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
 
-        game_logic.clear_player_list()
+        clear_player_list()
         fadein = Animation(opacity=1)
 
         for i in range(game_setup.plr_num):
@@ -134,11 +135,11 @@ class PlayerScreen(MDScreen, Screen):
             for i in range(game_setup.plr_num):
                 plr_name = self.ids["name" + str(i+1)].text
                 print(plr_name)
-                game_logic.create_player(plr_name)
+                create_player(plr_name)
                 print(game_setup.players)
 
         create_players(self)
-        game_logic.assign_roles()
+        host.assign_roles()
 
         for plr in game_setup.players:
             print(plr.name + "|" + plr.role)
@@ -265,7 +266,7 @@ class GameScreen(MDScreen, Screen):
         dialogue.text = "The quick brown fox jumped over the lazy dog."
         action.disabled = True
 
-        game_stages.intro()
+        run_concurrent(game_stages.intro())
 
     def click(self):
         run_concurrent(audio.play_audio, audio.UI_CLICK)

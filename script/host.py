@@ -1,31 +1,11 @@
 from time import sleep
 from random import choice
 
-from player import Player
-
 import game_setup
 
 
-def clear_player_list():
-    game_setup.players.clear()
-    game_setup.living_players.clear()
-
-
-def create_player(plr_name):
-    plr_object = Player(
-        name=plr_name,
-        role="Civilian",
-        team="Good",
-        is_alive=True,
-        audio_file=None,
-        votes=0
-    )
-
-    # Creates player object with default attributes
-
-    game_setup.players.append(plr_object)
-    game_setup.living_players.append(plr_object)
-    # Adds player object to relevent arrays
+def wait(t):
+    sleep(t)
 
 
 def assign_mafia():
@@ -65,6 +45,8 @@ def assign_roles():
     assign_doctor()
     assign_detective()
 
-
-def wait(t):
-    sleep(t)
+# Host manages the game and performs key actions
+# assigns roles
+# makes announcements
+# countdown
+# executes player

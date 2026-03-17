@@ -1,4 +1,4 @@
-from game_logic import wait
+from host import wait
 import audio
 import concurrency
 
