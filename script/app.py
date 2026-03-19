@@ -1,5 +1,4 @@
 from kivy.lang import Builder
-# from kivy.storage.jsonstore import JsonStore
 from kivy.core.window import Window
 from kivy import require
 # Imports kivy sub-modules
@@ -8,14 +7,13 @@ from kivymd.app import MDApp
 # Imports kivymd sub-modules
 
 from background import bg
-from files import get_path
 
 import screens
 
 require('2.3.1')
 
 
-Builder.load_file(get_path("script", "kivy_gui", "app.kv"))  # Loads kivy file
+Builder.load_file("kivy_gui/app.kv")  # Loads kivy file
 
 
 class MafiaApp(MDApp):

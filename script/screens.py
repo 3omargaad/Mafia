@@ -6,11 +6,11 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.screenmanager import ScreenManager
 
-from files import get_path
 from concurrency import run_concurrent
 from narrative import description
 from player import clear_player_list, create_player
 
+import assets
 import audio
 import game_setup
 import game_stages
@@ -21,8 +21,7 @@ sm = ScreenManager()
 
 
 class LoginScreen(MDScreen, Screen):
-    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
-    press_font = get_path("assets", "fonts", "PressStart2P-Regular.ttf")
+    rye_font = assets.RYE
 
     def account(self):
         print("Pressed")
@@ -40,11 +39,11 @@ class LoginScreen(MDScreen, Screen):
         widget.bold = False
 
     def click(self):
-        run_concurrent(audio.play_audio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, assets.UI_CLICK)
 
 
 class SetupScreen(MDScreen, Screen):
-    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+    rye_font = assets.RYE
     plr_num = StringProperty("4")
     maf_num = StringProperty("1")
     max_maf = StringProperty("1")
@@ -56,13 +55,13 @@ class SetupScreen(MDScreen, Screen):
         widget.bold = False
 
     def slide(self):
-        run_concurrent(audio.play_audio, audio.UI_POP)
+        run_concurrent(audio.play_audio, assets.UI_POP)
 
     def toggle(self, widget):
         if widget.active:
-            run_concurrent(audio.play_audio, audio.UI_ENABLE)
+            run_concurrent(audio.play_audio, assets.UI_ENABLE)
         else:
-            run_concurrent(audio.play_audio, audio.UI_DISABLE)
+            run_concurrent(audio.play_audio, assets.UI_DISABLE)
 
     def on_plr_slider_value(self, widget):
         self.plr_num = str(int(widget.value))
@@ -89,14 +88,14 @@ class SetupScreen(MDScreen, Screen):
         print(game_setup.plr_num)
 
     def click(self):
-        run_concurrent(audio.play_audio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self, widget):
         widget.bold = True
 
 
 class PlayerScreen(MDScreen, Screen):
-    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+    rye_font = assets.RYE
 
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
@@ -149,14 +148,14 @@ class PlayerScreen(MDScreen, Screen):
             self.ids["name" + str(i+1)].opacity = 0
 
     def click(self):
-        run_concurrent(audio.play_audio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self):
         self.bold = True
 
 
 class RoleScreen(MDScreen, Screen):
-    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+    rye_font = assets.RYE
 
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
@@ -227,14 +226,14 @@ class RoleScreen(MDScreen, Screen):
     # Creates a popup window to show account creation is unavaiable
 
     def click(self):
-        run_concurrent(audio.play_audio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self, widget):
         widget.bold = True
 
 
 class GameScreen(MDScreen, Screen):
-    rye_font = get_path("assets", "fonts", "Rye-Regular.ttf")
+    rye_font = assets.RYE
 
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
@@ -269,7 +268,7 @@ class GameScreen(MDScreen, Screen):
         run_concurrent(game_stages.intro())
 
     def click(self):
-        run_concurrent(audio.play_audio, audio.UI_CLICK)
+        run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self, widget):
         widget.bold = True
