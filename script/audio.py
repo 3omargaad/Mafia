@@ -15,14 +15,10 @@ def play_audio_in_parallel(audioFile):
     thread.start()
 
 
-def get_sound(sound):
-    get_path("assets", "audio", "preset", "common", sound)
-
-
-UI_CLICK = get_sound("ui_click.wav")
-UI_ENABLE = get_sound("ui_enable.wav")
-UI_DISABLE = get_sound("ui_disable.wav")
-UI_POP = get_sound("ui_pop.wav")
+UI_CLICK = get_path("assets", "audio", "preset", "common", "ui_click.wav")
+UI_ENABLE = get_path("assets", "audio", "preset", "common", "ui_enable.wav")
+UI_DISABLE = get_path("assets", "audio", "preset", "common", "ui_disable.wav")
+UI_POP = get_path("assets", "audio", "preset", "common", "ui_pop.wav")
 
 WELCOME = get_path("assets", "audio", "preset", "uk", "welcome.wav")
 INTRO = get_path("assets", "audio", "preset", "uk", "intro.wav")
