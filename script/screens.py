@@ -8,11 +8,9 @@ from kivymd.uix.screenmanager import ScreenManager
 
 from concurrency import run_concurrent
 from narrative import description
-from player import clear_player_list, create_player
 
 import assets
 import audio
-import game_setup
 import game_stages
 import host
 import narrative
@@ -65,27 +63,27 @@ class SetupScreen(MDScreen, Screen):
 
     def on_plr_slider_value(self, widget):
         self.plr_num = str(int(widget.value))
-        game_setup.plr_num = int(widget.value)
+        host.game.plr_num = int(widget.value)
 
-        self.max_maf = str((game_setup.plr_num // 2) - 1)  # Sets max mafia val
+        self.max_maf = str((host.game.plr_num // 2) - 1)  # Sets max mafia val
         print(self.max_maf)
 
     def on_maf_slider_value(self, widget):
         self.maf_num = str(int(widget.value))
-        game_setup.maf_num = int(widget.value)
-        print(str(game_setup.maf_num))
+        host.game.maf_num = int(widget.value)
+        print(str(host.game.maf_num))
 
     def on_include_doc_switch_active(self, widget):
-        game_setup.include_doc = widget.active
-        print(str(game_setup.include_doc))
+        host.game.include_doc = widget.active
+        print(str(host.game.include_doc))
 
     def on_include_det_switch_active(self, widget):
-        game_setup.include_det = widget.active
-        print(str(game_setup.include_det))
+        host.game.include_det = widget.active
+        print(str(host.game.include_det))
 
     def on_continue(self, widget):
         print(self.ids)
-        print(game_setup.plr_num)
+        print(host.game.plr_num)
 
     def click(self):
         run_concurrent(audio.play_audio, assets.UI_CLICK)
@@ -100,15 +98,15 @@ class PlayerScreen(MDScreen, Screen):
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
 
-        clear_player_list()
+        host.game.clear_player_list()
         fadein = Animation(opacity=1)
 
-        for i in range(game_setup.plr_num):
+        for i in range(host.game.plr_num):
             text_field = self.ids["name" + str(i+1)]
             text_field.disabled = False
             fadein.start(text_field)
 
-        for i in range(game_setup.plr_num):
+        for i in range(host.game.plr_num):
             text_field = self.ids["name" + str(i+1)]
             if text_field.text == "":
                 player_screen.ids.play.disabled = True
@@ -119,7 +117,7 @@ class PlayerScreen(MDScreen, Screen):
     def validate_text(self, widget):
         player_screen = self.manager.get_screen('player')
 
-        for i in range(game_setup.plr_num):
+        for i in range(host.game.plr_num):
             plr_name = self.ids["name" + str(i+1)].text
 
             if plr_name == "":
@@ -131,16 +129,16 @@ class PlayerScreen(MDScreen, Screen):
     def on_leave(self):
 
         def create_players(self):
-            for i in range(game_setup.plr_num):
+            for i in range(host.game.plr_num):
                 plr_name = self.ids["name" + str(i+1)].text
                 print(plr_name)
-                create_player(plr_name)
-                print(game_setup.players)
+                host.game.create_player(plr_name)
+                print(host.game.players)
 
         create_players(self)
         host.assign_roles()
 
-        for plr in game_setup.players:
+        for plr in host.game.players:
             print(plr.name + "|" + plr.role)
 
         for i in range(16):
@@ -160,17 +158,17 @@ class RoleScreen(MDScreen, Screen):
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
         role_screen = self.manager.get_screen('role')
-        print(game_setup.players)
+        print(host.game.players)
         role_screen.ids.play.disabled = True
 
         fade_in = Animation(opacity=1)
 
         for card in role_screen.ids["cards"].children:
-            if card.value is not None and card.value <= game_setup.plr_num:
+            if card.value is not None and card.value <= host.game.plr_num:
                 card.disabled = False
                 fade_in.start(card)
 
-        for i in range(game_setup.plr_num):
+        for i in range(host.game.plr_num):
             alphabet = "abcdefghijklmnopqrstuvwxyz"
             n = str(i+1)
             initial = player_screen.ids["name" + n].text[0].lower()
@@ -179,7 +177,7 @@ class RoleScreen(MDScreen, Screen):
             self.ids["name" + n].text = player_screen.ids["name" + n].text
             if initial in alphabet:
                 icon.icon = "alpha-" + initial + "-circle-outline"
-        # for i in range(game_setup.plr_num):
+        # for i in range(host.game.plr_num):
         #     self.ids["name" + str(i+1)].disabled = False
 
     def on_leave(self):
@@ -195,7 +193,7 @@ class RoleScreen(MDScreen, Screen):
 
         print("Pressed")
         print(card.value)
-        role = game_setup.players[int(card.value) - 1].role
+        role = host.game.players[int(card.value) - 1].role
         extra = " Once this tab closes it won't open again."
         close_btn = MDFlatButton(
             text="Finish",
@@ -240,7 +238,7 @@ class GameScreen(MDScreen, Screen):
 
         fadein = Animation(opacity=1)
 
-        for i in range(game_setup.plr_num):
+        for i in range(host.game.plr_num):
             n = str(i+1)
             card = self.ids["name" + n]
 

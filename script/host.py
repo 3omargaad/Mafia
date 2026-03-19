@@ -1,7 +1,9 @@
 from time import sleep
 from random import choice
 
-import game_setup
+from game_setup import Game
+
+game = Game()
 
 
 def wait(t):
@@ -9,9 +11,9 @@ def wait(t):
 
 
 def assign_mafia():
-    for maf in range(game_setup.maf_num):
+    for maf in range(game.maf_num):
         while True:
-            mafia_player = choice(game_setup.players)
+            mafia_player = choice(game.players)
             if mafia_player.role != "Mafia":
                 mafia_player.role = "Mafia"
                 mafia_player.team = "Bad"
@@ -21,9 +23,9 @@ def assign_mafia():
 
 
 def assign_doctor():
-    if game_setup.include_doc is True:
+    if game.include_doc is True:
         while True:
-            doctor_player = choice(game_setup.players)
+            doctor_player = choice(game.players)
             if doctor_player.role != "Mafia":
                 doctor_player.role = "Doctor"
                 break
@@ -32,9 +34,9 @@ def assign_doctor():
 
 
 def assign_detective():
-    if game_setup.include_det is True:
+    if game.include_det is True:
         while True:
-            detective_player = choice(game_setup.players)
+            detective_player = choice(game.players)
             if detective_player.role not in ("Mafia", "Doctor"):
                 detective_player.role = "Detective"
                 break
