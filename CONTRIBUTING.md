@@ -1,6 +1,6 @@
 Minor contributions are welcome with a clear description.
 
-Current working directory: script/
+Current working directory: src/
 Current working file: app.py
 
 Code Standards:

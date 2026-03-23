@@ -8,10 +8,10 @@ from kivymd.uix.screenmanager import ScreenManager
 
 from concurrency import run_concurrent
 from narrative import description
+from host import wait
 
 import assets
 import audio
-import game_stages
 import host
 import narrative
 
@@ -260,10 +260,33 @@ class GameScreen(MDScreen, Screen):
         dialogue = game_screen.ids["dialogue"]
         action = game_screen.ids["action"]
 
-        dialogue.text = "The quick brown fox jumped over the lazy dog."
-        action.disabled = True
+        def announce(text):
+            dialogue.text = text
 
-        run_concurrent(game_stages.intro())
+        def countdown(t):
+            for i in range(t+1):
+                announce(str(t-i))
+                wait(1)
+
+        def eliminate():
+            print("Somebodies been eliminated!")
+
+        print("The quick brown fox jumped over the lazy dog.")
+        print("The quick brown fox jumped over the lazy dog.")
+        # audio.play_audio(assets.WELCOME)
+        wait(5)
+        print(narrative.intro)
+        # audio.play_audio(assets.INTRO)
+        wait(5)
+        countdown(15)
+        wait(1)
+        print("The night approaches, everyone falls asleep.")
+        wait(5)
+        print("The mafia wakes up and chooses who to eliminate tonight!")
+        wait(6)
+        action.disabled = False
+        action.on_press = eliminate()
+        action.text = "Eliminate"
 
     def click(self):
         run_concurrent(audio.play_audio, assets.UI_CLICK)

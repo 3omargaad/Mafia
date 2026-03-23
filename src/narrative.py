@@ -7,3 +7,5 @@ description = {
 
 quit_msg = """Are you sure you want to quit?
 Roles will not be revealed until the end of the game."""
+
+intro = "The game has begun! you have 15 seconds to talk before night!"

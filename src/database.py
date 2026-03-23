@@ -1,5 +1,6 @@
-import sqlite3
-conn = sqlite3.connect("")
+from sqlite3 import connect
+
+conn = connect("")
 
 cursor = conn.cursor()
 

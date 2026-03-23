@@ -47,6 +47,14 @@ def assign_roles():
     assign_doctor()
     assign_detective()
 
+
+def announce():
+    pass
+
+
+def countdown(t):
+    pass
+
 # Host manages the game and performs key actions
 # assigns roles
 # makes announcements

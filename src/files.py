@@ -13,7 +13,7 @@ def get_path(*parts) -> Path:
     # syntax.
 
 
-def clearAudioFiles():
+def clear_audio_files():
     files = glob(str(get_path("assets", "audio", "player_names", "*")))
     for f in files:
         remove(f)
