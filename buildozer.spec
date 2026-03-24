@@ -7,7 +7,7 @@ title = Mafia
 package.name = mafia
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.3omargaad
+package.domain = org.test
 
 # (str) Source code where the main.py live
 source.dir = src
@@ -270,7 +270,7 @@ android.accept_sdk_license = True
 #android.uses_library =
 
 # (str) Android logcat filters to use
-android.logcat_filters = *:S python:D
+#android.logcat_filters = *:S python:D
 
 # (bool) Android logcat only display log for activity's pid
 #android.logcat_pid_only = False
@@ -441,8 +441,8 @@ warn_on_root = 1
 #    HD content. You could first change the title to add "(demo)" in the name
 #    and extend the excluded directories to remove the HD content.
 #
-#[app@demo]
-#title = Mafia (demo)
+[app@demo]
+title = Mafia (demo)
 #
 #[app:source.exclude_patterns@demo]
 #images/hd/*
