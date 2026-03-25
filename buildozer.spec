@@ -29,7 +29,7 @@ source.exclude_dirs = tests, bin, venv, docs, script
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.4
+version = 1.0
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -37,7 +37,7 @@ version = 0.4
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, gTTS==2.5.4, Kivy==2.3.1, KivyGradient==0.0.5, kivymd==1.2.0, pydub==0.25.1
+requirements = python3, gTTS==2.5.4, Kivy==2.3.1, KivyGradient==0.0.5, kivymd==1.2.0, pydub==0.25.1, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, pycairo
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -101,10 +101,10 @@ android.presplash_color = #202020
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 31
+android.api = 36
 
 # (int) Minimum API your APK / AAB will support.
-#android.minapi = 21
+android.minapi = 30
 
 # (int) Android SDK version to use
 #android.sdk = 20
@@ -305,10 +305,10 @@ android.allow_backup = True
 # android.no-byte-compile-python = False
 
 # (str) The format used to package the app for release mode (aab or apk or aar).
-# android.release_artifact = aab
+android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aar).
-# android.debug_artifact = apk
+android.debug_artifact = apk
 
 #
 # Python for android (p4a) specific
@@ -321,7 +321,7 @@ android.allow_backup = True
 #p4a.fork = kivy
 
 # (str) python-for-android branch to use, defaults to master
-#p4a.branch = master
+p4a.branch = develop
 
 # (str) python-for-android specific commit to use, defaults to HEAD, must be within p4a.branch
 #p4a.commit = HEAD
