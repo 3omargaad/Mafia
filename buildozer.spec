@@ -67,7 +67,7 @@ orientation = portrait
 osx.python_version = 3
 
 # Kivy version to use
-osx.kivy_version = 1.9.1
+osx.kivy_version = 2.3.1
 
 #
 # Android specific
@@ -95,7 +95,7 @@ android.presplash_color = #202020
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
-android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
+# android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -441,8 +441,8 @@ warn_on_root = 1
 #    HD content. You could first change the title to add "(demo)" in the name
 #    and extend the excluded directories to remove the HD content.
 #
-[app@demo]
-title = Mafia (demo)
+#[app@demo]
+#title = Mafia (demo)
 #
 #[app:source.exclude_patterns@demo]
 #images/hd/*
