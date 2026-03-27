@@ -37,7 +37,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, gTTS==2.5.4, Kivy==2.3.1, KivyGradient==0.0.5, kivymd==1.2.0, pydub==0.25.1, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, pycairo
+requirements = python3, gTTS==2.5.4, Kivy==2.3.1, KivyGradient==0.0.5, kivymd==1.0.2, pydub==0.25.1, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, pycairo
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -95,7 +95,7 @@ android.presplash_color = #202020
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
-# android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
+android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
