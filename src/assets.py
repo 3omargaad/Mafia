@@ -9,3 +9,5 @@ UI_POP = get_path("assets", "audio", "preset", "common", "ui_pop.wav")
 
 WELCOME = get_path("assets", "audio", "preset", "uk", "welcome.wav")
 INTRO = get_path("assets", "audio", "preset", "uk", "intro.wav")
+GOODNIGHT = get_path("assets", "audio", "preset", "uk", "goodnight.wav")
+MAFIA = get_path("assets", "audio", "preset", "uk", "mafia.wav")
