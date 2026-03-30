@@ -3,9 +3,12 @@
 
 <MDCheckbox>:
     group: 'group'
+    disabled: True
+    opacity: 0
     size_hint: None, None
     size: dp(48), dp(48)
     pos_hint: {'center_x':0.85, 'center_y':0.5}
+    on_active: self.parent.parent.parent.parent.on_checkbox_active(*args)
 
 <TwoLineAvatarListItem>:
     disabled: True

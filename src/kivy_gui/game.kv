@@ -11,15 +11,16 @@
         font_size: "20dp"
 
     MDRectangleFlatButton:
-        text: "Start"
+        text: "Action"
         id: action
         #font_name: root.press_font
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)
         font_size: "20dp"
-        disabled: False
+        disabled: True
 
-        on_press: root.start_game()
+        on_press: root.on_press()
+        on_release: root.on_release()
 
     MDRoundFlatIconButton:
         size_hint: (None, None)
@@ -66,6 +67,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check1
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -83,6 +85,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check2
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -100,6 +103,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check3
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -117,6 +121,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check4
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -134,6 +139,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check5
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -151,6 +157,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check6
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -168,6 +175,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check7
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -185,6 +193,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check8
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -202,6 +211,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check9
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -219,6 +229,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check10
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -236,6 +247,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check11
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -253,6 +265,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check12
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -270,6 +283,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check13
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -287,6 +301,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check14
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -304,6 +319,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check15
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)
@@ -321,6 +337,7 @@
                 secondary_text: "0 Votes"
 
                 MDCheckbox:
+                    id: check16
 
                 #IconLeftWidget:
                 #    icon_size: dp(32)

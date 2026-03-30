@@ -39,3 +39,12 @@ class Game:
     def clear_player_list(self):
         self.players.clear()
         self.living_players.clear()
+
+    def get_player(self, name: str):
+        for plr in self.players:
+            if getattr(plr, "name", None) == name:
+                return plr
+        raise ValueError(f"No player found with name={name!r}")
+
+
+game = Game()

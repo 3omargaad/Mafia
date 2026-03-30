@@ -1,9 +1,7 @@
 from time import sleep
 from random import choice
 
-from game_setup import Game
-
-game = Game()
+from game_setup import game
 
 
 def wait(t):
