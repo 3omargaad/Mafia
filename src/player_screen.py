@@ -33,15 +33,30 @@ class PlayerScreen(MDScreen, Screen):
 
     def validate_text(self, widget):
         player_screen = self.manager.get_screen('player')
+        names = []
 
         for i in range(host.game.plr_num):
             plr_name = self.ids["name" + str(i+1)].text
+            names.append(plr_name)
 
-            if plr_name == "":
+        # Places all the names in a list for easier duplicate checking
+
+        for plr_name in names:
+            blank = plr_name == ""  # Condition for blank
+            duplicate = names.count(plr_name) > 1  # Condition for duplicate
+            print("blank:" + str(blank))
+            print("duplicate: " + str(duplicate))
+            if blank or duplicate:
                 player_screen.ids.play.disabled = True
                 break
+                # Disables play button
             else:
                 player_screen.ids.play.disabled = False
+                # Enabled play button
+
+        # Validation to prevent empty names and duplicate names
+
+        names.clear()  # Clears list to prevent errors
 
     def on_leave(self):
 
