@@ -61,10 +61,13 @@ class GameScreen(MDScreen, Screen):
                 card.disabled = True
 
         Clock.schedule_once(partial(announce, "Welcome to Mafia! I am your host ChadGPT"), 3)
-        Clock.schedule_once(partial(announce, "The night approaches, everyone falls asleep!"), 7)
-        Clock.schedule_once(partial(announce, "While everyone else is fast as asleep, the mafia wakes up. The mafia chooses who to eliminate tonight."), 10)
-        Clock.schedule_once(partial(enable_checkboxes, "Eliminate"), 10)
-        Clock.schedule_once(partial(announce, "Never gonna give you up"), 15)
+        Clock.schedule_once(partial(announce, "The night approaches, everyone falls asleep!"), 9)
+        Clock.schedule_once(partial(announce, "While everyone else is fast as asleep, the mafia wakes up. The mafia chooses who to eliminate tonight."), 15)
+        Clock.schedule_once(partial(enable_checkboxes, "Eliminate"), 18)
+
+        Clock.schedule_once(partial(audio.play_audio, assets.WELCOME), 3)
+        Clock.schedule_once(partial(audio.play_audio, assets.GOODNIGHT), 9)
+        Clock.schedule_once(partial(audio.play_audio, assets.MAFIA), 15)
 
     def on_checkbox_active(self, checkbox, value):
 

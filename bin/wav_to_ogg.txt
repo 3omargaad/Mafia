@@ -1,0 +1,2 @@
+# change $sound to sound name
+ffmpeg -i assets/audio/preset/uk/$sound.wav -ar 44100 -ac 2 assets/audio/preset/uk/$sound.ogg

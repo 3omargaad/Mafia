@@ -1,7 +1,41 @@
-from pydub import AudioSegment
-from pydub.playback import play
+# from pydub import AudioSegment
+# from pydub.playback import play
+from kivy.core.audio import SoundLoader
+# from kivy.app import App
+
+from threading import Lock
+
+_sound_cache = {}
+_cache_lock = Lock()
 
 
-def play_audio(audioFile):
-    file = AudioSegment.from_file(file=audioFile, format="wav")
-    play(file)
+def get_sound(path):
+    with _cache_lock:
+        s = _sound_cache.get(path)
+        if s is None:
+            s = SoundLoader.load(path)
+            if s:
+                _sound_cache[path] = s
+        return s
+# Loads sound from cache
+
+
+def play_audio(path, *args):
+    sound = get_sound(path)
+    if not sound:
+        return False
+    # ensure safe restart instead of reloading
+    if sound.state == 'play':
+        sound.stop()
+    sound.play()
+    return True
+
+
+
+# def play_audio(file):
+#    file = get_sound(file)
+#    audio = SoundLoader.load(file)
+#    audio.stop()
+#    audio.play()
+#    # file = AudioSegment.from_file(file=audioFile, format="wav")
+#    # play(file)
