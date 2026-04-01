@@ -30,8 +30,6 @@ def play_audio(path, *args):
     sound.play()
     return True
 
-
-
 # def play_audio(file):
 #    file = get_sound(file)
 #    audio = SoundLoader.load(file)

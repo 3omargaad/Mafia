@@ -5,7 +5,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 
 from concurrency import run_concurrent
-from narrative import description
+from narrative import ROLE_DESC
 
 import assets
 import audio
@@ -63,7 +63,7 @@ class RoleScreen(MDScreen, Screen):
 
         popup = MDDialog(
             title='You are ' + role,
-            text=description[role] + extra,
+            text=ROLE_DESC[role] + extra,
             auto_dismiss=False,
             buttons=[close_btn],
 

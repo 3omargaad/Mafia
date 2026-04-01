@@ -13,6 +13,7 @@ class Game:
         self.execute_if_tie = False  # Whether the game has anonymous voting
         self.host_name = "ChadGPT"  # Default host name
         self.host_accent = "uk"  # Default host accent
+        self.game_stage = "Intro"  # The stage which the game is at
 
         self.players = []  # List of players in game
         self.living_players = []  # List of living players in game

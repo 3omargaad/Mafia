@@ -18,3 +18,8 @@ src/
     player.py               | Defines player object
     narrative.py            | Stores in game text
     concurrency.py          | Allows for threading
+    game_screen.py          | Python code for Game Screen Object
+    login_screen.py         | Python code for Login Screen Object
+    player_screen.py        | Python code for Player Screen Object
+    role_screen.py          | Python code for Role Screen Object
+    setup_screen.py         | Python code for Setup Screen Object

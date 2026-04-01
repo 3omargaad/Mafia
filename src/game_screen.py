@@ -6,8 +6,6 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 
 from functools import partial
-from random import choice
-
 from concurrency import run_concurrent
 from game_setup import game
 
@@ -30,7 +28,7 @@ class GameScreen(MDScreen, Screen):
         dialogue = game_screen.ids["dialogue"]
         action = game_screen.ids["action"]
 
-        def announce(text, *args):
+        def display(text, *args):
             dialogue.text = text
 
         def enable_checkboxes(action_text, *args):
@@ -60,14 +58,22 @@ class GameScreen(MDScreen, Screen):
                 card.opacity = 0
                 card.disabled = True
 
-        Clock.schedule_once(partial(announce, "Welcome to Mafia! I am your host ChadGPT"), 3)
-        Clock.schedule_once(partial(announce, "The night approaches, everyone falls asleep!"), 9)
-        Clock.schedule_once(partial(announce, "While everyone else is fast as asleep, the mafia wakes up. The mafia chooses who to eliminate tonight."), 15)
-        Clock.schedule_once(partial(enable_checkboxes, "Eliminate"), 18)
+        def countdown(t, clock_t):
+            for i in range(t+1):
+                Clock.schedule_once(partial(display, str(t-i)), clock_t + i)
+                Clock.schedule_once(partial(audio.play_audio, assets.UI_POP), clock_t + i)
 
-        Clock.schedule_once(partial(audio.play_audio, assets.WELCOME), 3)
-        Clock.schedule_once(partial(audio.play_audio, assets.GOODNIGHT), 9)
-        Clock.schedule_once(partial(audio.play_audio, assets.MAFIA), 15)
+        def announce(text, audio_file, clock_t):
+            Clock.schedule_once(partial(display, text), clock_t)
+            Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
+
+        announce(narrative.WELCOME, assets.WELCOME, 3)
+        announce(narrative.INTRO, assets.INTRO, 8)
+        countdown(15, 13)
+        announce(narrative.GOODNIGHT, assets.GOODNIGHT, 29)
+        announce(narrative.MAFIA, assets.MAFIA, 35)
+
+        Clock.schedule_once(partial(enable_checkboxes, "Eliminate"), 38)
 
     def on_checkbox_active(self, checkbox, value):
 
@@ -83,21 +89,21 @@ class GameScreen(MDScreen, Screen):
         action = game_screen.ids["action"]
         dialogue = game_screen.ids["dialogue"]
 
-        def announce(text):
+        def display(text, *args):
             dialogue.text = text
 
         action.disabled = True
 
         def investigate():
-            announce(selected_player.name + " is a " + selected_player.role)
+            display(selected_player.name + " is a " + selected_player.role)
 
         def eliminate():
             selected_player.die()
-            announce(selected_player.name + " has been eliminated!")
+            display(selected_player.name + " has been eliminated!")
 
         def heal():
             selected_player.heal()
-            announce(selected_player.name + " has been healed!")
+            display(selected_player.name + " has been healed!")
 
         match (action.text):
             case "Eliminate":
@@ -110,9 +116,18 @@ class GameScreen(MDScreen, Screen):
                 investigate()
                 return
 
-        action.text = choice(["Eliminate", "Investigate", "Heal"])
-
     def on_release(self):
+        game_screen = self.manager.get_screen('game')
+
+        dialogue = game_screen.ids["dialogue"]
+
+        def display(text, *args):
+            dialogue.text = text
+
+        def announce(text, audio_file, clock_t):
+            Clock.schedule_once(partial(display, text), clock_t)
+            Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
+
         def disable_checkboxes(*args):
             fadein = Animation(opacity=0)
 
@@ -124,24 +139,25 @@ class GameScreen(MDScreen, Screen):
 
         print("Continuing game...")
         disable_checkboxes()
+        announce(narrative.MAFIA_SLEEP, assets.MAFIA_SLEEP, 3)
 
         # print(dialogue.text)
         # def countdown(t):
         #     for i in range(t+1):
-        #         announce(str(t-i))
+        #         dialogue(str(t-i))
         #         wait(1)
         # def eliminate():
         #     print("Somebodies been eliminated!")
         # # audio.play_audio(assets.WELCOME)
         # wait(5)
-        # announce(narrative.intro)
+        # dialogue(narrative.intro)
         # audio.play_audio(assets.INTRO)
         # wait(5)
         # wait(1)
-        # announce("The night approaches, everyone falls asleep.")
+        # dialogue("The night approaches, everyone falls asleep.")
         # audio.play_audio(assets.GOODNIGHT)
         # wait(5)
-        # announce("The mafia wakes up and chooses who to eliminate tonight!")
+        # dialogue("The mafia wakes up and chooses who to eliminate tonight!")
         # audio.play_audio(assets.MAFIA)
         # wait(6)
         # # action.disabled = False
@@ -168,7 +184,7 @@ class GameScreen(MDScreen, Screen):
 
         popup = MDDialog(
             title="Quit Game",
-            text=narrative.quit_msg,
+            text=narrative.QUIT_MSG,
             auto_dismiss=False,
             buttons=[continue_btn, quit_btn],
 
@@ -181,6 +197,12 @@ class GameScreen(MDScreen, Screen):
 
         def quit_button_pressed(self):
             complete_quit(manager)
+            for event in list(Clock._events):
+                try:
+                    event.cancel()
+                except Exception:
+                    pass
+            Clock._events.clear()
 
         continue_btn.bind(on_release=popup.dismiss)
         quit_btn.bind(on_release=quit_button_pressed)
