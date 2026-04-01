@@ -1,7 +1,7 @@
 Minor contributions are welcome with a clear description.
 
 Current working directory: src/
-Current working file: app.py
+Run main.py
 
 Code Standards:
 - Variables and functions are in snake_case

@@ -6,8 +6,8 @@ class Game:
         self.plr_num = 4  # Number of players
         self.maf_num = 1  # Number of mafia
         self.discussion_time = 30  # Discussion time
-        self.include_doc = False  # Whether the game has a Doctor
-        self.include_det = False  # Whether the game has a Doctor
+        self.include_doc = True  # Whether the game has a Doctor
+        self.include_det = True  # Whether the game has a Detective
         self.anonymous_voting = False  # Whether the game has anonymous voting
         self.allow_skip = False  # Whether the game has anonymous voting
         self.execute_if_tie = False  # Whether the game has anonymous voting
@@ -46,6 +46,9 @@ class Game:
             if getattr(plr, "name", None) == name:
                 return plr
         raise ValueError(f"No player found with name={name!r}")
+
+    def set_stage(self, stage):
+        self.game_stage = stage
 
 
 game = Game()

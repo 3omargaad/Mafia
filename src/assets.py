@@ -12,3 +12,9 @@ INTRO = get_path("assets", "audio", "preset", "uk", "intro.ogg")
 GOODNIGHT = get_path("assets", "audio", "preset", "uk", "goodnight.ogg")
 MAFIA = get_path("assets", "audio", "preset", "uk", "mafia.ogg")
 MAFIA_SLEEP = get_path("assets", "audio", "preset", "uk", "mafia_sleep.ogg")
+DOCTOR = get_path("assets", "audio", "preset", "uk", "doctor.ogg")
+DOCTOR_SLEEP = get_path("assets", "audio", "preset", "uk", "doctor_sleep.ogg")
+DETECTIVE = get_path("assets", "audio", "preset", "uk", "detective.ogg")
+DETECTIVE_SLEEP = get_path(
+    "assets", "audio", "preset", "uk", "detective_sleep.ogg"
+)

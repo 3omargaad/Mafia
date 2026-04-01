@@ -9,12 +9,12 @@ class Player:
     # Initialises Default Attributes such as name, role, team, isAlive etc.
 
     def die(self):
-        self.isAlive = False
+        self.is_alive = False
     # Eliminates the player
 
     def heal(self):
-        if self.isAlive is False:
-            self.isAlive = True
+        if self.is_alive is False:
+            self.is_alive = True
     # Saves the player who has been aliminates
 
     def reveal_team(self):
@@ -27,7 +27,7 @@ class Player:
 
     def final_reveal(self):
         status = "Dead"
-        if self.isAlive:
+        if self.is_alive:
             status = "Alive"
 
         print(self.name + " is " + self.role + " (" + status + ")")

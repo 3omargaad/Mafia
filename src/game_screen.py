@@ -59,9 +59,14 @@ class GameScreen(MDScreen, Screen):
                 card.disabled = True
 
         def countdown(t, clock_t):
+            dialogue.font_size = 40
             for i in range(t+1):
                 Clock.schedule_once(partial(display, str(t-i)), clock_t + i)
-                Clock.schedule_once(partial(audio.play_audio, assets.UI_POP), clock_t + i)
+                Clock.schedule_once(
+                    partial(audio.play_audio, assets.UI_POP),
+                    clock_t + i
+                )
+            dialogue.font_size = 20
 
         def announce(text, audio_file, clock_t):
             Clock.schedule_once(partial(display, text), clock_t)
@@ -72,7 +77,7 @@ class GameScreen(MDScreen, Screen):
         countdown(15, 13)
         announce(narrative.GOODNIGHT, assets.GOODNIGHT, 29)
         announce(narrative.MAFIA, assets.MAFIA, 35)
-
+        game.set_stage("Mafia")
         Clock.schedule_once(partial(enable_checkboxes, "Eliminate"), 38)
 
     def on_checkbox_active(self, checkbox, value):
@@ -83,6 +88,27 @@ class GameScreen(MDScreen, Screen):
         print(str(checkbox.parent.text) + str(value))
         global selected_player
         selected_player = game.get_player(checkbox.parent.text)
+
+        match (action.text):
+            case "Eliminate":
+                if selected_player.role == "Mafia":
+                    action.disabled = value
+                else:
+                    action.disabled = not value
+                return
+            case "Heal":
+                if selected_player.role == "Doctor":
+                    action.disabled = value
+                else:
+                    action.disabled = not value
+                return
+            case "Investigate":
+                if selected_player.role == "Detective":
+                    action.disabled = value
+                else:
+                    action.disabled = not value
+                return
+        # Ensures Mafia, Doctor & Detective cannot use their role on themselves
 
     def on_press(self):
         game_screen = self.manager.get_screen('game')
@@ -118,7 +144,7 @@ class GameScreen(MDScreen, Screen):
 
     def on_release(self):
         game_screen = self.manager.get_screen('game')
-
+        action = game_screen.ids["action"]
         dialogue = game_screen.ids["dialogue"]
 
         def display(text, *args):
@@ -133,36 +159,40 @@ class GameScreen(MDScreen, Screen):
 
             for i in range(host.game.plr_num):
                 check = self.ids["check" + str(i+1)]
+                check.active = False
+                check.state = "normal"
                 check.disabled = True
                 check.value = False
                 fadein.start(check)
 
+        def enable_checkboxes(action_text, *args):
+            action.text = action_text
+            fadein = Animation(opacity=1)
+
+            for i in range(host.game.plr_num):
+                check = self.ids["check" + str(i+1)]
+                check.disabled = False
+                fadein.start(check)
+
         print("Continuing game...")
         disable_checkboxes()
-        announce(narrative.MAFIA_SLEEP, assets.MAFIA_SLEEP, 3)
 
-        # print(dialogue.text)
-        # def countdown(t):
-        #     for i in range(t+1):
-        #         dialogue(str(t-i))
-        #         wait(1)
-        # def eliminate():
-        #     print("Somebodies been eliminated!")
-        # # audio.play_audio(assets.WELCOME)
-        # wait(5)
-        # dialogue(narrative.intro)
-        # audio.play_audio(assets.INTRO)
-        # wait(5)
-        # wait(1)
-        # dialogue("The night approaches, everyone falls asleep.")
-        # audio.play_audio(assets.GOODNIGHT)
-        # wait(5)
-        # dialogue("The mafia wakes up and chooses who to eliminate tonight!")
-        # audio.play_audio(assets.MAFIA)
-        # wait(6)
-        # # action.disabled = False
-        # # action.on_press = eliminate()
-        # # action.text = "Eliminate"
+        if game.game_stage == "Mafia":
+            announce(narrative.MAFIA_SLEEP, assets.MAFIA_SLEEP, 3)
+            announce(narrative.DOCTOR, assets.DOCTOR, 9)
+            game.set_stage("Doctor")
+            Clock.schedule_once(partial(enable_checkboxes, "Heal"), 12)
+        elif game.game_stage == "Doctor":
+            announce(narrative.DOCTOR_SLEEP, assets.DOCTOR_SLEEP, 3)
+            announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
+            game.set_stage("Detective")
+            Clock.schedule_once(partial(enable_checkboxes, "Investigate"), 12)
+        elif game.game_stage == "Detective":
+            announce(narrative.DETECTIVE_SLEEP, assets.DETECTIVE_SLEEP, 3)
+            announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
+            game.set_stage("Morning")
+            
+
 
     def click(self):
         run_concurrent(audio.play_audio, assets.UI_CLICK)
