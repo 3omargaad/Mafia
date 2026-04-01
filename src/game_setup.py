@@ -14,6 +14,7 @@ class Game:
         self.host_name = "ChadGPT"  # Default host name
         self.host_accent = "uk"  # Default host accent
         self.game_stage = "Intro"  # The stage which the game is at
+        self.vote_count = 0  # Player number who last voted
 
         self.players = []  # List of players in game
         self.living_players = []  # List of living players in game

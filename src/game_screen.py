@@ -59,14 +59,12 @@ class GameScreen(MDScreen, Screen):
                 card.disabled = True
 
         def countdown(t, clock_t):
-            dialogue.font_size = 40
             for i in range(t+1):
                 Clock.schedule_once(partial(display, str(t-i)), clock_t + i)
                 Clock.schedule_once(
                     partial(audio.play_audio, assets.UI_POP),
                     clock_t + i
                 )
-            dialogue.font_size = 20
 
         def announce(text, audio_file, clock_t):
             Clock.schedule_once(partial(display, text), clock_t)
@@ -75,7 +73,7 @@ class GameScreen(MDScreen, Screen):
         announce(narrative.WELCOME, assets.WELCOME, 3)
         announce(narrative.INTRO, assets.INTRO, 8)
         countdown(15, 13)
-        announce(narrative.GOODNIGHT, assets.GOODNIGHT, 29)
+        announce(narrative.NIGHT, assets.NIGHT, 29)
         announce(narrative.MAFIA, assets.MAFIA, 35)
         game.set_stage("Mafia")
         Clock.schedule_once(partial(enable_checkboxes, "Eliminate"), 38)
@@ -131,6 +129,10 @@ class GameScreen(MDScreen, Screen):
             selected_player.heal()
             display(selected_player.name + " has been healed!")
 
+        def vote():
+            selected_player.add_vote()
+            display(selected_player.name + " has been voted!")
+
         match (action.text):
             case "Eliminate":
                 eliminate()
@@ -141,6 +143,9 @@ class GameScreen(MDScreen, Screen):
             case "Investigate":
                 investigate()
                 return
+            case "Vote":
+                vote()
+                return
 
     def on_release(self):
         game_screen = self.manager.get_screen('game')
@@ -150,9 +155,18 @@ class GameScreen(MDScreen, Screen):
         def display(text, *args):
             dialogue.text = text
 
+        def countdown(t, clock_t):
+            for i in range(t+1):
+                Clock.schedule_once(partial(display, str(t-i)), clock_t + i)
+                Clock.schedule_once(
+                    partial(audio.play_audio, assets.UI_POP),
+                    clock_t + i
+                )
+
         def announce(text, audio_file, clock_t):
             Clock.schedule_once(partial(display, text), clock_t)
-            Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
+            if audio_file:
+                Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
 
         def disable_checkboxes(*args):
             fadein = Animation(opacity=0)
@@ -174,7 +188,6 @@ class GameScreen(MDScreen, Screen):
                 check.disabled = False
                 fadein.start(check)
 
-        print("Continuing game...")
         disable_checkboxes()
 
         if game.game_stage == "Mafia":
@@ -189,10 +202,19 @@ class GameScreen(MDScreen, Screen):
             Clock.schedule_once(partial(enable_checkboxes, "Investigate"), 12)
         elif game.game_stage == "Detective":
             announce(narrative.DETECTIVE_SLEEP, assets.DETECTIVE_SLEEP, 3)
-            announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
-            game.set_stage("Morning")
-            
-
+            announce(narrative.MORNING, assets.MORNING, 7)
+            announce(narrative.VOTE, assets.VOTE, 11)
+            announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 16)
+            enable_checkboxes("Vote")
+            game.set_stage("Voting")
+        elif game.game_stage == "Voting":
+            game.vote_count += 1
+            if game.vote_count == len(game.living_players):
+                for plr in game.living_players:
+                    print(plr.name + " has " + str(plr.votes))
+            else:
+                announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 3)
+                enable_checkboxes("Vote")
 
     def click(self):
         run_concurrent(audio.play_audio, assets.UI_CLICK)

@@ -39,6 +39,8 @@ def assign_detective():
                 detective_player.role = "Detective"
                 break
 
+    # Chooses Player as doctor
+
 
 def assign_roles():
     assign_mafia()

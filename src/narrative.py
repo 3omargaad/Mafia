@@ -11,8 +11,8 @@ Roles will not be revealed until the end of the game."""
 
 WELCOME = "Welcome to Mafia! I am your host ChadGPT"
 INTRO = "The game has begun! You have 15 seconds to talk before night"
-GOODNIGHT = "The night approaches, everyone falls asleep!"
-MAFIA = """While everyone else is fast as asleep, the mafia wakes up.
+NIGHT = "The night approaches, everyone falls asleep!"
+MAFIA = """While everyone else is fast asleep, the mafia wakes up.
 The mafia chooses who to eliminate tonight."""
 MAFIA_SLEEP = "The mafia goes back to sleep."
 DOCTOR = """Soon after, the doctor wakes up,
@@ -21,4 +21,9 @@ DOCTOR_SLEEP = "The doctor goes back to sleep."
 DETECTIVE = """Then the detective wakes up,
 The detective chooses who to investigate tonight."""
 DETECTIVE_SLEEP = "The detective goes back to sleep."
+MORNING = "Good morning everyone!"
+UNFORTUNATELY = "Unfortunately, the following players are no longer alive:"
+FORTUNATELY = "Fortunately, eveyone is still alive."
+DISCUSS = "You have 30 seconds to discuss who you think is the mafia."
+VOTE = "Time's up! Now you must vote on which player to execute"
 # Displayed text associated with host audio
