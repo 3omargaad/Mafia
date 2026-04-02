@@ -146,7 +146,6 @@ class GameScreen(MDScreen, Screen):
                 if game.get_player(card.text).is_alive is False:
                     card.disabled = True
                     fadeout.start(card)
-                    game_screen.remove_widget(card)
         disable_checkboxes()
 
         def doctor_stage():
@@ -158,6 +157,21 @@ class GameScreen(MDScreen, Screen):
             announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
             game.set_stage("Detective")
             Clock.schedule_once(partial(enable_checkboxes, "Investigate"), 12)
+
+        def reveal_votes(*args):
+            fadein = Animation(opacity=1)
+
+            for i in range(host.game.plr_num):
+                n = str(i+1)
+                card = self.ids["name" + n]
+                vote = self.ids["vote" + n]
+                if not card.disabled:
+                    vote_num = game.get_player(card.text).votes
+                    if vote_num > 9:
+                        vote.icon = "numeric-9-plus-circle-outline"
+                    else:
+                        vote.icon = "numeric-" + str(vote_num) + "-circle-outline"
+                    fadein.start(vote)
 
         def voting():
             announce(narrative.MORNING, assets.MORNING, 7)
@@ -175,7 +189,7 @@ class GameScreen(MDScreen, Screen):
             announce(narrative.VOTE, assets.VOTE, 18)
             announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 22)
             enable_checkboxes("Vote")
-            game.set_stage("Voting")   
+            game.set_stage("Voting")
 
         if game.game_stage == "Mafia":
             announce(narrative.MAFIA_SLEEP, assets.MAFIA_SLEEP, 3)
@@ -199,6 +213,10 @@ class GameScreen(MDScreen, Screen):
             if game.vote_count == len(game.living_players):
                 for plr in game.living_players:
                     print(plr.name + " has " + str(plr.votes))
+                announce(narrative.REVEAL, assets.REVEAL, 3)
+                Clock.schedule_once(reveal_votes, 3)
+                announce(narrative.EXECUTION, assets.EXECUTION, 9)
+                # remove_card()
             else:
                 announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 3)
                 enable_checkboxes("Vote")

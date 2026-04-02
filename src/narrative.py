@@ -26,4 +26,6 @@ FORTUNATELY = "Fortunately, eveyone is still alive."
 UNFORTUNATELY = "Unfortunately, the following players are no longer alive:"
 DISCUSS = "You have 30 seconds to discuss who you think is the mafia."
 VOTE = "Time's up! Now you must vote on which player to execute"
+REVEAL = "It's time to reveal the votes!"
+EXECUTION = "It's execution time! The player being executed is..."
 # Displayed text associated with host audio
