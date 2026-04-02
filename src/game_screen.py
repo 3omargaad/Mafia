@@ -13,6 +13,7 @@ import narrative
 import assets
 import audio
 import host
+import game_stages
 
 # from host import wait
 
@@ -22,61 +23,7 @@ class GameScreen(MDScreen, Screen):
     selected_player = ""
 
     def on_enter(self):
-        player_screen = self.manager.get_screen('player')
-        game_screen = self.manager.get_screen('game')
-
-        dialogue = game_screen.ids["dialogue"]
-        action = game_screen.ids["action"]
-
-        def display(text, *args):
-            dialogue.text = text
-
-        def enable_checkboxes(action_text, *args):
-            action.text = action_text
-            fadein = Animation(opacity=1)
-
-            for i in range(host.game.plr_num):
-                check = self.ids["check" + str(i+1)]
-                check.disabled = False
-                fadein.start(check)
-
-        fadein = Animation(opacity=1)
-
-        for i in range(host.game.plr_num):
-            n = str(i+1)
-            card = self.ids["name" + n]
-
-            card.text = player_screen.ids["name" + n].text
-            card.disabled = False
-            fadein.start(card)
-
-        for i in range(16):
-            n = str(i+1)
-            card = self.ids["name" + n]
-
-            if player_screen.ids["name" + n].text == "":
-                card.opacity = 0
-                card.disabled = True
-
-        def countdown(t, clock_t):
-            for i in range(t+1):
-                Clock.schedule_once(partial(display, str(t-i)), clock_t + i)
-                Clock.schedule_once(
-                    partial(audio.play_audio, assets.UI_POP),
-                    clock_t + i
-                )
-
-        def announce(text, audio_file, clock_t):
-            Clock.schedule_once(partial(display, text), clock_t)
-            Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
-
-        announce(narrative.WELCOME, assets.WELCOME, 3)
-        announce(narrative.INTRO, assets.INTRO, 8)
-        countdown(15, 13)
-        announce(narrative.NIGHT, assets.NIGHT, 29)
-        announce(narrative.MAFIA, assets.MAFIA, 35)
-        game.set_stage("Mafia")
-        Clock.schedule_once(partial(enable_checkboxes, "Eliminate"), 38)
+        game_stages.intro()
 
     def on_checkbox_active(self, checkbox, value):
 
@@ -188,6 +135,17 @@ class GameScreen(MDScreen, Screen):
                 check.disabled = False
                 fadein.start(check)
 
+        def remove_card(*args):
+            fadeout = Animation(opacity=0)
+
+            for i in range(host.game.plr_num):
+                n = str(i+1)
+                card = self.ids["name" + n]
+
+                if game.get_player(card.text).is_alive is False:
+                    card.disabled = True
+                    fadeout.start(card)
+                    game_screen.remove_widget(card)
         disable_checkboxes()
 
         if game.game_stage == "Mafia":
@@ -203,8 +161,19 @@ class GameScreen(MDScreen, Screen):
         elif game.game_stage == "Detective":
             announce(narrative.DETECTIVE_SLEEP, assets.DETECTIVE_SLEEP, 3)
             announce(narrative.MORNING, assets.MORNING, 7)
-            announce(narrative.VOTE, assets.VOTE, 11)
-            announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 16)
+            game.remove_dead_players()
+
+            if len(game.living_players) == len(game.players):
+                announce(narrative.FORTUNATELY, assets.FORTUNATELY, 11)
+            else:
+                announce(narrative.UNFORTUNATELY, assets.UNFORTUNATELY, 11)
+                dead_list = "| "
+                for plr in game.dead_players:
+                    dead_list += plr.name + " | "
+                announce(dead_list, None, 15)
+                Clock.schedule_once(remove_card, 15)
+            announce(narrative.VOTE, assets.VOTE, 18)
+            announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 22)
             enable_checkboxes("Vote")
             game.set_stage("Voting")
         elif game.game_stage == "Voting":

@@ -6,8 +6,8 @@ class Game:
         self.plr_num = 4  # Number of players
         self.maf_num = 1  # Number of mafia
         self.discussion_time = 30  # Discussion time
-        self.include_doc = True  # Whether the game has a Doctor
-        self.include_det = True  # Whether the game has a Detective
+        self.include_doc = False  # Whether the game has a Doctor
+        self.include_det = False  # Whether the game has a Detective
         self.anonymous_voting = False  # Whether the game has anonymous voting
         self.allow_skip = False  # Whether the game has anonymous voting
         self.execute_if_tie = False  # Whether the game has anonymous voting
@@ -18,6 +18,7 @@ class Game:
 
         self.players = []  # List of players in game
         self.living_players = []  # List of living players in game
+        self.dead_players = []  # List of dead players in game
         self.skip_vote = 0  # Amount of people voting skip (if applicable)
         self.good_team_num = 3  # Default number of good team members
         self.bad_team_num = 1  # Default number of bad team members
@@ -50,6 +51,13 @@ class Game:
 
     def set_stage(self, stage):
         self.game_stage = stage
+
+    def remove_dead_players(self):
+        for plr in self.players:
+            if plr.is_alive is False:
+                self.living_players.remove(plr)
+                self.dead_players.append(plr)
+            # Removes dead players from list
 
 
 game = Game()

@@ -22,8 +22,8 @@ DETECTIVE = """Then the detective wakes up,
 The detective chooses who to investigate tonight."""
 DETECTIVE_SLEEP = "The detective goes back to sleep."
 MORNING = "Good morning everyone!"
-UNFORTUNATELY = "Unfortunately, the following players are no longer alive:"
 FORTUNATELY = "Fortunately, eveyone is still alive."
+UNFORTUNATELY = "Unfortunately, the following players are no longer alive:"
 DISCUSS = "You have 30 seconds to discuss who you think is the mafia."
 VOTE = "Time's up! Now you must vote on which player to execute"
 # Displayed text associated with host audio
