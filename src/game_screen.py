@@ -173,6 +173,16 @@ class GameScreen(MDScreen, Screen):
                         vote.icon = "numeric-" + str(vote_num) + "-circle-outline"
                     fadein.start(vote)
 
+        def remove_votes(*args):
+            fadeout = Animation(opacity=0)
+
+            for i in range(host.game.plr_num):
+                n = str(i+1)
+                card = self.ids["name" + n]
+                vote = self.ids["vote" + n]
+                if not card.disabled:
+                    fadeout.start(vote)
+
         def voting():
             announce(narrative.MORNING, assets.MORNING, 7)
             game.remove_dead_players()
@@ -216,6 +226,11 @@ class GameScreen(MDScreen, Screen):
                 announce(narrative.REVEAL, assets.REVEAL, 3)
                 Clock.schedule_once(reveal_votes, 3)
                 announce(narrative.EXECUTION, assets.EXECUTION, 9)
+
+                Clock.schedule_once(game.execute_voted_player, 13)
+                Clock.schedule_once(remove_card, 15)
+                Clock.schedule_once(remove_votes, 15)
+
                 # remove_card()
             else:
                 announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 3)

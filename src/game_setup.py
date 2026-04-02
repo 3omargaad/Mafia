@@ -1,3 +1,5 @@
+from random import choice
+
 from player import Player
 
 
@@ -17,6 +19,7 @@ class Game:
         self.vote_count = 0  # Player number who last voted
 
         self.players = []  # List of players in game
+        self.votes = []  # List of player votes
         self.living_players = []  # List of living players in game
         self.dead_players = []  # List of dead players in game
         self.skip_vote = 0  # Amount of people voting skip (if applicable)
@@ -58,6 +61,26 @@ class Game:
                 self.living_players.remove(plr)
                 self.dead_players.append(plr)
             # Removes dead players from list
+
+    def reset_votes(self):
+        self.vote_count = 0
+        self.votes.clear()
+        for plr in self.living_players:
+            plr.reset_vote()
+
+    def execute_voted_player(self, *args):
+        for plr in self.living_players:
+            self.votes.append(plr.votes)
+
+        max_vote = max(self.votes)
+        executed_players = []
+
+        for plr in self.living_players:
+            if plr.votes == max_vote:
+                executed_players.append(plr)
+
+        executed_player = choice(executed_players)
+        executed_player.die()
 
 
 game = Game()
