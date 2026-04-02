@@ -7,10 +7,15 @@ def get_sound(name):
 
 RYE = get_path("assets", "fonts", "Rye-Regular.ttf")
 
+WIN_IMG = get_path("assets", "images", "win_img.png")
+LOSE_IMG = get_path("assets", "images", "lose_img.png")
+
 UI_CLICK = get_path("assets", "audio", "preset", "common", "ui_click.ogg")
 UI_ENABLE = get_path("assets", "audio", "preset", "common", "ui_enable.ogg")
 UI_DISABLE = get_path("assets", "audio", "preset", "common", "ui_disable.ogg")
 UI_POP = get_path("assets", "audio", "preset", "common", "ui_pop.ogg")
+WIN = get_path("assets", "audio", "preset", "common", "win.ogg")
+LOSE = get_path("assets", "audio", "preset", "common", "lose.ogg")
 
 WELCOME = get_sound("welcome.ogg")
 INTRO = get_sound("intro.ogg")

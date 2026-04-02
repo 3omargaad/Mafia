@@ -1,0 +1,46 @@
+<EndScreen>:
+
+    MDLabel:
+        id: dialogue
+        text: "Mafia Wins"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        #size_hint: (0.7, 0.1)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "60dp"
+
+    # MDLabel:
+    #     id: result
+    #     text: "Good Team wins!"
+    #     pos_hint: {'center_x':0.5, 'center_y':0.3}
+    #     #size_hint: (0.7, 0.1)
+    #     halign: 'center'
+    #     font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+    #     color: "#F44336" # "#d73612ff"
+    #     font_size: "30dp"
+    
+    MDLabel:
+        text: "Here are all the players roles..."
+        pos_hint: {'center_x':0.5, 'center_y':0.3}
+        halign: 'center'
+        halign: 'center'
+        size_hint: (0.7, 0.1)
+
+    Image:
+        source: root.result_image
+        pos_hint: {'center_x':0.5, 'center_y':0.6}
+        size_hint: (0.6, 0.6)
+
+    MDRectangleFlatButton:
+        text: "Play Again"
+        id: action
+        #font_name: root.press_font
+        pos_hint: {'center_x':0.5, 'center_y':0.15}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+
+        on_release:
+            root.manager.transition.direction = "down"
+            root.manager.current = 'setup'
+            print("Start Game")
