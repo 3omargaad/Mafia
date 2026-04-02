@@ -11,6 +11,7 @@
         font_size: "60dp"
 
     MDLabel:
+        font_name: root.roboto_font
         text: "No. Players (" + str(root.plr_num) + ")"
         pos_hint: {'center_x':0.4, 'center_y':0.675}
         size_hint: (0.6, None)
@@ -26,6 +27,7 @@
             root.on_plr_slider_value(self)
 
     MDLabel:
+        font_name: root.roboto_font
         text: "No. Mafia (" + str(root.maf_num) + ")"
         pos_hint: {'center_x':0.4, 'center_y':0.575}
         size_hint: (0.6, None)
@@ -36,9 +38,12 @@
         max: root.max_maf
         step: 1
         size_hint: (0.4, None)
-        on_value: root.on_maf_slider_value(self)
+        on_value: 
+            root.slide()
+            root.on_maf_slider_value(self)
 
     MDLabel:
+        font_name: root.roboto_font
         text: "Add Doctor?"
         pos_hint: {'center_x':0.175, 'center_y':0.46}
         size_hint: (0.25, None)
@@ -50,6 +55,7 @@
 
     
     MDLabel:
+        font_name: root.roboto_font
         text: "Add Detective?"
         pos_hint: {'center_x':0.175, 'center_y':0.385}
         size_hint: (0.25, None)
@@ -60,6 +66,7 @@
             root.on_include_det_switch_active(self)
 
     MDLabel:
+        font_name: root.roboto_font
         text: "Anonymous Vote?"
         pos_hint: {'center_x':0.175, 'center_y':0.3}
         size_hint: (0.25, None)
@@ -69,6 +76,7 @@
         on_active:
 
     MDLabel:
+        font_name: root.roboto_font
         text: "Skip Vote?"
         pos_hint: {'center_x':0.6, 'center_y':0.46}
         size_hint: (0.25, None)
@@ -78,6 +86,7 @@
         on_active:
 
     MDLabel:
+        font_name: root.roboto_font
         text: "Execute If Tie?"
         pos_hint: {'center_x':0.6, 'center_y':0.385}
         size_hint: (0.25, None)
@@ -110,6 +119,7 @@
     
     MDRectangleFlatButton:
         text: "Continue"
+        font_name: root.roboto_font
         #font_name: root.press_font
         pos_hint: {'center_x':0.5, 'center_y':0.15}
         size_hint: (0.4, 0.1)

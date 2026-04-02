@@ -12,6 +12,7 @@ import audio
 
 class EndScreen(MDScreen, Screen):
     rye_font = assets.RYE
+    roboto_font = assets.ROBOTO
     result_image = assets.WIN_IMG
 
     def on_enter(self):

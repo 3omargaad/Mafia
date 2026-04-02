@@ -9,6 +9,7 @@ import audio
 
 class LoginScreen(MDScreen, Screen):
     rye_font = assets.RYE
+    roboto_font = assets.ROBOTO
 
     def account(self):
         print("Pressed")

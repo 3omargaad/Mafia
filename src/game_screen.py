@@ -20,6 +20,7 @@ import game_stages
 
 class GameScreen(MDScreen, Screen):
     rye_font = assets.RYE
+    roboto_font = assets.ROBOTO
     selected_player = ""
 
     def on_enter(self):
@@ -104,7 +105,7 @@ class GameScreen(MDScreen, Screen):
 
         def countdown(t, clock_t):
             for i in range(t+1):
-                Clock.schedule_once(partial(display, str(t-i)), clock_t + i)
+                Clock.schedule_once(partial(display, "[size=100]" + str(t-i) + "[/size]"), clock_t + i)
                 Clock.schedule_once(
                     partial(audio.play_audio, assets.UI_POP),
                     clock_t + i
@@ -148,18 +149,17 @@ class GameScreen(MDScreen, Screen):
                     game_screen.remove_widget(card)
         disable_checkboxes()
 
-        if game.game_stage == "Mafia":
-            announce(narrative.MAFIA_SLEEP, assets.MAFIA_SLEEP, 3)
+        def doctor_stage():
             announce(narrative.DOCTOR, assets.DOCTOR, 9)
             game.set_stage("Doctor")
             Clock.schedule_once(partial(enable_checkboxes, "Heal"), 12)
-        elif game.game_stage == "Doctor":
-            announce(narrative.DOCTOR_SLEEP, assets.DOCTOR_SLEEP, 3)
+
+        def detective_stage():
             announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
             game.set_stage("Detective")
             Clock.schedule_once(partial(enable_checkboxes, "Investigate"), 12)
-        elif game.game_stage == "Detective":
-            announce(narrative.DETECTIVE_SLEEP, assets.DETECTIVE_SLEEP, 3)
+
+        def voting():
             announce(narrative.MORNING, assets.MORNING, 7)
             game.remove_dead_players()
 
@@ -175,7 +175,25 @@ class GameScreen(MDScreen, Screen):
             announce(narrative.VOTE, assets.VOTE, 18)
             announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 22)
             enable_checkboxes("Vote")
-            game.set_stage("Voting")
+            game.set_stage("Voting")   
+
+        if game.game_stage == "Mafia":
+            announce(narrative.MAFIA_SLEEP, assets.MAFIA_SLEEP, 3)
+            if game.include_doc:
+                doctor_stage()
+            elif game.include_det:
+                detective_stage()
+            else:
+                voting()
+        elif game.game_stage == "Doctor":
+            announce(narrative.DOCTOR_SLEEP, assets.DOCTOR_SLEEP, 3)
+            if game.include_det:
+                detective_stage()
+            else:
+                voting()
+        elif game.game_stage == "Detective":
+            announce(narrative.DETECTIVE_SLEEP, assets.DETECTIVE_SLEEP, 3)
+            voting()
         elif game.game_stage == "Voting":
             game.vote_count += 1
             if game.vote_count == len(game.living_players):
@@ -218,12 +236,12 @@ class GameScreen(MDScreen, Screen):
 
         def quit_button_pressed(self):
             complete_quit(manager)
-            for event in list(Clock._events):
-                try:
-                    event.cancel()
-                except Exception:
-                    pass
-            Clock._events.clear()
+            # for event in list(Clock._events):
+            #     try:
+            #         event.cancel()
+            #     except Exception:
+            #         pass
+            # Clock._events.clear()
 
         continue_btn.bind(on_release=popup.dismiss)
         quit_btn.bind(on_release=quit_button_pressed)
