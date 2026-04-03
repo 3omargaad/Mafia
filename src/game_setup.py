@@ -17,6 +17,9 @@ class Game:
         self.host_accent = "uk"  # Default host accent
         self.game_stage = "Intro"  # The stage which the game is at
         self.vote_count = 0  # Player number who last voted
+        self.last_player_eliminated = None
+        self.doctor_player = None
+        self.detective_player = None
 
         self.players = []  # List of players in game
         self.votes = []  # List of player votes
@@ -25,7 +28,7 @@ class Game:
         self.skip_vote = 0  # Amount of people voting skip (if applicable)
         self.good_team_num = 3  # Default number of good team members
         self.bad_team_num = 1  # Default number of bad team members
-        self.winnning_team = ""  # Final winning team
+        self.winning_team = ""  # Final winning team
     # Initialises Default Attributes such as name, role, team, isAlive etc.
 
     def create_player(self, plr_name):
@@ -55,11 +58,18 @@ class Game:
     def set_stage(self, stage):
         self.game_stage = stage
 
-    def remove_dead_players(self):
-        for plr in self.players:
+    def remove_dead_players(self, *args):
+        for plr in self.living_players:
             if plr.is_alive is False:
+                self.last_player_eliminated = plr
                 self.living_players.remove(plr)
                 self.dead_players.append(plr)
+                if plr.team == "Bad":
+                    self.bad_team_num -= 1
+                elif plr.team == "Good":
+                    self.good_team_num -= 1
+                print("Good Team: " + str(self.good_team_num))
+                print("Bad Team: " + str(self.bad_team_num))
             # Removes dead players from list
 
     def reset_votes(self):
@@ -79,8 +89,18 @@ class Game:
             if plr.votes == max_vote:
                 executed_players.append(plr)
 
-        executed_player = choice(executed_players)
-        executed_player.die()
+        self.last_player_eliminated = choice(executed_players)
+        self.last_player_eliminated.die()
+
+    def game_is_over(self):
+        if self.bad_team_num == self.good_team_num:
+            self.winning_team = "Bad"
+            return True
+        elif self.bad_team_num == 0:
+            self.winning_team = "Good"
+            return True
+        else:
+            return False
 
 
 game = Game()

@@ -4,6 +4,7 @@ from kivymd.uix.screen import MDScreen, Screen
 
 from concurrency import run_concurrent
 
+from game_setup import game
 import assets
 import audio
 import host
@@ -33,14 +34,17 @@ class SetupScreen(MDScreen, Screen):
 
     def on_plr_slider_value(self, widget):
         self.plr_num = str(int(widget.value))
-        host.game.plr_num = int(widget.value)
+        game.plr_num = int(widget.value)
+        game.good_team_num = game.plr_num - game.bad_team_num
 
         self.max_maf = str((host.game.plr_num // 2) - 1)  # Sets max mafia val
         print(self.max_maf)
 
     def on_maf_slider_value(self, widget):
         self.maf_num = str(int(widget.value))
-        host.game.maf_num = int(widget.value)
+        game.maf_num = int(widget.value)
+        game.bad_team_num = int(widget.value)
+        game.good_team_num = game.plr_num - game.bad_team_num
         print(str(host.game.maf_num))
 
     def on_include_doc_switch_active(self, widget):

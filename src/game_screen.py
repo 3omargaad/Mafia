@@ -8,6 +8,9 @@ from kivymd.uix.button import MDFlatButton
 from functools import partial
 from concurrency import run_concurrent
 from game_setup import game
+from screen_manager import sm
+
+from random import randint
 
 import narrative
 import assets
@@ -71,6 +74,7 @@ class GameScreen(MDScreen, Screen):
 
         def eliminate():
             selected_player.die()
+            game.last_player_eliminated = selected_player
             display(selected_player.name + " has been eliminated!")
 
         def heal():
@@ -110,6 +114,10 @@ class GameScreen(MDScreen, Screen):
                     partial(audio.play_audio, assets.UI_POP),
                     clock_t + i
                 )
+
+        def leave(self, *args):
+            sm.transition.direction = "up"
+            sm.current = 'end'
 
         def announce(text, audio_file, clock_t):
             Clock.schedule_once(partial(display, text), clock_t)
@@ -151,12 +159,23 @@ class GameScreen(MDScreen, Screen):
         def doctor_stage():
             announce(narrative.DOCTOR, assets.DOCTOR, 9)
             game.set_stage("Doctor")
-            Clock.schedule_once(partial(enable_checkboxes, "Heal"), 12)
+            if game.doctor_player in game.living_players:
+                Clock.schedule_once(partial(enable_checkboxes, "Heal"), 12)
+            else:
+                announce("Doctor is dead.", None, 15)
+                if game.include_det:
+                    Clock.schedule_once(detective_stage, 15 + randint(1,7))
+                else:
+                    Clock.schedule_once(voting, 15 + randint(1,7))
 
         def detective_stage():
             announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
             game.set_stage("Detective")
-            Clock.schedule_once(partial(enable_checkboxes, "Investigate"), 12)
+            if game.detective_player in game.living_players:
+                Clock.schedule_once(partial(enable_checkboxes, "Investigate"), 12)
+            else:
+                announce("Detective is dead.", None, 15)
+                Clock.schedule_once(voting, 15 + randint(1,7))
 
         def reveal_votes(*args):
             fadein = Animation(opacity=1)
@@ -183,6 +202,16 @@ class GameScreen(MDScreen, Screen):
                 if not card.disabled:
                     fadeout.start(vote)
 
+            game.reset_votes()
+
+        def end(*args):
+            if game.game_is_over():
+                announce(narrative.GAME_OVER, assets.GAME_OVER, 1)
+                Clock.schedule_once(leave, 6)
+            else:
+                announce(narrative.GAME_CONTINUES, assets.GAME_CONTINUES, 1)
+                Clock.schedule_once(game_stages.night, 6)
+
         def voting():
             announce(narrative.MORNING, assets.MORNING, 7)
             game.remove_dead_players()
@@ -191,10 +220,7 @@ class GameScreen(MDScreen, Screen):
                 announce(narrative.FORTUNATELY, assets.FORTUNATELY, 11)
             else:
                 announce(narrative.UNFORTUNATELY, assets.UNFORTUNATELY, 11)
-                dead_list = "| "
-                for plr in game.dead_players:
-                    dead_list += plr.name + " | "
-                announce(dead_list, None, 15)
+                announce(game.last_player_eliminated.name, None, 15)
                 Clock.schedule_once(remove_card, 15)
             announce(narrative.VOTE, assets.VOTE, 18)
             announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 22)
@@ -228,10 +254,11 @@ class GameScreen(MDScreen, Screen):
                 announce(narrative.EXECUTION, assets.EXECUTION, 9)
 
                 Clock.schedule_once(game.execute_voted_player, 13)
-                Clock.schedule_once(remove_card, 15)
+                announce(game.last_player_eliminated.name, None, 15)
+                Clock.schedule_once(game.remove_dead_players, 14)
                 Clock.schedule_once(remove_votes, 15)
-
-                # remove_card()
+                Clock.schedule_once(remove_card, 18)
+                Clock.schedule_once(end, 19)
             else:
                 announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 3)
                 enable_checkboxes("Vote")
@@ -269,6 +296,7 @@ class GameScreen(MDScreen, Screen):
 
         def quit_button_pressed(self):
             complete_quit(manager)
+            game.__init__()  # Resets game for the next one
             # for event in list(Clock._events):
             #     try:
             #         event.cancel()

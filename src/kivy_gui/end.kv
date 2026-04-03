@@ -1,8 +1,20 @@
 <EndScreen>:
+    name: 'end'
 
     MDLabel:
-        id: dialogue
-        text: "Mafia Wins"
+        id: good
+        opacity: 0
+        text: "Good Team Wins"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        #size_hint: (0.7, 0.1)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        font_size: "60dp"
+
+    MDLabel:
+        id: bad
+        opacity: 0
+        text: "Bad Team Wins"
         pos_hint: {'center_x':0.5, 'center_y':0.85}
         #size_hint: (0.7, 0.1)
         halign: 'center'
@@ -29,7 +41,16 @@
         size_hint: (0.7, 0.1)
 
     Image:
-        source: root.result_image
+        id: win
+        opacity: 0
+        source: root.win_img
+        pos_hint: {'center_x':0.5, 'center_y':0.6}
+        size_hint: (0.6, 0.6)
+
+    Image:
+        id: lose
+        opacity: 0
+        source: root.lose_img
         pos_hint: {'center_x':0.5, 'center_y':0.6}
         size_hint: (0.6, 0.6)
 

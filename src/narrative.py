@@ -22,10 +22,12 @@ DETECTIVE = """Then the detective wakes up,
 The detective chooses who to investigate tonight."""
 DETECTIVE_SLEEP = "The detective goes back to sleep."
 MORNING = "Good morning everyone!"
-FORTUNATELY = "Fortunately, eveyone is still alive."
+FORTUNATELY = "Fortunately, everyone is still alive."
 UNFORTUNATELY = "Unfortunately, the following players are no longer alive:"
 DISCUSS = "You have 30 seconds to discuss who you think is the mafia."
 VOTE = "Time's up! Now you must vote on which player to execute"
 REVEAL = "It's time to reveal the votes!"
 EXECUTION = "It's execution time! The player being executed is..."
+GAME_OVER = "The game is over!"
+GAME_CONTINUES = "The game continues!"
 # Displayed text associated with host audio

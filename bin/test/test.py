@@ -1,13 +1,13 @@
-from kivy.lang import Builder
-from kivymd.app import MDApp
+class Thingy:
+    def __init__(self):
+        self.attribute = "Strange"
 
-KV = '''
-OneLineListItem:
-    text: "[size=48]One-line item with avatar[/size]"
-'''
+    def change(self):
+        self.attribute = "Normal"
 
-class MainApp(MDApp):
-    def build(self):
-        return Builder.load_string(KV)
 
-MainApp().run()   
+thing = Thingy()
+thing.change()
+print(thing.attribute)
+thing.__init__()
+print(thing.attribute)

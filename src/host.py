@@ -26,6 +26,7 @@ def assign_doctor():
             doctor_player = choice(game.players)
             if doctor_player.role != "Mafia":
                 doctor_player.role = "Doctor"
+                game.doctor_player = doctor_player
                 break
 
     # Chooses Player as doctor
@@ -37,6 +38,7 @@ def assign_detective():
             detective_player = choice(game.players)
             if detective_player.role not in ("Mafia", "Doctor"):
                 detective_player.role = "Detective"
+                game.detective_player = detective_player
                 break
 
     # Chooses Player as doctor
