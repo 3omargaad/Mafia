@@ -15,7 +15,6 @@ from random import randint
 import narrative
 import assets
 import audio
-import host
 import game_stages
 
 # from host import wait
@@ -127,7 +126,7 @@ class GameScreen(MDScreen, Screen):
         def disable_checkboxes(*args):
             fadein = Animation(opacity=0)
 
-            for i in range(host.game.plr_num):
+            for i in range(game.plr_num):
                 check = self.ids["check" + str(i+1)]
                 check.active = False
                 check.state = "normal"
@@ -139,7 +138,7 @@ class GameScreen(MDScreen, Screen):
             action.text = action_text
             fadein = Animation(opacity=1)
 
-            for i in range(host.game.plr_num):
+            for i in range(game.plr_num):
                 check = self.ids["check" + str(i+1)]
                 check.disabled = False
                 fadein.start(check)
@@ -147,7 +146,7 @@ class GameScreen(MDScreen, Screen):
         def remove_card(*args):
             fadeout = Animation(opacity=0)
 
-            for i in range(host.game.plr_num):
+            for i in range(game.plr_num):
                 n = str(i+1)
                 card = self.ids["name" + n]
 
@@ -164,9 +163,9 @@ class GameScreen(MDScreen, Screen):
             else:
                 announce("Doctor is dead.", None, 15)
                 if game.include_det:
-                    Clock.schedule_once(detective_stage, 15 + randint(1,7))
+                    Clock.schedule_once(detective_stage, 15 + randint(1, 7))
                 else:
-                    Clock.schedule_once(voting, 15 + randint(1,7))
+                    Clock.schedule_once(voting, 15 + randint(1, 7))
 
         def detective_stage():
             announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
@@ -175,12 +174,12 @@ class GameScreen(MDScreen, Screen):
                 Clock.schedule_once(partial(enable_checkboxes, "Investigate"), 12)
             else:
                 announce("Detective is dead.", None, 15)
-                Clock.schedule_once(voting, 15 + randint(1,7))
+                Clock.schedule_once(voting, 15 + randint(1, 7))
 
         def reveal_votes(*args):
             fadein = Animation(opacity=1)
 
-            for i in range(host.game.plr_num):
+            for i in range(game.plr_num):
                 n = str(i+1)
                 card = self.ids["name" + n]
                 vote = self.ids["vote" + n]
@@ -195,7 +194,7 @@ class GameScreen(MDScreen, Screen):
         def remove_votes(*args):
             fadeout = Animation(opacity=0)
 
-            for i in range(host.game.plr_num):
+            for i in range(game.plr_num):
                 n = str(i+1)
                 card = self.ids["name" + n]
                 vote = self.ids["vote" + n]

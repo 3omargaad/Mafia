@@ -9,7 +9,6 @@ from game_setup import game
 import narrative
 import assets
 import audio
-import host
 
 
 def night(*args):
@@ -20,7 +19,7 @@ def night(*args):
     def enable_checkboxes(action_text, *args):
         action.text = action_text
         fadein = Animation(opacity=1)
-        for i in range(host.game.plr_num):
+        for i in range(game.plr_num):
             check = game_screen.ids["check" + str(i+1)]
             check.disabled = False
             fadein.start(check)
@@ -47,7 +46,7 @@ def intro():
     def enable_checkboxes(action_text, *args):
         action.text = action_text
         fadein = Animation(opacity=1)
-        for i in range(host.game.plr_num):
+        for i in range(game.plr_num):
             check = game_screen.ids["check" + str(i+1)]
             check.disabled = False
             fadein.start(check)
@@ -61,7 +60,7 @@ def intro():
 
     fadein = Animation(opacity=1)
 
-    for i in range(host.game.plr_num):
+    for i in range(game.plr_num):
         n = str(i+1)
         card = game_screen.ids["name" + n]
         card.text = player_screen.ids["name" + n].text

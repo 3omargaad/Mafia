@@ -6,10 +6,10 @@ from kivymd.uix.button import MDFlatButton
 
 from concurrency import run_concurrent
 from narrative import ROLE_DESC
+from game_setup import game
 
 import assets
 import audio
-import host
 
 
 class RoleScreen(MDScreen, Screen):
@@ -19,17 +19,17 @@ class RoleScreen(MDScreen, Screen):
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
         role_screen = self.manager.get_screen('role')
-        print(host.game.players)
+        print(game.players)
         role_screen.ids.play.disabled = True
 
         fade_in = Animation(opacity=1)
 
         for card in role_screen.ids["cards"].children:
-            if card.value is not None and card.value <= host.game.plr_num:
+            if card.value is not None and card.value <= game.plr_num:
                 card.disabled = False
                 fade_in.start(card)
 
-        for i in range(host.game.plr_num):
+        for i in range(game.plr_num):
             alphabet = "abcdefghijklmnopqrstuvwxyz"
             n = str(i+1)
             initial = player_screen.ids["name" + n].text[0].lower()
@@ -38,7 +38,7 @@ class RoleScreen(MDScreen, Screen):
             self.ids["name" + n].text = player_screen.ids["name" + n].text
             if initial in alphabet:
                 icon.icon = "alpha-" + initial + "-circle-outline"
-        # for i in range(host.game.plr_num):
+        # for i in range(game.plr_num):
         #     self.ids["name" + str(i+1)].disabled = False
 
     def on_leave(self):
@@ -54,7 +54,7 @@ class RoleScreen(MDScreen, Screen):
 
         print("Pressed")
         print(card.value)
-        role = host.game.players[int(card.value) - 1].role
+        role = game.players[int(card.value) - 1].role
         extra = " Once this tab closes it won't open again."
         close_btn = MDFlatButton(
             text="Finish",

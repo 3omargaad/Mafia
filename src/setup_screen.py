@@ -3,11 +3,10 @@ from kivy.properties import StringProperty
 from kivymd.uix.screen import MDScreen, Screen
 
 from concurrency import run_concurrent
-
 from game_setup import game
+
 import assets
 import audio
-import host
 
 
 class SetupScreen(MDScreen, Screen):
@@ -37,7 +36,7 @@ class SetupScreen(MDScreen, Screen):
         game.plr_num = int(widget.value)
         game.good_team_num = game.plr_num - game.bad_team_num
 
-        self.max_maf = str((host.game.plr_num // 2) - 1)  # Sets max mafia val
+        self.max_maf = str((game.plr_num // 2) - 1)  # Sets max mafia val
         print(self.max_maf)
 
     def on_maf_slider_value(self, widget):
@@ -45,19 +44,19 @@ class SetupScreen(MDScreen, Screen):
         game.maf_num = int(widget.value)
         game.bad_team_num = int(widget.value)
         game.good_team_num = game.plr_num - game.bad_team_num
-        print(str(host.game.maf_num))
+        print(str(game.maf_num))
 
     def on_include_doc_switch_active(self, widget):
-        host.game.include_doc = widget.active
-        print(str(host.game.include_doc))
+        game.include_doc = widget.active
+        print(str(game.include_doc))
 
     def on_include_det_switch_active(self, widget):
-        host.game.include_det = widget.active
-        print(str(host.game.include_det))
+        game.include_det = widget.active
+        print(str(game.include_det))
 
     def on_continue(self, widget):
         print(self.ids)
-        print(host.game.plr_num)
+        print(game.plr_num)
 
     def click(self):
         run_concurrent(audio.play_audio, assets.UI_CLICK)

@@ -1,11 +1,6 @@
-from time import sleep
 from random import choice
 
 from game_setup import game
-
-
-def wait(t):
-    sleep(t)
 
 
 def assign_mafia():

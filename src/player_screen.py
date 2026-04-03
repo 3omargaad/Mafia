@@ -3,10 +3,11 @@ from kivy.animation import Animation
 from kivymd.uix.screen import MDScreen, Screen
 
 from concurrency import run_concurrent
+from game_setup import game
+from roles import assign_roles
 
 import assets
 import audio
-import host
 
 
 class PlayerScreen(MDScreen, Screen):
@@ -16,15 +17,15 @@ class PlayerScreen(MDScreen, Screen):
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
 
-        host.game.clear_player_list()
+        game.clear_player_list()
         fadein = Animation(opacity=1)
 
-        for i in range(host.game.plr_num):
+        for i in range(game.plr_num):
             text_field = self.ids["name" + str(i+1)]
             text_field.disabled = False
             fadein.start(text_field)
 
-        for i in range(host.game.plr_num):
+        for i in range(game.plr_num):
             text_field = self.ids["name" + str(i+1)]
             if text_field.text == "":
                 player_screen.ids.play.disabled = True
@@ -36,7 +37,7 @@ class PlayerScreen(MDScreen, Screen):
         player_screen = self.manager.get_screen('player')
         names = []
 
-        for i in range(host.game.plr_num):
+        for i in range(game.plr_num):
             plr_name = self.ids["name" + str(i+1)].text
             names.append(plr_name)
 
@@ -62,16 +63,16 @@ class PlayerScreen(MDScreen, Screen):
     def on_leave(self):
 
         def create_players(self):
-            for i in range(host.game.plr_num):
+            for i in range(game.plr_num):
                 plr_name = self.ids["name" + str(i+1)].text
                 print(plr_name)
-                host.game.create_player(plr_name)
-                print(host.game.players)
+                game.create_player(plr_name)
+                print(game.players)
 
         create_players(self)
-        host.assign_roles()
+        assign_roles()
 
-        for plr in host.game.players:
+        for plr in game.players:
             print(plr.name + "|" + plr.role)
 
         for i in range(16):
