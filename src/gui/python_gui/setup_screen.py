@@ -16,6 +16,20 @@ class SetupScreen(MDScreen, Screen):
     maf_num = StringProperty("1")
     max_maf = StringProperty("1")
 
+    def on_enter(self):
+        plr_num_slider = self.ids['plr_num_slider']
+        maf_num_slider = self.ids['maf_num_slider']
+        add_doc_switch = self.ids['add_doc_switch']
+        add_det_switch = self.ids['add_det_switch']
+
+        game.plr_num = int(plr_num_slider.value)
+        game.maf_num = int(maf_num_slider.value)
+        game.bad_team_num = game.maf_num
+        game.good_team_num = game.plr_num - game.bad_team_num
+
+        game.include_doc = bool(add_doc_switch.active)
+        game.include_det = bool(add_det_switch.active)
+
     def hover_on(self, widget):
         widget.bold = True
 

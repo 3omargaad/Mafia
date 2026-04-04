@@ -17,6 +17,7 @@
         size_hint: (0.6, None)
 
     MDSlider:
+        id: plr_num_slider
         pos_hint: {'center_x':0.6, 'center_y':0.675}
         min: 4
         max: 16
@@ -33,6 +34,7 @@
         size_hint: (0.6, None)
 
     MDSlider:
+        id: maf_num_slider
         pos_hint: {'center_x':0.6, 'center_y':0.575}
         min: 1
         max: root.max_maf
@@ -49,6 +51,7 @@
         size_hint: (0.25, None)
 
     MDSwitch:
+        id: add_doc_switch
         pos_hint: {'center_x':0.325, 'center_y':0.45}
         on_active:
             root.on_include_doc_switch_active(self)
@@ -61,6 +64,7 @@
         size_hint: (0.25, None)
     
     MDSwitch:
+        id: add_det_switch
         pos_hint: {'center_x':0.325, 'center_y':0.375}
         on_active:
             root.on_include_det_switch_active(self)
@@ -73,6 +77,7 @@
     
     MDSwitch:
         pos_hint: {'center_x':0.325, 'center_y':0.3}
+        disabled: True
         on_active:
 
     MDLabel:
@@ -83,6 +88,7 @@
     
     MDSwitch:
         pos_hint: {'center_x':0.75, 'center_y':0.45}
+        disabled: True
         on_active:
 
     MDLabel:
@@ -93,6 +99,8 @@
 
     MDSwitch:
         pos_hint: {'center_x':0.75, 'center_y':0.375}
+        active: True
+        disabled: True
         on_active:
     
     MDRoundFlatIconButton:
