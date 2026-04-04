@@ -14,7 +14,7 @@ class LoginScreen(MDScreen, Screen):
     def account(self):
         print("Pressed")
         popup = MDDialog(
-            title='Error',
+            title='Oops!',
             text="Account creation is currently unavailable."
         )
         popup.open()
