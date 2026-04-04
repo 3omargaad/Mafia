@@ -4,6 +4,7 @@ from kivy.animation import Animation
 from functools import partial
 
 from game_setup import game
+from screen_manager import sm
 
 import audio
 import assets
@@ -94,3 +95,8 @@ def remove_card(*args):
         if game.get_player(card.text).is_alive is False:
             card.disabled = True
             fadeout.start(card)
+
+
+def leave(*args):
+    sm.transition.direction = "up"
+    sm.current = 'end'

@@ -1,16 +1,11 @@
-from kivy.animation import Animation
 from kivy.clock import Clock
 
 from kivymd.uix.screen import MDScreen, Screen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 
-from functools import partial
 from concurrency import run_concurrent
 from game_setup import game
-from screen_manager import sm
-
-from random import randint
 
 import narrative
 import assets
@@ -101,77 +96,37 @@ class GameScreen(MDScreen, Screen):
                 return
 
     def on_release(self):
-
-        def leave(self, *args):
-            sm.transition.direction = "up"
-            sm.current = 'end'
-
         ui_control.disable_checkboxes()
-
-        def doctor_stage(*args):
-            ui_control.announce(narrative.DOCTOR, assets.DOCTOR, 9)
-            game.set_stage("Doctor")
-            if game.doctor_player in game.living_players:
-                Clock.schedule_once(partial(ui_control.enable_checkboxes, "Heal"), 12)
-            else:
-                ui_control.announce("Doctor is dead.", None, 15)
-                if game.include_det:
-                    Clock.schedule_once(detective_stage, 15 + randint(1, 7))
-                else:
-                    Clock.schedule_once(voting, 15 + randint(1, 7))
-
-        def detective_stage(*args):
-            ui_control.announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
-            game.set_stage("Detective")
-            if game.detective_player in game.living_players:
-                Clock.schedule_once(partial(ui_control.enable_checkboxes, "Investigate"), 12)
-            else:
-                ui_control.announce("Detective is dead.", None, 15)
-                Clock.schedule_once(voting, 15 + randint(1, 7))
 
         def end(*args):
             if game.game_is_over():
                 ui_control.announce(narrative.GAME_OVER, assets.GAME_OVER, 1)
-                Clock.schedule_once(leave, 6)
+                Clock.schedule_once(ui_control.leave, 6)
             else:
-                ui_control.announce(narrative.GAME_CONTINUES, assets.GAME_CONTINUES, 1)
+                ui_control.announce(
+                    narrative.GAME_CONTINUES, assets.GAME_CONTINUES, 1
+                )
                 Clock.schedule_once(game_stages.night, 6)
-
-        def voting(*args):
-            ui_control.announce(narrative.MORNING, assets.MORNING, 7)
-            game.remove_dead_players()
-
-            if len(game.living_players) == len(game.players):
-                ui_control.announce(narrative.FORTUNATELY, assets.FORTUNATELY, 11)
-            else:
-                ui_control.announce(narrative.UNFORTUNATELY, assets.UNFORTUNATELY, 11)
-                ui_control.announce(game.last_player_eliminated.name, None, 15)
-                Clock.schedule_once(ui_control.remove_card, 15)
-                ui_control.announce(narrative.DISCUSS, assets.DISCUSS, 18)
-                ui_control.countdown(30, 24)
-                Clock.schedule_once(ui_control.remove_card, 55)
-            ui_control.announce(narrative.VOTE, assets.VOTE, 58)
-            ui_control.announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 62)
-            Clock.schedule_once(partial(ui_control.enable_checkboxes, "Vote"), 60)
-            game.set_stage("Voting")
 
         if game.game_stage == "Mafia":
             ui_control.announce(narrative.MAFIA_SLEEP, assets.MAFIA_SLEEP, 3)
             if game.include_doc:
-                doctor_stage()
+                game_stages.doctor_stage()
             elif game.include_det:
-                detective_stage()
+                game_stages.game_stages.detective_stage()
             else:
-                voting()
+                game_stages.voting()
         elif game.game_stage == "Doctor":
             ui_control.announce(narrative.DOCTOR_SLEEP, assets.DOCTOR_SLEEP, 3)
             if game.include_det:
-                detective_stage()
+                game_stages.detective_stage()
             else:
-                voting()
+                game_stages.voting()
         elif game.game_stage == "Detective":
-            ui_control.announce(narrative.DETECTIVE_SLEEP, assets.DETECTIVE_SLEEP, 3)
-            voting()
+            ui_control.announce(
+                narrative.DETECTIVE_SLEEP, assets.DETECTIVE_SLEEP, 3
+            )
+            game_stages.voting()
         elif game.game_stage == "Voting":
             game.vote_count += 1
             if game.vote_count == len(game.living_players):
@@ -188,7 +143,12 @@ class GameScreen(MDScreen, Screen):
                 Clock.schedule_once(ui_control.remove_card, 18)
                 Clock.schedule_once(end, 19)
             else:
-                ui_control.announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 3)
+                ui_control.announce(
+                    game.living_players[game.vote_count].name
+                    + "'s turn to vote.",
+                    None,
+                    3
+                )
                 ui_control.enable_checkboxes("Vote")
 
     def click(self):
