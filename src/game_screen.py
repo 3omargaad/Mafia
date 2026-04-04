@@ -223,7 +223,7 @@ class GameScreen(MDScreen, Screen):
                 Clock.schedule_once(remove_card, 15)
             announce(narrative.VOTE, assets.VOTE, 18)
             announce(game.living_players[game.vote_count].name + "'s turn to vote.", None, 22)
-            enable_checkboxes("Vote")
+            Clock.schedule_once(partial(enable_checkboxes, "Vote"), 20)
             game.set_stage("Voting")
 
         if game.game_stage == "Mafia":
