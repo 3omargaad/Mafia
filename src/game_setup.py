@@ -32,6 +32,9 @@ class Game:
         self.winning_team = ""  # Final winning team
     # Initialises Default Attributes such as name, role, team, isAlive etc.
 
+    def get_last_player_eliminated(self):
+        return self.last_player_eliminated
+
     def create_player(self, plr_name):
         plr_object = Player(
             name=plr_name,
@@ -62,7 +65,6 @@ class Game:
     def remove_dead_players(self, *args):
         for plr in self.living_players:
             if plr.is_alive is False:
-                self.last_player_eliminated = plr
                 self.living_players.remove(plr)
                 self.dead_players.append(plr)
                 if plr.team == "Bad":
@@ -90,8 +92,8 @@ class Game:
             if plr.votes == max_vote:
                 executed_players.append(plr)
 
-        self.last_player_eliminated = choice(executed_players)
-        self.last_player_eliminated.die()
+        executed_player = choice(executed_players)
+        return executed_player
 
     def game_is_over(self):
         if self.bad_team_num == self.good_team_num:

@@ -135,9 +135,12 @@ class GameScreen(MDScreen, Screen):
                 ui_control.announce(narrative.REVEAL, assets.REVEAL, 3)
                 Clock.schedule_once(ui_control.reveal_votes, 3)
                 ui_control.announce(narrative.EXECUTION, assets.EXECUTION, 9)
-
+                executed_player = game.execute_voted_player()
+                executed_player.die()
                 Clock.schedule_once(game.execute_voted_player, 13)
-                ui_control.announce(game.last_player_eliminated.name, None, 15)
+                ui_control.announce(
+                    executed_player.name, None, 15
+                )
                 Clock.schedule_once(game.remove_dead_players, 14)
                 Clock.schedule_once(ui_control.remove_votes, 15)
                 Clock.schedule_once(ui_control.remove_card, 18)
