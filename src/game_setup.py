@@ -18,6 +18,7 @@ class Game:
         self.game_stage = "Intro"  # The stage which the game is at
         self.vote_count = 0  # Player number who last voted
         self.last_player_eliminated = None
+        self.mafia_players = []
         self.doctor_player = None
         self.detective_player = None
 

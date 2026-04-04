@@ -10,6 +10,7 @@ def assign_mafia():
             if mafia_player.role != "Mafia":
                 mafia_player.role = "Mafia"
                 mafia_player.team = "Bad"
+                game.mafia_players.append(mafia_player)
                 break
 
     # Chooses Player(s) as mafia
