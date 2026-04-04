@@ -1,9 +1,9 @@
-from login_screen import LoginScreen
-from setup_screen import SetupScreen
-from player_screen import PlayerScreen
-from role_screen import RoleScreen
-from game_screen import GameScreen
-from end_screen import EndScreen
+from gui.python_gui.login_screen import LoginScreen
+from gui.python_gui.setup_screen import SetupScreen
+from gui.python_gui.player_screen import PlayerScreen
+from gui.python_gui.role_screen import RoleScreen
+from gui.python_gui.game_screen import GameScreen
+from gui.python_gui.end_screen import EndScreen
 
 from screen_manager import sm
 

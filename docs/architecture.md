@@ -1,12 +1,21 @@
 src/
-    kivy_gui/
-        app.kv              | Main file to load all screens
-        common.kv           | Common widget attributes across screens
-        game.kv             | Holds game screen ui
-        login.kv            | Holds login screen ui
-        player.kv           | Holds player screen ui
-        role.kv             | Holds role screen ui
-        setup.kv            | Holds setup screen ui
+    gui/
+        kivy_gui/
+            app.kv              | Main file to load all Screens
+            common.kv           | Common widget attributes across Screens
+            end.kv              | Kivy code for End Screen UI
+            game.kv             | Kivy code for Game Screen UI
+            login.kv            | Kivy code for Login Screen UI
+            player.kv           | Kivy code for Player Screen UI
+            role.kv             | Kivy code for Role Screen UI
+            setup.kv            | Kivy code for Setup Screen UI
+        python_gui/
+            game_screen.py          | Python code for Game Screen Object
+            login_screen.py         | Python code for Login Screen Object
+            player_screen.py        | Python code for Player Screen Object
+            role_screen.py          | Python code for Role Screen Object
+            setup_screen.py         | Python code for Setup Screen Object
+            end_screen.py           | Python code for End Screen Object
 
     main.py                 | Runs the main program
     app.py                  | Sets up the application
@@ -16,10 +25,7 @@ src/
     audio.py                | Functionality for running audio
     game_setup.py           | Defines game object
     player.py               | Defines player object
-    narrative.py            | Stores in game text
+    narrative.py            | Stores core in game text
     concurrency.py          | Allows for threading
-    game_screen.py          | Python code for Game Screen Object
-    login_screen.py         | Python code for Login Screen Object
-    player_screen.py        | Python code for Player Screen Object
-    role_screen.py          | Python code for Role Screen Object
-    setup_screen.py         | Python code for Setup Screen Object
+    roles.py                | Assigns roles randomly
+    ui_control.py           | Main module for controllling ui changes

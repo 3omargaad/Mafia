@@ -16,7 +16,7 @@ from screens import setup_screens
 require('2.3.1')
 
 
-Builder.load_file("kivy_gui/app.kv")  # Loads kivy file
+Builder.load_file("gui/kivy_gui/app.kv")  # Loads kivy file
 
 
 class MafiaApp(MDApp):
