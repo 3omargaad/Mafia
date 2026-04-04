@@ -5,6 +5,11 @@ from time import sleep
 # from kivy.app import App
 
 from threading import Lock
+from kivy import Config
+
+from concurrency import run_concurrent
+
+Config.set('kivy', 'audio', 'ffpyplayer')
 
 _sound_cache = {}
 _cache_lock = Lock()
@@ -28,8 +33,12 @@ def play_audio(path, *args):
     # ensure safe restart instead of reloading
     if sound.state == 'play':
         sound.stop()
-    sleep(0.05)
     sound.play()
+
+    def unload():
+        sleep(31)
+        sound.unload()
+    run_concurrent(unload)
     return True
 
 # def play_audio(file):

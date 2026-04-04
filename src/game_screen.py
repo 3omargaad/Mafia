@@ -155,7 +155,7 @@ class GameScreen(MDScreen, Screen):
                     fadeout.start(card)
         disable_checkboxes()
 
-        def doctor_stage():
+        def doctor_stage(*args):
             announce(narrative.DOCTOR, assets.DOCTOR, 9)
             game.set_stage("Doctor")
             if game.doctor_player in game.living_players:
@@ -167,7 +167,7 @@ class GameScreen(MDScreen, Screen):
                 else:
                     Clock.schedule_once(voting, 15 + randint(1, 7))
 
-        def detective_stage():
+        def detective_stage(*args):
             announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
             game.set_stage("Detective")
             if game.detective_player in game.living_players:
@@ -211,7 +211,7 @@ class GameScreen(MDScreen, Screen):
                 announce(narrative.GAME_CONTINUES, assets.GAME_CONTINUES, 1)
                 Clock.schedule_once(game_stages.night, 6)
 
-        def voting():
+        def voting(*args):
             announce(narrative.MORNING, assets.MORNING, 7)
             game.remove_dead_players()
 
