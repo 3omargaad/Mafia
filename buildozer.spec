@@ -37,7 +37,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, gTTS==2.5.4, Kivy==2.3.1, KivyGradient==0.0.5, kivymd==1.0.2, pydub==0.25.1, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, pycairo
+requirements = python3, gTTS==2.5.4, Kivy==2.3.1, KivyGradient==0.0.5, kivymd==1.0.2, pydub==0.25.1, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
