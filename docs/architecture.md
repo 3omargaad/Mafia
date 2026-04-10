@@ -1,3 +1,40 @@
+assets/
+    audio/
+        player_names/
+            ...
+
+        preset/
+            uk/
+                detective_sleep.ogg
+                detective.ogg
+                discuss.ogg
+                doctor_sleep.ogg
+                doctor.ogg
+                execution.ogg
+                fortunately.ogg
+                game_continues.ogg
+                game_over.ogg
+                intro.ogg
+                mafia_sleep.ogg
+                mafia.ogg
+                morning.ogg
+                night.ogg
+                reveal.ogg
+                unfortunately.ogg
+                vote.ogg
+                welcome.ogg
+
+    fonts/
+        PressStart2P-Regular.ttf
+        RobotoSlab-Medium.ttf
+        Rye-Regular.ttf
+
+    images/
+        ...
+
+bin/
+    accents.py
+
 src/
     gui/
         kivy_gui/
@@ -9,6 +46,7 @@ src/
             player.kv           | Kivy code for Player Screen UI
             role.kv             | Kivy code for Role Screen UI
             setup.kv            | Kivy code for Setup Screen UI
+
         python_gui/
             game_screen.py          | Python code for Game Screen Object
             login_screen.py         | Python code for Login Screen Object
