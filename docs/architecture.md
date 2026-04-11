@@ -1,3 +1,4 @@
+# Architecture of Mafia Project
 assets/
     audio/
         player_names/
