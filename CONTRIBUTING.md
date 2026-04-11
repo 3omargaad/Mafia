@@ -1,10 +1,12 @@
 # Info for Contributing
 Minor contributions are welcome with a clear description.
 
-Run ```git clone ```
+## Get Started
+1) Run ```git clone https://github.com/3omargaad/Mafia.git``` in command line (make sure git is installed).
+2) Use a Virutal Environment running Python 3.11.2 Interpreter.
+3) Install requirements.txt to the virtual environment.
+4) Run ```src/main.py```. 
 
-Run ```src/main.py``` with requirements installed. 
-Use a Virutal Environment running Python 3.11.2 Interpreter
 
 Code Standards:
 - Variables and functions are in snake_case
