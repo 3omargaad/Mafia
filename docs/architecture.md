@@ -23,6 +23,8 @@ assets/
                 unfortunately.ogg
                 vote.ogg
                 welcome.ogg
+            
+            ...
 
     fonts/
         PressStart2P-Regular.ttf
@@ -31,9 +33,6 @@ assets/
 
     images/
         ...
-
-bin/
-    accents.py
 
 src/
     gui/
@@ -48,22 +47,29 @@ src/
             setup.kv            | Kivy code for Setup Screen UI
 
         python_gui/
-            game_screen.py          | Python code for Game Screen Object
-            login_screen.py         | Python code for Login Screen Object
-            player_screen.py        | Python code for Player Screen Object
-            role_screen.py          | Python code for Role Screen Object
-            setup_screen.py         | Python code for Setup Screen Object
-            end_screen.py           | Python code for End Screen Object
+            game_screen.py      | Python code for Game Screen Object
+            login_screen.py     | Python code for Login Screen Object
+            player_screen.py    | Python code for Player Screen Object
+            role_screen.py      | Python code for Role Screen Object
+            setup_screen.py     | Python code for Setup Screen Object
+            end_screen.py       | Python code for End Screen Object
 
-    main.py                 | Runs the main program
-    app.py                  | Sets up the application
-    background.py           | Creates the background gradient
-    screens.py              | Manages functionality of screens
-    assets.py               | Stores the paths to assets
-    audio.py                | Functionality for running audio
-    game_setup.py           | Defines game object
-    player.py               | Defines player object
-    narrative.py            | Stores core in game text
-    concurrency.py          | Allows for threading
-    roles.py                | Assigns roles randomly
-    ui_control.py           | Main module for controllling ui changes
+    main.py                     | Runs the main program
+    app.py                      | Sets up the application
+    background.py               | Creates the background gradient
+    concurrency.py              | Function which lets different functions run simultaneously
+    files.py                    | Allows different operating systems to access files
+    assets.py                   | Stores the paths to assets
+    audio.py                    | Functionality for running audio
+    game_setup.py               | Defines game object
+    game_stages.py              | Holds details of functions which occur in the main game stages
+    player.py                   | Defines player object
+    narrative.py                | Stores core in game text
+    concurrency.py              | Allows for threading
+    roles.py                    | Assigns roles randomly
+    screens.py                  | Sets up all the screens into one file for app.py
+    screen_manager.py           | Holds the screen_manager for global access
+    ui_control.py               | Main module for controllling ui changes
+
+script/
+    accents.py                  | Script for creating text-to-speech

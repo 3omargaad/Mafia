@@ -15,3 +15,5 @@ def setup_screens():
     sm.add_widget(GameScreen(name='game'))
     sm.add_widget(EndScreen(name='end'))
     sm.add_widget(SetupScreen(name='setup'))
+
+# Sets up the screens for app.py
