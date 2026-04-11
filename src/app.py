@@ -13,7 +13,7 @@ from screen_manager import sm
 from screens import setup_screens
 
 
-require('2.3.1')
+require('2.3.0')
 
 
 Builder.load_file("gui/kivy_gui/app.kv")  # Loads kivy file

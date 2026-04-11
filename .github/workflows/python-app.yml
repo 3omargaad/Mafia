@@ -112,7 +112,7 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip install --upgrade pip
-          pip install buildozer cython==3.0.11 kivy==2.3.1
+          pip install buildozer cython==3.0.11 kivy==2.3.0
 
       # Build with Buildozer
       - name: Build with Buildozer
