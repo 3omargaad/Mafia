@@ -1,4 +1,5 @@
 # Architecture of Mafia Project
+```
 assets/
     audio/
         player_names/
@@ -74,3 +75,4 @@ src/
 
 script/
     accents.py                  | Script for creating text-to-speech
+```
