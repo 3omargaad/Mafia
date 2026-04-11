@@ -12,4 +12,4 @@ Code Standards:
 - Objects are PascalCase
 - Lint code with Flake8 before commiting
 
-For more information on the project's organisation go to [link](docs/architecture.md "docs/architecture.md")
+For more information on the project's organisation go to [docs/architecture.md](https://github.com/3omargaad/Mafia/blob/main/docs/architecture.md)
