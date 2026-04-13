@@ -37,7 +37,8 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow, olefile
+requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow 
+
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
