@@ -1,11 +1,9 @@
-<img src="assets/images/mafia_icon.png" height="100px" width="100px"></a>
-### Play without a host/moderator
-
 # Mafia
+<img src="assets/images/mafia_icon.png" height="100px" width="100px"></a>
+### Play Mafia without a host/moderator
 
 This project is an offline mobile app for the social-deduction game Mafia. What makes this game different is that the device acts as the moderator/host allowing everyone in a group of people to play!
 
-Made with Python using the kivy and kivymd framework. This app is in development. 
+Made with Python using the [Kivy](https://github.com/kivy/kivy) and [KivyMD](https://github.com/kivymd/KivyMD) framework.
 
-Note: There is a chance that code the may not run on your local computer since this was developed on the Linux Operating System.
-Additional Note: Looking for someone who can help build the APK without it crashing.
+The main program for this app is complete, but I need help in making an APK file which does not crash. If you'd like to help out see [CONTRIBUTING.md](CONTRIBUTING.md)
