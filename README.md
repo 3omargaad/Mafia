@@ -1,3 +1,6 @@
+<img src="assets/images/mafia_icon.png" height="100px" width="100px"></a>
+### Play without a host/moderator
+
 # Mafia
 
 This project is an offline mobile app for the social-deduction game Mafia. What makes this game different is that the device acts as the moderator/host allowing everyone in a group of people to play!
