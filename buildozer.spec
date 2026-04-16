@@ -16,7 +16,7 @@ source.dir = src
 source.include_exts = py,png,jpg,kv,atlas,wav,ogg,ttf
 
 # (list) List of inclusions using pattern matching
-source.include_patterns = assets/fonts/*, assets/images/*, assets/audio/preset/common/*, assets/audio/preset/uk/*, src/*, src/gui/kivy_gui/*, src/gui/python_gui/*
+source.include_patterns = assets/fonts/*.ttf, assets/images/*.png, assets/audio/preset/common/*.ogg, assets/audio/preset/uk/*.ogg, src/*.py, src/gui/kivy_gui/*.kv, src/gui/python_gui/*.py
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
