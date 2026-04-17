@@ -58,8 +58,8 @@ class RoleScreen(MDScreen, Screen):
         extra = " Once this tab closes it won't open again."
         close_btn = MDFlatButton(
             text="Finish",
-            theme_text_color="Custom",
-            text_color=self.theme_cls.primary_color,
+            # theme_text_color="Custom",
+            # text_color=self.theme_cls.primary_color,
         )
 
         popup = MDDialog(
