@@ -1,5 +1,5 @@
 from kivy.lang import Builder
-from kivy.core.window import Window
+# from kivy.core.window import Window
 from kivy import require
 # Imports kivy sub-modules
 
@@ -24,7 +24,7 @@ class MafiaApp(MDApp):
         self.theme_cls.primary_palette = 'Red'
         self.theme_cls.primary_hue = '400'
         self.theme_cls.theme_style = 'Dark'  # Creates red/dark theme
-        Window.size = (360, 640)
+        # Window.size = (360, 640)
 
         root = bg
 
