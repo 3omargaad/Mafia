@@ -13,8 +13,8 @@ import audio
 
 
 class RoleScreen(MDScreen, Screen):
-    rye_font = assets.RYE
-    roboto_font = assets.ROBOTO
+    # rye_font = assets.RYE
+    # roboto_font = assets.ROBOTO
 
     def on_enter(self):
         player_screen = self.manager.get_screen('player')

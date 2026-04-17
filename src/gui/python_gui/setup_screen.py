@@ -10,8 +10,8 @@ import audio
 
 
 class SetupScreen(MDScreen, Screen):
-    rye_font = assets.RYE
-    roboto_font = assets.ROBOTO
+    # rye_font = assets.RYE
+    # roboto_font = assets.ROBOTO
     plr_num = StringProperty("4")
     maf_num = StringProperty("1")
     max_maf = StringProperty("1")

@@ -5,8 +5,8 @@ def get_sound(name):
     return get_path("assets", "audio", "preset", "uk", name)
 
 
-RYE = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
-ROBOTO = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
+# RYE = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
+# ROBOTO = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
 
 WIN_IMG = get_path("assets", "images", "win_img.png")
 LOSE_IMG = get_path("assets", "images", "lose_img.png")

@@ -13,8 +13,8 @@ import audio
 
 
 class EndScreen(MDScreen, Screen):
-    rye_font = assets.RYE
-    roboto_font = assets.ROBOTO
+    # rye_font = assets.RYE
+    # roboto_font = assets.ROBOTO
     win_img = assets.WIN_IMG
     lose_img = assets.LOSE_IMG
     winning_team = game.winning_team
