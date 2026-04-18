@@ -9,7 +9,7 @@ from kivy import Config
 
 from concurrency import run_concurrent
 
-Config.set('kivy', 'audio', 'ffpyplayer')
+# Config.set('kivy', 'audio', 'ffpyplayer')
 
 _sound_cache = {}
 _cache_lock = Lock()

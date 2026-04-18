@@ -168,8 +168,8 @@ class GameScreen(MDScreen, Screen):
 
         quit_btn = MDFlatButton(
             text="Quit",
-            theme_text_color="Custom",
-            text_color=self.theme_cls.primary_color,
+            # theme_text_color="Custom",
+            # text_color=self.theme_cls.primary_color,
         )
 
         popup = MDDialog(
