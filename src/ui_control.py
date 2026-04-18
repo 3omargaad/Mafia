@@ -1,6 +1,8 @@
 from kivy.clock import Clock
 from kivy.animation import Animation
 
+from plyer import tts
+
 from functools import partial
 
 from game_setup import game
@@ -62,6 +64,7 @@ def enable_checkboxes(action_text, *args):
 def announce(text, audio_file, clock_t):
     Clock.schedule_once(partial(display, text), clock_t)
     if audio_file:
+        Clock.schedule_once(partial(tts.speak, text), clock_t)
         Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
 
 # Pairs display() with audio if avaiable
