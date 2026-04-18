@@ -7,7 +7,7 @@ title = Mafia
 package.name = mafia
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = com.github.mafia
 
 # (str) Source code where the main.py live
 source.dir = src
