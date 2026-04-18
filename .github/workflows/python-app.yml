@@ -62,12 +62,10 @@ jobs:
             libunwind-dev \
             zlib1g-dev \
             autoconf-archive
-          sudo apt-get install -y \
-            libsqlite3-dev \
-            sqlite3 \
+            #libsqlite3-dev \
+            #sqlite3 \
             bzip2 \
             libbz2-dev \
-            zlib1g-dev \
             openssl \
             libgdbm-dev \
             libgdbm-compat-dev \
@@ -77,7 +75,6 @@ jobs:
             libgstreamer1.0 \
             gstreamer1.0-plugins-base \
             gstreamer1.0-plugins-good
-          sudo apt-get install -y \
             zip \
             unzip \
             autoconf \
@@ -112,7 +109,7 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip install --upgrade pip
-          pip install buildozer cython==3.0.11 kivy==2.3.0 plyer==2.1.0 olefile
+          pip install buildozer cython==3.0.11 kivy==2.3.0 ffpyplayer==4.5.3 plyer==2.1.0 olefile
 
       # Build with Buildozer
       - name: Build with Buildozer
