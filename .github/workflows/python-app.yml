@@ -62,8 +62,8 @@ jobs:
             libunwind-dev \
             zlib1g-dev \
             autoconf-archive
-            #libsqlite3-dev \
-            #sqlite3 \
+            libsqlite3-dev \
+            sqlite3 \
             bzip2 \
             libbz2-dev \
             openssl \
