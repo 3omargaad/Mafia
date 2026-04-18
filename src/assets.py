@@ -1,6 +1,8 @@
-from kivy.resources import resource_find
+from os import getcwd
+from kivy.resources import resource_find, resource_add_path
 from files import get_path
  
+resource_add_path(getcwd())  # Adds Current Working Directory as Resource Path
  
 def get_sound(name):
     return get_path("assets", "audio", "preset", "uk", name)
