@@ -62,10 +62,12 @@ jobs:
             libunwind-dev \
             zlib1g-dev \
             autoconf-archive
+          sudo apt-get install -y \
             libsqlite3-dev \
             sqlite3 \
             bzip2 \
             libbz2-dev \
+            zlib1g-dev \
             openssl \
             libgdbm-dev \
             libgdbm-compat-dev \
@@ -75,6 +77,7 @@ jobs:
             libgstreamer1.0 \
             gstreamer1.0-plugins-base \
             gstreamer1.0-plugins-good
+          sudo apt-get install -y \
             zip \
             unzip \
             autoconf \
