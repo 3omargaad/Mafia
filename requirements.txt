@@ -3,6 +3,7 @@ KivyGradient==0.0.5
 kivymd==1.2.0
 plyer==2.1.0
 ffpyplayer==4.5.3
+plyer==2.2.0
 #gTTS==2.5.4
 #pyinstaller
 #cython==0.29.34
