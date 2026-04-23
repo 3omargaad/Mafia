@@ -1,6 +1,7 @@
 # from pydub import AudioSegment
 # from pydub.playback import play
 from kivy.core.audio import SoundLoader
+from plyer import audio
 from time import sleep
 # from kivy.app import App
 
@@ -33,7 +34,7 @@ def play_audio(path, *args):
     # ensure safe restart instead of reloading
     if sound.state == 'play':
         sound.stop()
-    sound.play()
+    audio.play_sound()
 
     def unload():
         sleep(31)
