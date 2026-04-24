@@ -73,6 +73,7 @@ class SetupScreen(MDScreen, Screen):
         print(game.plr_num)
 
     def click(self):
+        do_vibrate()
         run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self, widget):
