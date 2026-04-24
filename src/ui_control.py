@@ -24,7 +24,7 @@ def countdown(t, clock_t):
     for i in range(t+1):
         Clock.schedule_once(partial(display, str(t-i)), clock_t + i)
         Clock.schedule_once(
-            partial(audio.play_audio, assets.UI_POP),
+            # partial(audio.play_audio, assets.UI_POP),
             clock_t + i
         )
 
@@ -61,9 +61,9 @@ def enable_checkboxes(action_text, *args):
 
 def announce(text, audio_file, clock_t):
     Clock.schedule_once(partial(display, text), clock_t)
-    if audio_file:
+    # if audio_file:
         # Clock.schedule_once(partial(tts.speak, text), clock_t)
-        Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
+        # Clock.schedule_once(partial(audio.play_audio, audio_file), clock_t)
 
 # Pairs display() with audio if avaiable
 
