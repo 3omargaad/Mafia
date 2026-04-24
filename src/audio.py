@@ -7,10 +7,12 @@ from time import sleep
 
 from threading import Lock
 from kivy import Config
+from os import environ
 
 from concurrency import run_concurrent
 
 Config.set('kivy', 'audio', 'sdl2')
+environ['KIVY_AUDIO'] = 'sdl2'
 
 _sound_cache = {}
 _cache_lock = Lock()
