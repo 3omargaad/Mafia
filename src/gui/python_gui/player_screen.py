@@ -80,7 +80,7 @@ class PlayerScreen(MDScreen, Screen):
             self.ids["name" + str(i+1)].opacity = 0
 
     def click(self):
-        do_vibrate()
+        #do_vibrate()
         run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self):
