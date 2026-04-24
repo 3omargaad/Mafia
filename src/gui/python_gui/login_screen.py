@@ -2,7 +2,7 @@ from kivymd.uix.screen import MDScreen, Screen
 from kivymd.uix.dialog import MDDialog
 
 from concurrency import run_concurrent
-from vibe import do_vibrate
+from vibe import vibrate
 
 import assets
 import audio
@@ -28,5 +28,5 @@ class LoginScreen(MDScreen, Screen):
         widget.bold = False
 
     def click(self):
-        #do_vibrate()
+        vibrate()
         run_concurrent(audio.play_audio, assets.UI_CLICK)

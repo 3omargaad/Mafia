@@ -5,6 +5,7 @@ from kivymd.uix.screen import MDScreen, Screen
 from concurrency import run_concurrent
 from game_setup import game
 from roles import assign_roles
+from vibe import vibrate
 
 import assets
 import audio
@@ -80,7 +81,7 @@ class PlayerScreen(MDScreen, Screen):
             self.ids["name" + str(i+1)].opacity = 0
 
     def click(self):
-        #do_vibrate()
+        vibrate()
         run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self):
