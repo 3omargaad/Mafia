@@ -1,4 +1,4 @@
 from plyer import vibrator
 
-def vibrate()
+def vibrate():
     vibrator.vibrate()
