@@ -6,4 +6,6 @@ This project is an offline mobile app for the social-deduction game Mafia. What 
 
 Made with Python using the [Kivy](https://github.com/kivy/kivy) and [KivyMD](https://github.com/kivymd/KivyMD) framework.
 
-The main program for this app is complete, but I need help in making an APK file which does not crash. If you'd like to help out see [CONTRIBUTING.md](CONTRIBUTING.md)
+The main program for this app is complete. The app's TextToSpeech does not work.
+
+If you'd like to help out see [CONTRIBUTING.md](CONTRIBUTING.md)
