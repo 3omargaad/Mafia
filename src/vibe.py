@@ -1,5 +1,5 @@
-from plyer import vibrator, tts
+from plyer import vibrator
+
 
 def vibrate():
     vibrator.vibrate()
-    tts.speak("Hello World!")
