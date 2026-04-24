@@ -7,7 +7,7 @@ title = Mafia
 package.name = mafia
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.github.mafia
+package.domain = org.test
 
 # (str) Source code where the main.py live
 source.dir = src
@@ -37,7 +37,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, plyer==2.1.0, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow, pyjnius
+requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow 
 
 
 # (str) Custom source folders for requirements
@@ -96,7 +96,7 @@ android.presplash_color = #202020
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
-android.permissions = VIBRATE #android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE, android.permission.READ_EXTERNAL_STORAGE, android.permission.MANAGE_EXTERNAL_STORAGE, 
+#android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE, android.permission.READ_EXTERNAL_STORAGE, android.permission.MANAGE_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -306,7 +306,7 @@ android.allow_backup = True
 # android.no-byte-compile-python = False
 
 # (str) The format used to package the app for release mode (aab or apk or aar).
-android.release_artifact = aab
+#android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aar).
 #android.debug_artifact = apk
@@ -337,7 +337,7 @@ p4a.branch = master
 #p4a.hook =
 
 # (str) Bootstrap to use for android builds
-p4a.bootstrap = sdl2
+# p4a.bootstrap = sdl2
 
 # (int) port number to specify an explicit --port= p4a argument (eg for bootstrap flask)
 #p4a.port =
@@ -412,7 +412,7 @@ warn_on_root = 1
 # build_dir = ./.buildozer
 
 # (str) Path to build output (i.e. .apk, .aab, .ipa) storage
-bin_dir = ./bin
+# bin_dir = ./bin
 
 #    -----------------------------------------------------------------------------
 #    List as sections

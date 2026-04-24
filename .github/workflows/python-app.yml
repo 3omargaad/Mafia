@@ -112,14 +112,14 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip install --upgrade pip
-          pip install buildozer cython==3.0.11 kivy==2.3.0 plyer==2.1.0 olefile pyjnius #android
+          pip install buildozer cython==3.0.11 kivy==2.3.0, olefile
 
       # Build with Buildozer
       - name: Build with Buildozer
         id: buildozer
         run: |
           yes | buildozer -v android debug
-          yes | buildozer -v android release
+        # yes | buildozer -v android release
         # run this for generating aab (Android App Bundle) [Required by google play]
 
       # Upload artifacts
