@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0920ea8-1dfd-473a-a029-e4f180c6a658" name="Changes" comment="Switched IDE to PyCharm" />
+    <list default="true" id="e0920ea8-1dfd-473a-a029-e4f180c6a658" name="Changes" comment="Switched IDE to PyCharm">
+      <change afterPath="$PROJECT_DIR$/src/gui/kivy_gui/tutorial.kv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/python_gui/tutorial_screen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/mafia_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/mafia_icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/background.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/kivy_gui/app.kv" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/kivy_gui/app.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/kivy_gui/login.kv" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/kivy_gui/start.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/kivy_gui/setup.kv" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/kivy_gui/setup.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/python_gui/login_screen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/python_gui/start_screen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui_control.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="3fcb4b10af79ba79742137a2b07e97ee0c61bef7" />
+        <entry key="$PROJECT_DIR$" value="dc668ac0948e2c5d2bc93c712d1454538953b7e7" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,10 +71,11 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "dc668ac0",
+    "git-widget-placeholder": "APK",
     "last_opened_file_path": "/home/ohms/Mafia/Mafia",
     "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -74,8 +89,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (Mafia)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
@@ -111,7 +127,8 @@
       <option name="presentableId" value="Default" />
       <updated>1778783729470</updated>
       <workItem from="1778783732481" duration="3741000" />
-      <workItem from="1778788023674" duration="706000" />
+      <workItem from="1778788023674" duration="970000" />
+      <workItem from="1778830344532" duration="105000" />
     </task>
     <task id="LOCAL-00001" summary="Switched IDE to PyCharm">
       <option name="closed" value="true" />
@@ -121,7 +138,23 @@
       <option name="project" value="LOCAL" />
       <updated>1778787022406</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Switched IDE to PyCharm">
+      <option name="closed" value="true" />
+      <created>1778790940793</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1778790940793</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Switched IDE to PyCharm">
+      <option name="closed" value="true" />
+      <created>1778791023769</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1778791023769</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

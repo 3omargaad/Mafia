@@ -1,0 +1,51 @@
+<TutorialScreen>:
+    name: 'tutorial'
+
+    MDLabel:
+        text: "Tutorial"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.7, None)
+        halign: 'center'
+        font_name: root.rye_font
+        color: "#F44336" # "#d73612ff""
+        font_size: "30dp"
+
+    GridLayout:
+        rows: 3
+        cols: 1
+        size_hint_y: None
+        height: self.minimum_height
+        width: self.minimum_width
+        spacing: "20dp"
+        padding: "20dp"
+
+        MDCard:
+            MDLabel:
+                text: "Never Gonna Give you up"
+        MDCard:
+            MDLabel:
+                text: "Never Gonna let you down"
+        MDCard:
+            MDLabel:
+                text: "Never Gonna run around and desert you"
+
+    MDRoundFlatIconButton:
+        size_hint: (None, None)
+        size: (dp(64), dp(64))
+        pos_hint: {"center_x": 0.1, "center_y": 0.85}
+        line_color: [0,0,0,0]
+
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.current = 'start'
+            print("Start Game")
+
+        MDIcon:
+            icon_size: dp(128)
+            theme_text_color: "Custom"  # Set text color to custom
+            text_color: "#F44336"  # Use accent color for the icon
+            icon: "arrow-left-bold-circle-outline"
+            icon_align: "center"
+            size_hint: (None, None)
+            size: (dp(64), dp(64))  # Set a size for the icon
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center the icon

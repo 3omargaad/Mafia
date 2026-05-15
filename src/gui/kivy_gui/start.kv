@@ -1,0 +1,40 @@
+<StartScreen>:
+    name: 'start'
+
+    MDLabel:
+        text: "Mafia"
+        pos_hint: {'center_x':0.5, 'center_y':0.85}
+        size_hint: (0.7, None)
+        halign: 'center'
+        font_name: root.rye_font# "assets\\fonts\\Rye-Regular.ttf"
+        color: "#F44336" # "#d73612ff"
+        font_size: "60dp"
+
+    Image:
+        source: root.icon
+        icon_align: "center"
+        size_hint: (None, None)
+        size: (dp(256), dp(256))  # Set a size for the icon
+        pos_hint: {"center_x": 0.5, "center_y": 0.6}  # Center the icon
+
+    MDRectangleFlatButton:
+        text: "Get Started"
+        font_name: root.roboto_font
+        pos_hint: {'center_x':0.5, 'center_y':0.325}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = 'setup'
+    
+    MDRectangleFlatButton:
+        text: "How to Play"
+        font_name: root.roboto_font
+        pos_hint: {'center_x':0.5, 'center_y':0.2}
+        size_hint: (0.4, 0.1)
+        font_size: "20dp"
+
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = 'tutorial'

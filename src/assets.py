@@ -8,11 +8,12 @@ def get_sound(name):
     return get_path("assets", "audio", "preset", "uk", name)
 
 
-# RYE = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
-# ROBOTO = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
+RYE = get_path("assets", "fonts", "Rye-Regular.ttf")
+ROBOTO = get_path("assets", "fonts", "RobotoSlab-Medium.ttf")
 
 WIN_IMG = resource_find(get_path("assets", "images", "win_img.png"))
 LOSE_IMG = resource_find(get_path("assets", "images", "lose_img.png"))
+MAIN_IMG = resource_find(get_path("assets", "images", "mafia_icon.png"))
 
 UI_CLICK = resource_find(get_path("assets", "audio", "preset", "common", "ui_click.ogg"))
 UI_ENABLE = resource_find(get_path("assets", "audio", "preset", "common", "ui_enable.ogg"))

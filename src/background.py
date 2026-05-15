@@ -13,9 +13,9 @@ class BackgroundManager(FloatLayout):
                 size=self.size,
                 pos=self.pos,
                 texture=Gradient.vertical(
-                    get_color_from_hex("000505"),
-                    get_color_from_hex("202020"),
-                    get_color_from_hex("000505"),
+                    #get_color_from_hex("000505"),
+                    get_color_from_hex("070505"),
+                    #get_color_from_hex("000505"),
                 )
             )
         self.bind(size=self._update_rect, pos=self._update_rect)

@@ -7,9 +7,10 @@ import assets
 import audio
 
 
-class LoginScreen(MDScreen, Screen):
-    # rye_font = assets.RYE
-    # roboto_font = assets.ROBOTO
+class StartScreen(MDScreen, Screen):
+    rye_font = assets.RYE
+    roboto_font = assets.ROBOTO
+    icon = assets.MAIN_IMG
 
     def account(self):
         print("Pressed")
