@@ -1,4 +1,6 @@
 # Mafia
+[![Android Build](https://github.com/3omargaad/Mafia/actions/workflows/python-app.yml/badge.svg)](https://github.com/3omargaad/Mafia/actions/workflows/python-app.yml)
+
 <img src="assets/images/mafia_icon.png" height="100px" width="100px"></a>
 ### Play Mafia without a host/moderator
 
