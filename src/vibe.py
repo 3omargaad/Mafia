@@ -2,4 +2,5 @@ from plyer import vibrator
 
 
 def vibrate():
-    vibrator.vibrate()
+    #vibrator.vibrate()
+    pass
