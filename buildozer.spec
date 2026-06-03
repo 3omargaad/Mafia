@@ -37,7 +37,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow 
+requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckio, materialyoucolor==3.0.1, Pillow==10.1.0, pyjnius==1.6.1, android
 
 
 # (str) Custom source folders for requirements
@@ -323,6 +323,7 @@ android.allow_backup = True
 
 # (str) python-for-android branch to use, defaults to master
 p4a.branch = master
+p4a.pip_install_flags = --prefer-binary
 
 # (str) python-for-android specific commit to use, defaults to HEAD, must be within p4a.branch
 #p4a.commit = HEAD
