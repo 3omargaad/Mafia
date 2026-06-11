@@ -29,7 +29,7 @@ source.exclude_dirs = tests, bin, venv, docs, script
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 1.0
+version = 1.1
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -37,7 +37,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckio, materialyoucolor==3.0.1, Pillow==9.5.0, pyjnius==1.6.1, android
+requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow 
 
 
 # (str) Custom source folders for requirements
@@ -102,10 +102,10 @@ android.presplash_color = #202020
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 36
+android.api = 36
 
 # (int) Minimum API your APK / AAB will support.
-#android.minapi = 30
+android.minapi = 30
 
 # (int) Android SDK version to use
 #android.sdk = 20
@@ -251,7 +251,7 @@ android.accept_sdk_license = True
 
 # (list) Android additional libraries to copy into libs/armeabi
 #android.add_libs_armeabi = libs/android/*.so
-android.add_libs_armeabi_v7a = libs/android-v7/*.so
+#android.add_libs_armeabi_v7a = libs/android-v7/*.so
 android.add_libs_arm64_v8a = libs/android-v8/*.so
 #android.add_libs_x86 = libs/android-x86/*.so
 #android.add_libs_mips = libs/android-mips/*.so
@@ -284,7 +284,7 @@ android.add_libs_arm64_v8a = libs/android-v8/*.so
 
 # (list) The Android archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
@@ -323,7 +323,6 @@ android.allow_backup = True
 
 # (str) python-for-android branch to use, defaults to master
 p4a.branch = master
-p4a.pip_install_flags = --prefer-binary
 
 # (str) python-for-android specific commit to use, defaults to HEAD, must be within p4a.branch
 #p4a.commit = HEAD
