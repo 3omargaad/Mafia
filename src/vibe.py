@@ -1,4 +1,7 @@
 from plyer import vibrator
 
 def vibrate():
-    vibrator.vibrate()
+    try:
+        vibrator.vibrate()
+    except NotImplementedError:
+        print("Vibrator not implemented on device.")
