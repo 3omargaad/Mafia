@@ -5,7 +5,6 @@ from kivymd.uix.screen import MDScreen, Screen
 from concurrency import run_concurrent
 from game_setup import game
 from roles import assign_roles
-from vibe import vibrate
 
 import assets
 import audio
@@ -13,7 +12,7 @@ import audio
 
 class PlayerScreen(MDScreen, Screen):
     # rye_font = assets.RYE
-    # roboto_font = assets.ROBOTO
+    roboto_font = assets.ROBOTO
 
     def on_enter(self):
         player_screen = self.manager.get_screen('player')
@@ -81,7 +80,6 @@ class PlayerScreen(MDScreen, Screen):
             self.ids["name" + str(i+1)].opacity = 0
 
     def click(self):
-        vibrate()
         run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self):

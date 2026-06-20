@@ -6,6 +6,7 @@ from random import randint
 
 from screen_manager import sm
 from game_setup import game
+from vibe import vibrate
 
 import narrative
 import assets
@@ -43,12 +44,14 @@ def intro():
     ui_control.announce(narrative.INTRO, assets.INTRO, 8)
     ui_control.countdown(15, 13)
     ui_control.announce(narrative.NIGHT, assets.NIGHT, 29)
+    Clock.schedule_once(vibrate, 35)
     ui_control.announce(narrative.MAFIA, assets.MAFIA, 35)
     game.set_stage("Mafia")
     Clock.schedule_once(partial(ui_control.enable_checkboxes, "Eliminate"), 38)
 
 
 def doctor_stage(*args):
+    Clock.schedule_once(vibrate, 9)
     ui_control.announce(narrative.DOCTOR, assets.DOCTOR, 9)
     game.set_stage("Doctor")
     if game.doctor_player in game.living_players:
@@ -62,6 +65,7 @@ def doctor_stage(*args):
 
 
 def detective_stage(*args):
+    Clock.schedule_once(vibrate, 9)
     ui_control.announce(narrative.DETECTIVE, assets.DETECTIVE, 9)
     game.set_stage("Detective")
     if game.detective_player in game.living_players:
@@ -83,6 +87,9 @@ def end(*args):
 
 
 def voting(*args):
+    Clock.schedule_once(vibrate, 5)
+    Clock.schedule_once(vibrate, 6)
+    Clock.schedule_once(vibrate, 7)
     ui_control.announce(narrative.MORNING, assets.MORNING, 7)
     game.remove_dead_players()
     if len(game.living_players) == len(game.players):
@@ -91,9 +98,10 @@ def voting(*args):
         ui_control.announce(narrative.UNFORTUNATELY, assets.UNFORTUNATELY, 11)
         ui_control.announce(game.last_player_eliminated.name, None, 15)
         Clock.schedule_once(ui_control.remove_card, 15)
-        ui_control.announce(narrative.DISCUSS, assets.DISCUSS, 18)
-        ui_control.countdown(30, 24)
-        Clock.schedule_once(ui_control.remove_card, 55)
+
+    ui_control.announce(narrative.DISCUSS, assets.DISCUSS, 18)
+    ui_control.countdown(30, 24)
+    Clock.schedule_once(ui_control.remove_card, 55)
     ui_control.announce(narrative.VOTE, assets.VOTE, 58)
     ui_control.announce(
         game.living_players[game.vote_count].name + "'s turn to vote.",

@@ -1,4 +1,6 @@
 # Mafia
+[![Android Build](https://github.com/3omargaad/Mafia/actions/workflows/python-app.yml/badge.svg)](https://github.com/3omargaad/Mafia/actions/workflows/python-app.yml)
+
 <img src="assets/images/mafia_icon.png" height="100px" width="100px"></a>
 ### Play Mafia without a host/moderator
 
@@ -6,4 +8,11 @@ This project is an offline mobile app for the social-deduction game Mafia. What 
 
 Made with Python using the [Kivy](https://github.com/kivy/kivy) and [KivyMD](https://github.com/kivymd/KivyMD) framework.
 
-The main program for this app is complete, but I need help in making an APK file which does not crash. If you'd like to help out see [CONTRIBUTING.md](CONTRIBUTING.md)
+The main program for this app is complete. Currently, the app's TextToSpeech does not work.
+
+To get a better understanding of the project, read:
+- [problem.md](docs/problem.md) 
+- [values.md](docs/problem.md) 
+- [design-decisions.md](docs/design-decisions.md) 
+
+If you'd like to help out see [CONTRIBUTING.md](CONTRIBUTING.md)

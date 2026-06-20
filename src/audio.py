@@ -1,7 +1,6 @@
 # from pydub import AudioSegment
 # from pydub.playback import play
 from kivy.core.audio import SoundLoader
-from plyer import audio
 from time import sleep
 # from kivy.app import App
 
@@ -10,7 +9,7 @@ from kivy import Config
 
 from concurrency import run_concurrent
 
-Config.set('kivy', 'audio', 'sdl2')
+Config.set('kivy', 'audio', 'ffpyplayer')
 
 _sound_cache = {}
 _cache_lock = Lock()
@@ -34,7 +33,7 @@ def play_audio(path, *args):
     # ensure safe restart instead of reloading
     if sound.state == 'play':
         sound.stop()
-    audio.play_sound()
+    sound.play()
 
     def unload():
         sleep(31)

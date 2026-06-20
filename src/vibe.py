@@ -1,5 +1,6 @@
 from plyer import vibrator
 
+
 def vibrate():
     try:
         vibrator.vibrate()

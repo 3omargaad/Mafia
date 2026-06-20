@@ -1,8 +1,6 @@
 from kivy.clock import Clock
 from kivy.animation import Animation
 
-from plyer import tts
-
 from functools import partial
 
 from game_setup import game

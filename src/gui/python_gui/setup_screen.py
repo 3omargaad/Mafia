@@ -4,7 +4,6 @@ from kivymd.uix.screen import MDScreen, Screen
 
 from concurrency import run_concurrent
 from game_setup import game
-from vibe import vibrate
 
 import assets
 import audio
@@ -12,7 +11,7 @@ import audio
 
 class SetupScreen(MDScreen, Screen):
     # rye_font = assets.RYE
-    # roboto_font = assets.ROBOTO
+    roboto_font = assets.ROBOTO
     plr_num = StringProperty("4")
     maf_num = StringProperty("1")
     max_maf = StringProperty("1")
@@ -74,7 +73,6 @@ class SetupScreen(MDScreen, Screen):
         print(game.plr_num)
 
     def click(self):
-        vibrate()
         run_concurrent(audio.play_audio, assets.UI_CLICK)
 
     def hover(self, widget):

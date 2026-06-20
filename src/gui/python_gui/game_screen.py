@@ -18,7 +18,7 @@ import ui_control
 
 class GameScreen(MDScreen, Screen):
     # rye_font = assets.RYE
-    # roboto_font = assets.ROBOTO
+    roboto_font = assets.ROBOTO
     selected_player = ""
 
     def on_enter(self):
