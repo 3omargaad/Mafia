@@ -19,3 +19,4 @@ def setup_screens():
     sm.add_widget(SetupScreen(name='setup'))
 
 # Sets up the screens for app.py
+

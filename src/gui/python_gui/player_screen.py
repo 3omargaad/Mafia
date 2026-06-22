@@ -84,3 +84,4 @@ class PlayerScreen(MDScreen, Screen):
 
     def hover(self):
         self.bold = True
+

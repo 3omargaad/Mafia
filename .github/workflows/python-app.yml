@@ -130,3 +130,4 @@ jobs:
           path: |
             bin/*.apk
             bin/*.aab
+

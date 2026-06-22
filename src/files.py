@@ -23,3 +23,4 @@ def clear_audio_files():
 # Example usage:
 # font_file = get_path("assets", "fonts", "Rye-Regular.ttf")
 # audio_file = get_path("assets", "audio", "preset", "welcome.wav")
+

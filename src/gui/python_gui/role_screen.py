@@ -89,3 +89,4 @@ class RoleScreen(MDScreen, Screen):
 
     def hover(self, widget):
         widget.bold = True
+

@@ -102,3 +102,4 @@ def voting(*args):
     )
     Clock.schedule_once(partial(ui_control.enable_checkboxes, "Vote"), 60)
     game.set_stage("Voting")
+

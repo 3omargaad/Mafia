@@ -56,3 +56,4 @@ class Player:
 #             votes=0
 # )
 # DEFAULT SETTINGS FOR PLAYEROBJECT
+

@@ -40,3 +40,4 @@ REVEAL = resource_find(get_sound("reveal.ogg"))
 EXECUTION = resource_find(get_sound("execution.ogg"))
 GAME_OVER = resource_find(get_sound("game_over.ogg"))
 GAME_CONTINUES = resource_find(get_sound("game_continues.ogg"))
+

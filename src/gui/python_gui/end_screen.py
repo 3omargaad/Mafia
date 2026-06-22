@@ -77,3 +77,4 @@ class EndScreen(MDScreen, Screen):
 
     def click(self):
         run_concurrent(audio.play_audio, assets.UI_CLICK)
+

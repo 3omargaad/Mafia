@@ -199,3 +199,4 @@ class GameScreen(MDScreen, Screen):
         quit_btn.bind(on_release=quit_button_pressed)
 
         popup.open()
+

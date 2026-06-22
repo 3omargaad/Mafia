@@ -46,3 +46,4 @@ def assign_roles():
     assign_detective()
 
 # Higher order function which assigns roles
+

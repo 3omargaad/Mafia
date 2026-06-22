@@ -26,3 +26,4 @@ class BackgroundManager(FloatLayout):
 
 
 bg = BackgroundManager()
+

@@ -451,3 +451,4 @@ bin_dir = ./bin
 #    Then, invoke the command line with the "demo" profile:
 #
 #buildozer --profile demo android debug
+
