@@ -7,7 +7,7 @@ title = Mafia
 package.name = mafia
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.github.mafia
+package.domain = org.test
 
 # (str) Source code where the main.py live
 source.dir = src
@@ -37,7 +37,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, plyer==2.1.0, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow #ffpyplayer==4.5.3
+requirements = kivy==2.3.0, KivyGradient==0.0.5, kivymd==1.0.2, cython==0.29.34, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapes, Pillow
 
 
 # (str) Custom source folders for requirements
@@ -196,7 +196,7 @@ android.accept_sdk_license = True
 # android.add_resources = my_icons/all-inclusive.png:drawable/all_inclusive.png
 # 2) A directory, here  'legal_icons' must contain resources of one kind
 # android.add_resources = legal_icons:drawable
-# 3) A directory, here 'legal_resources' must contain one or more directories, 
+# 3) A directory, here 'legal_resources' must contain one or more directories,
 # each of a resource kind:  drawable, xml, etc...
 # android.add_resources = legal_resources
 #android.add_resources =
@@ -215,14 +215,14 @@ android.accept_sdk_license = True
 # android.add_compile_options = "sourceCompatibility = 1.8", "targetCompatibility = 1.8"
 
 # (list) Gradle repositories to add {can be necessary for some android.gradle_dependencies}
-# please enclose in double quotes 
+# please enclose in double quotes
 # e.g. android.gradle_repositories = "maven { url 'https://kotlin.bintray.com/ktor' }"
 #android.add_gradle_repositories =
 
-# (list) packaging options to add 
+# (list) packaging options to add
 # see https://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.PackagingOptions.html
 # can be necessary to solve conflicts in gradle_dependencies
-# please enclose in double quotes 
+# please enclose in double quotes
 # e.g. android.add_packaging_options = "exclude 'META-INF/common.kotlin_module'", "exclude 'META-INF/*.kotlin_module'"
 #android.add_packaging_options =
 
@@ -306,7 +306,7 @@ android.allow_backup = True
 # android.no-byte-compile-python = False
 
 # (str) The format used to package the app for release mode (aab or apk or aar).
-android.release_artifact = aab
+#android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aar).
 #android.debug_artifact = apk
@@ -412,7 +412,7 @@ warn_on_root = 1
 # build_dir = ./.buildozer
 
 # (str) Path to build output (i.e. .apk, .aab, .ipa) storage
-bin_dir = ./bin
+# bin_dir = ./bin
 
 #    -----------------------------------------------------------------------------
 #    List as sections
@@ -451,4 +451,3 @@ bin_dir = ./bin
 #    Then, invoke the command line with the "demo" profile:
 #
 #buildozer --profile demo android debug
-
