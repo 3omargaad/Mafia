@@ -11,12 +11,13 @@ from background import bg
 from screen_manager import sm
 
 from screens import setup_screens
+from files import get_path
 
 
-require('2.3.0')
+require('2.3.1')
 
 
-Builder.load_file("gui/kivy_gui/app.kv")  # Loads kivy file
+Builder.load_file(get_path("src", "gui", "kivy_gui", "app.kv"))  # Loads kivy file
 
 
 class MafiaApp(MDApp):
