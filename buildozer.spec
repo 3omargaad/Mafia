@@ -21,7 +21,7 @@ source.include_exts = py,png,jpg,kv,atlas,ttf,ogg
 # (list) List of directory to exclude (let empty to not exclude anything)
 #source.exclude_dirs = tests, bin
 
-source.include_patterns = assets/**/*, src/**/*
+source.include_patterns = assets/**/*, src/*.py, src/gui/kivy_gui/*.kv, src/gui/python_gui/*.py
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
