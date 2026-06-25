@@ -34,7 +34,7 @@ source.include_patterns = assets/**/*, src/**/*
 version = 1.0
 
 # (list) Application requirements
-requirements = plyer, kivy, kivymd, KivyGradient, python3, pyjnius
+requirements = plyer, kivy==2.3.1, kivymd==1.2.0, KivyGradient==0.0.5, python3, pyjnius
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png

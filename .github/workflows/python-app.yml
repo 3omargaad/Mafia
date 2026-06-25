@@ -108,7 +108,7 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip install --upgrade pip
-          pip install buildozer cython==3.0.11 kivy kivymd KivyGradient olefile plyer
+          pip install buildozer cython==3.0.11 kivy==2.3.1 kivymd==1.2.0 KivyGradient==0.0.5 olefile plyer
       # Build with Buildozer
       - name: Build with Buildozer
         id: buildozer
