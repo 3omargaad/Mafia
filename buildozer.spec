@@ -21,7 +21,7 @@ source.include_exts = py,png,jpg,kv,atlas,ttf,ogg
 # (list) List of directory to exclude (let empty to not exclude anything)
 #source.exclude_dirs = tests, bin
 
-source.include_patterns = assets/**/*, src/*.py, src/gui/kivy_gui/*.kv, src/gui/python_gui/*.py
+source.include_patterns = assets, assets/images, assets/**/*, src, src/*.py, src/gui, src/gui/kivy_gui, src/gui/python_gui, src/gui/kivy_gui/*.kv, src/gui/python_gui/*.py
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
@@ -37,7 +37,7 @@ version = 1.0
 requirements = plyer, kivy==2.3.1, kivymd==1.2.0, KivyGradient==0.0.5, python3, pyjnius
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = assets/images/mafia_icon.png
 
 # (str) Icon of the application
 icon.filename = assets/images/mafia_icon.png
