@@ -14,7 +14,7 @@ from screens import setup_screens
 from files import get_path
 
 
-require('2.3.1')
+require('2.3.0')
 
 
 Builder.load_file("gui/kivy_gui/app.kv") # Loads kivy file
