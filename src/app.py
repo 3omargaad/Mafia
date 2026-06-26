@@ -17,7 +17,7 @@ from files import get_path
 require('2.3.1')
 
 
-Builder.load_file(get_path("src", "gui", "kivy_gui", "app.kv"))  # Loads kivy file
+Builder.load_file("gui/kivy_gui/app.kv") # Loads kivy file
 
 
 class MafiaApp(MDApp):
