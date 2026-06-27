@@ -26,6 +26,7 @@ jobs:
           key: ${{ runner.os }}-buildozer-global
           restore-keys: |
             ${{ runner.os }}-buildozer-global
+
       - name: Cache Buildozer directory in app
         uses: actions/cache@v4
         with:
@@ -33,6 +34,7 @@ jobs:
           key: ${{ runner.os }}-buildozer-app
           restore-keys: |
             ${{ runner.os }}-buildozer-app
+
       - name: Cache Android SDK
         uses: actions/cache@v4
         with:
@@ -40,6 +42,7 @@ jobs:
           key: ${{ runner.os }}-android-sdk
           restore-keys: |
             ${{ runner.os }}-android-sdk
+
       # Install dependencies
       - name: Install dependencies
         run: |
@@ -91,6 +94,7 @@ jobs:
             libssl-dev \
             autopoint \
             gettext
+
       # Set up Java 17 required by Gradle
       - name: Setup Java 17 required by Gradle
         uses: actions/setup-java@v4
@@ -108,7 +112,8 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip install --upgrade pip
-          pip install buildozer cython==3.0.11 kivy==2.3.1 kivymd==1.2.0 KivyGradient==0.0.5 olefile plyer
+          pip install buildozer cython==3.0.11 kivy==2.3.0, olefile
+
       # Build with Buildozer
       - name: Build with Buildozer
         id: buildozer
