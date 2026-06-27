@@ -33,13 +33,7 @@ source.include_patterns = assets/fonts/*.ttf, assets/images/*.png, assets/audio/
 version = 1.0
 
 # (list) Application requirements
-requirements = plyer, kivy==2.3.0, kivymd==1.2.0, KivyGradient==0.0.5, python3, pyjnius, exceptiongroup, asynckivy, asyncgui, materialyoucolor, android, materialshapesportrait
-
-# change the major version of python used by the app
-osx.python_version = 3.11
-
-# Kivy version to use
-osx.kivy_version = 2.3.0
+requirements = plyer, kivy==2.3.1, kivymd==1.2.0, KivyGradient==0.0.5, python3, pyjnius
 
 # (str) Presplash of the application
 presplash.filename = assets/images/mafia_icon.png
