@@ -26,7 +26,7 @@ class MafiaApp(MDApp):
         self.theme_cls.primary_hue = '400'
         self.theme_cls.theme_style = 'Dark'  # Creates red/dark theme
         self.theme_text_color = 'Custom'
-        #Window.size = (360, 640)
+        Window.size = (360, 640)
 
         root = bg
 
